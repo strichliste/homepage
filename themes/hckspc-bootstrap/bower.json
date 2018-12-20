@@ -1,9 +1,10 @@
 {
   "name": "strichliste-homepage",
-  "version": "0.0.0",
-  "homepage": "https://github.com/hackerspace-bootstrap/strichliste-homepage",
+  "version": "1.0.1",
+  "homepage": "https://github.com/strichliste/homepage",
   "authors": [
-    "Simon Elsbrock <simon@iodev.org>"
+    "Simon Elsbrock <simon@iodev.org>",
+    "Christopher Schirner <schinken@bamberg.ccc.de>"
   ],
   "license": "MIT",
   "ignore": [
