@@ -1,4 +1,4 @@
-baseurl = "https://strichliste.org"
+baseurl = "https://www.strichliste.org"
 languageCode = "en-us"
 title = "Strichliste ‒ The Tally Sheet Replacement for Your Organization"
 log = true
@@ -28,7 +28,7 @@ verboselog = true
 [[menu.main]]
   weight = 50
   name = "Source"
-  url = "https://github.com/hackerspace-bootstrap/?query=strichliste"
+  url = "https://github.com/strichliste"
 
 [[menu.main]]
   weight = 60
