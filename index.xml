@@ -2,50 +2,50 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Strichliste ‒ The Tally Sheet Replacement for Your Organization</title>
-    <link>https://strichliste.org/</link>
+    <link>https://www.strichliste.org/</link>
     <description>Recent content on Strichliste ‒ The Tally Sheet Replacement for Your Organization</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 07 Jan 2016 09:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://strichliste.org/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.strichliste.org/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Static builds are now available!</title>
-      <link>https://strichliste.org/news/static-builds/</link>
+      <link>https://www.strichliste.org/news/static-builds/</link>
       <pubDate>Thu, 07 Jan 2016 09:00:00 +0000</pubDate>
       
-      <guid>https://strichliste.org/news/static-builds/</guid>
+      <guid>https://www.strichliste.org/news/static-builds/</guid>
       <description>Now it&amp;rsquo;s easier to setup your strichliste instance, because we now provide static builds for strichliste-web! You can easily grab the latest build from github and follow the install instructions.
 We&amp;rsquo;re currently working on major features. Stay tuned for the next major release</description>
     </item>
     
     <item>
       <title>Get in touch with us!</title>
-      <link>https://strichliste.org/contact/</link>
+      <link>https://www.strichliste.org/contact/</link>
       <pubDate>Sat, 02 Jan 2016 20:15:00 +0200</pubDate>
       
-      <guid>https://strichliste.org/contact/</guid>
+      <guid>https://www.strichliste.org/contact/</guid>
       <description>IRC If you have any questions which are not answered by the Documentation, please do not hesitate to contact us: The IRC channel is irc://irc.freenode.net/strichliste.
 Twitter You can also reach us at @strichliste_org on Twitter! Just follow us to get the latest news about strichliste.</description>
     </item>
     
     <item>
       <title>More features to come</title>
-      <link>https://strichliste.org/news/more-features/</link>
+      <link>https://www.strichliste.org/news/more-features/</link>
       <pubDate>Wed, 25 Nov 2015 09:00:00 +0000</pubDate>
       
-      <guid>https://strichliste.org/news/more-features/</guid>
+      <guid>https://www.strichliste.org/news/more-features/</guid>
       <description>Stay tuned for more features! We&amp;rsquo;re now working on some wanted features in the next strichliste release. These features are: money transfer, splitting bills, cancellation of the last order within a specific time range and we&amp;rsquo;re preparing the database for articles</description>
     </item>
     
     <item>
       <title>Install strichliste</title>
-      <link>https://strichliste.org/install/</link>
+      <link>https://www.strichliste.org/install/</link>
       <pubDate>Sun, 12 Jul 2015 00:34:08 +0200</pubDate>
       
-      <guid>https://strichliste.org/install/</guid>
+      <guid>https://www.strichliste.org/install/</guid>
       <description>Installing strichliste is done in two steps.
 Backend Prerequisites The backend is a nodejs application. As such, you need to have nodejs installed.
 sudo apt-get install nodejs  Installing the Backend  Go to the Github project to download the latest release. Unpack the contents of the tarball to your target directory. Run npm install to install the package depencies. Create the SQLite database by running make database. (You might need the package sqlite3 or the equivalent on your distro.</description>
@@ -53,10 +53,10 @@ sudo apt-get install nodejs  Installing the Backend  Go to the Github project to
     
     <item>
       <title>What is this project about?</title>
-      <link>https://strichliste.org/about/</link>
+      <link>https://www.strichliste.org/about/</link>
       <pubDate>Sat, 11 Jul 2015 20:23:21 +0200</pubDate>
       
-      <guid>https://strichliste.org/about/</guid>
+      <guid>https://www.strichliste.org/about/</guid>
       <description>strichliste ([ʃtʀɪçˈlɪstə], German word for tally sheet) is a tool to replace a tally sheet inside a hackerspace. It is the first project developed by the hackerspace bootstrap organization.
 It&amp;rsquo;s aim is to provide a no-frills, easy-to-setup and -to-use solution for managing your organization&amp;rsquo;s snack bar. 
 Demo That&amp;rsquo;s what you&amp;rsquo;re here for, right? You can access a demo of strichliste here. But, just to be sure, here&amp;rsquo;s how it looks like:</description>
@@ -64,10 +64,10 @@ Demo That&amp;rsquo;s what you&amp;rsquo;re here for, right? You can access a de
     
     <item>
       <title>Hello World</title>
-      <link>https://strichliste.org/news/helloworld/</link>
+      <link>https://www.strichliste.org/news/helloworld/</link>
       <pubDate>Sat, 11 Jul 2015 12:31:53 +0000</pubDate>
       
-      <guid>https://strichliste.org/news/helloworld/</guid>
+      <guid>https://www.strichliste.org/news/helloworld/</guid>
       <description>strichliste has it&amp;rsquo;s own homepage now! We&amp;rsquo;re in the process of getting the content ready, stay tuned for updates.</description>
     </item>
     
