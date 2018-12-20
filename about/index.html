@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Strichliste ‒ The Tally Sheet Replacement for Your Organization</title>
+
+    <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png">
+
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+    
+</head>
+<body lang="en">
+    <div class="header">
+        <div class="container">
+            <a class="logo pull-left" href="/">
+                <img src="/img/strichliste-logo.png">
+            </a>
+        </div>
+        <div class="container">
+    <ul class="nav navbar-nav pull-right collapse navbar-collapse">
+        
+        
+        <li class=""><a href="/">Home</a></li>
+        
+        <li class=" active"><a href="/about/">About</a></li>
+        
+        <li class=""><a href="/install/">Install</a></li>
+        
+        <li class=""><a href="https://demo.strichliste.org">Demo</a></li>
+        
+        <li class=""><a href="https://github.com/hackerspace-bootstrap/?query=strichliste">Source</a></li>
+        
+        <li class=""><a href="/contact/">Contact</a></li>
+        
+    </ul>
+</div>
+
+    </div>
+
+
+<div class="container">
+    <div class="row content margin-bottom-20">
+        <h2>What is this project about?</h2>
+        
+
+<p><quote>
+<em>strichliste</em> ([ʃtʀɪçˈlɪstə], German word for tally sheet) is a tool to replace
+a tally sheet inside a hackerspace. It is the first project developed by the
+<a href="https://github.com/hackerspace-bootstrap">hackerspace bootstrap</a> organization.</p>
+
+<p>It&rsquo;s aim is to provide a no-frills, easy-to-setup and -to-use solution for
+managing your organization&rsquo;s snack bar.
+</quote></p>
+
+<h3 id="demo">Demo</h3>
+
+<p>That&rsquo;s what you&rsquo;re here for, right? You can access a demo of strichliste
+<a href="https://demo.strichliste.org/">here</a>. But, just to be sure, here&rsquo;s how
+it looks like:</p>
+
+<p><img alt="A screenshot of strichliste in action" src="/img/screenshot-main.png" width="819" height="671"></p>
+
+<h3 id="architecture">Architecture</h3>
+
+<p>strichliste consists of two components: the <code>frontend</code> and the <code>backend</code>.</p>
+
+<p>The frontend (<code>strichliste-web</code> on Github) is an angular-js based static web
+application that accesses the backend via a RESTful HTTP interface.</p>
+
+<p>The backend (<code>strichliste</code> on Github) is written in Javascript and runs in
+nodejs. It is governed by a testsuite. All data is stored in a SQLite database
+which supports deployment and simplifies backups.</p>
+
+<h3 id="how-it-works">How it works</h3>
+
+<p>The processes implemented by strichliste inherently assumes to be used by a
+trusted audience. Each user intending to buy something from your kiosk is
+required to have a user account with strichliste. This can be done by
+registering your username (no other data is required).</p>
+
+<p>Once an account is available, buying an item is as simple as deducting the
+equivalent value of the item from your account. Administrators of strichliste
+can define a lower or upper bound for the users&rsquo; credit balance. For example,
+administrators can configure that it is not allowed to have a negative balance.</p>
+
+<p>Cashing your account works the same as the inverse of buying an item: Simply
+charge your account with the given amount and it will take effect immediately.</p>
+
+<p>It&rsquo;s as simple as that!</p>
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+
+<p>In case of problems, please file an issue on our Github issue tracker.</p>
+
+    </div>
+</div>
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>                           
+</body>                                                                          
+</html> 
+
