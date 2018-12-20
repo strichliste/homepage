@@ -15,6 +15,7 @@ cache:
     - themes/hckspc-bootstrap/static/bower_components
 deploy:
   local-dir: public/
+  fqdn: www.strichliste.org
   provider: pages
   skip-cleanup: true
   github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
