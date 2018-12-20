@@ -1,23 +1,24 @@
 sudo: false
 language: go
 go:
-  - 1.4
-addons:
-  ssh_known_hosts: jade.strichliste.org
+  - 1.11
 install:
   - go get -v github.com/spf13/hugo
   - (cd themes/hckspc-bootstrap && npm install && ./node_modules/.bin/bower install)
 script:
   - export PATH=$HOME/gopath/bin:$PATH
   - hugo --theme=hckspc-bootstrap
-after_success:
-  - ./deploy.sh
 cache:
   bundler: true
   directories:
     - themes/hckspc-bootstrap/node_modules
     - themes/hckspc-bootstrap/static/bower_components
-env:
-  global:
-    - ENCRYPTION_LABEL="36f148202be5"
-    - DEPLOY_BRANCH="master"
+deploy:
+  local-dir: public/
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  on:
+    branch: master
+
