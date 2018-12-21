@@ -1,5 +1,5 @@
 +++
-date = "2015-07-12T00:34:08+02:00"
+date = "2018-12-31T12:16:08+02:00"
 draft = false
 title = "Install strichliste"
 [menu]
@@ -7,56 +7,57 @@ title = "Install strichliste"
     parent = "Install"
 +++
 
-Installing strichliste is done in two steps.
-
-### Backend
+Installing strichliste2 is easy
 
 #### Prerequisites
 
-The backend is a nodejs application. As such, you need to have `nodejs` installed.
+For strichliste to run, php7.1 is required at least. You should have a webserver running which supports mod_php or php-fpm.
 
-    sudo apt-get install nodejs
+### Installing
 
-#### Installing the Backend
+1. Go to the Github project to download the [latest release](https://github.com/strichliste/server/releases).
+2. Extract the package content to your target directory (e.g. `tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld`)
+3. Move the database in `var/` from `app.db.example` to `app.db` if you want to use the default sqlite setup
 
-1. Go to the Github project to download the [latest release](https://github.com/hackerspace-bootstrap/strichliste/releases).
-2. Unpack the contents of the tarball to your target directory.
-3. Run `npm install` to install the package depencies.
-4. Create the SQLite database by running `make database`. (You might need the package `sqlite3` or the equivalent on your distro.)
-5. _(optional)_ Modify `configuration.js` to match your needs.
-6. Start the backend by running `node server.js`. You can optionally specify
-the path to your configuration file using the `--externalconfig` parameter.
+#### Using a different database (optional)
 
-The backend should now be running on `http://localhost:8080` (default).
+The [ORM](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html) used in
+Strichliste supports multiple database backends such as:
 
-#### Reverse-Proxy in front of API (optional)
+* MySQL / MariaDB
+* Oracle
+* Microsoft SQL Server
+* PostgreSQL
+* SQLite
 
-You can proxy the requests to your strichliste server through your favorite webserver, using the default HTTP port 80. 
+If you want to use another Database, just adjust the `DATABASE_URL` variable in your `.env` file in your root
+directory according to the [Doctrine ORM](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#connecting-using-a-url)
+recommendations.
 
-For NGINX:
-```
-location /api/ {
-   proxy_pass http://localhost:8080/;
-}
-```
+Afterwards just run:
 
-For Apache:
-```
-ProxyPass /api/ http://localhost:8080/
-ProxyPassReverse /api/ http://localhost:8080/
+```bash
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:create
 ```
 
-### Frontend
+to create the database and schema 
 
-#### Installing the Frontend
+#### Configuring NGINX
 
-The frontend is a set of static files to be served by a webserver such as
-`nginx`. It accesses the backend using HTTP.
+Config examples for nginx can be found here:
 
-1. Go to the Github to download the [latest release](https://github.com/hackerspace-bootstrap/strichliste-web/releases).
-2. Unpack the contents of the tarball to a directory of your choice. (e.g. /var/www/strichliste)
-3. Configure your webserver to point to this directory.
-4. Modify your settings in `js/settings.js`. Use `http://<servername>:8080` or `http://<servername>/api` if you are using a reverse proxy.
-5. Access the frontend from your favorite browser.
+* https://github.com/strichliste/server/blob/master/examples/nginx_ssl.conf (with SSL)
+* https://github.com/strichliste/server/blob/master/examples/nginx.conf (without SSL)
 
-You should now be able to create your first transactions!
+#### Configuring Apache
+
+* TODO
+
+#### Test your setup
+
+To test if everything works, you can also run `php -S 0.0.0.0:8080` and navigate to `http://127.0.0.1:8080`
+
+### Common Pitfalls
+
+* Check your folder owner/group! Otherwise strichliste can't write to it's sqlite database 
