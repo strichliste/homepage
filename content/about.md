@@ -22,18 +22,18 @@ That's what you're here for, right? You can access a demo of strichliste
 [here](https://demo.strichliste.org/). But, just to be sure, here's how
 it looks like:
 
-<img alt="A screenshot of strichliste in action" src="/img/screenshot-main.png" width="819" height="671">
+<img alt="A screenshot of strichliste in action" src="/img/screenshot-main.png" width="1224" height="620">
 
 ### Architecture
 
 strichliste consists of two components: the `frontend` and the `backend`.
 
-The frontend (`strichliste-web` on Github) is an angular-js based static web
+The frontend [strichliste](https://github.com/strichliste/strichliste) is an react based
 application that accesses the backend via a RESTful HTTP interface.
 
-The backend (`strichliste` on Github) is written in Javascript and runs in
-nodejs. It is governed by a testsuite. All data is stored in a SQLite database
-which supports deployment and simplifies backups.
+The [backend](https://github.com/strichliste/server) is written in PHP using the symfony web framework.
+All data is writting into a database. By default it utilises a SQLite database, but can be changed
+easily thanks to the Doctrine ORM
 
 ### How it works
 
@@ -42,15 +42,21 @@ trusted audience. Each user intending to buy something from your kiosk is
 required to have a user account with strichliste. This can be done by
 registering your username (no other data is required).
 
-Once an account is available, buying an item is as simple as deducting the
-equivalent value of the item from your account. Administrators of strichliste
+Once an account is available, the user can simply deducting the value from their account, or buy
+articles from the article database. Administrators of strichliste
 can define a lower or upper bound for the users' credit balance. For example,
 administrators can configure that it is not allowed to have a negative balance.
 
 Cashing your account works the same as the inverse of buying an item: Simply
 charge your account with the given amount and it will take effect immediately.
 
-It's as simple as that!
+Also strichliste supports transactions. You can easily send money to another account
+and add a comment to store the purpose.
+
+### Barcode Scanner
+
+If you add a Barcode to your article database, you can use a simple USB/Serial/Bluetooth Barcode scanner to
+buy articles. Just go to your users page, pick up the barcode scanner and scan your favorite drink/snack.
 
 ### Troubleshooting
 
