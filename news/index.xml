@@ -6,10 +6,20 @@
     <description>Recent content in News on Strichliste ‒ The Tally Sheet Replacement for Your Organization</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 Jan 2016 09:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 Dec 2018 08:59:19 +0100</lastBuildDate>
     
 	<atom:link href="https://www.strichliste.org/news/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Strichliste2 released!</title>
+      <link>https://www.strichliste.org/news/strichliste2/</link>
+      <pubDate>Fri, 21 Dec 2018 08:59:19 +0100</pubDate>
+      
+      <guid>https://www.strichliste.org/news/strichliste2/</guid>
+      <description>After a lot of concept work, strichliste 2 has now a stable API and also a well designed front-end. We&amp;rsquo;ve also changed our tech stack completely. Instead of node.js in the backend, and angular js in the front-end, we&amp;rsquo;re now using a symfony based PHP backend providing the API and also command-line tools for several tasks.
+The new frontend is completely responsive and uses react and redux as it&amp;rsquo;s core components.</description>
+    </item>
     
     <item>
       <title>Static builds are now available!</title>
