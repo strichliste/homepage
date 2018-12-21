@@ -52,7 +52,8 @@ Config examples for nginx can be found here:
 
 #### Configuring Apache
 
-* TODO
+* https://github.com/strichliste/server/blob/master/examples/apache.conf (without SSL)
+* TODO: SSL-Config
 
 #### Test your setup
 
