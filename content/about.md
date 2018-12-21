@@ -8,12 +8,8 @@ title = "What is this project about?"
 +++
 
 <quote>
-_strichliste_ ([ʃtʀɪçˈlɪstə], German word for tally sheet) is a tool to replace
-a tally sheet inside a hackerspace. It is the first project developed by the
-[hackerspace bootstrap](https://github.com/hackerspace-bootstrap) organization.
-
-It's aim is to provide a no-frills, easy-to-setup and -to-use solution for
-managing your organization's snack bar.
+_strichliste_ ([ʃtʀɪçˈlɪstə], German word for tally sheet) is a tool to replace a tally sheet inside a hackerspace. 
+It's aim is to provide a no-frills, easy-to-setup and -to-use solution for managing your organization's snack bar.
 </quote>
 
 ### Demo
