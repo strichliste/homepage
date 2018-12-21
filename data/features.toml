@@ -4,9 +4,9 @@ img = "/img/features/statistics.png"
 text = "Stay on top of your organization's finances by having a look at our detailed statistics."
 
 [[feature]]
-title = "SQLite Database"
+title = "Database agnostic"
 img = "/img/features/sqlite.png"
-text = "All data is stored in a SQLite database: no complex setup, fully transactional, easy backup!"
+text = "Using Doctrine as ORM, strichliste is database agonstic. Use what you like!"
 
 [[feature]]
 title = "REST-API"
