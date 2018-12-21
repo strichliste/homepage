@@ -47,13 +47,9 @@
         <h2>Install strichliste</h2>
         
 
-<p>Installing strichliste2 is easy</p>
+<p>For strichliste to run, <strong>PHP 7.1 or higher is required</strong>. You should have a webserver running which supports <strong>mod_php</strong> or <strong>php-fpm</strong>.</p>
 
-<h4 id="prerequisites">Prerequisites</h4>
-
-<p>For strichliste to run, php7.1 is required at least. You should have a webserver running which supports mod_php or php-fpm.</p>
-
-<h2 id="installing">Installing</h2>
+<h3 id="installing">Installing</h3>
 
 <ol>
 <li>Go to the Github project to download the <a href="https://github.com/strichliste/server/releases">latest release</a>.</li>
@@ -63,7 +59,7 @@
 
 <p>If you want to keep sqlite as your database, you&rsquo;re done. Continue configuring your webserver</p>
 
-<h3 id="using-a-different-database-optional">Using a different database (optional)</h3>
+<h4 id="using-a-different-database-optional">Using a different database (optional)</h4>
 
 <p>The <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html">ORM</a> used in
 Strichliste supports multiple database backends such as:</p>
@@ -80,15 +76,15 @@ Strichliste supports multiple database backends such as:</p>
 directory according to the <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#connecting-using-a-url">Doctrine ORM</a>
 recommendations.</p>
 
-<p>Afterwards just run:</p>
+<p>Afterwards just run the following commands to create the database and schema.</p>
 
 <pre><code class="language-bash">php bin/console doctrine:database:create
 php bin/console doctrine:schema:create
 </code></pre>
 
-<p>to create the database and schema</p>
+<p>Make sure you have a user and database created beforehand.</p>
 
-<h3 id="configuring-nginx">Configuring NGINX</h3>
+<h4 id="configuring-nginx">Configuring NGINX</h4>
 
 <p>Config examples for nginx can be found here:</p>
 
@@ -97,22 +93,32 @@ php bin/console doctrine:schema:create
 <li><a href="https://github.com/strichliste/server/blob/master/examples/nginx.conf">https://github.com/strichliste/server/blob/master/examples/nginx.conf</a> (without SSL)</li>
 </ul>
 
-<h3 id="configuring-apache">Configuring Apache</h3>
+<h4 id="configuring-apache">Configuring Apache</h4>
 
 <ul>
 <li><a href="https://github.com/strichliste/server/blob/master/examples/apache.conf">https://github.com/strichliste/server/blob/master/examples/apache.conf</a> (without SSL)</li>
 <li>TODO: SSL-Config</li>
 </ul>
 
-<h3 id="test-your-setup">Test your setup</h3>
+<h4 id="test-your-setup">Test your setup</h4>
 
-<p>To test if everything works, you can also run <code>php -S 0.0.0.0:8080</code> and navigate to <code>http://127.0.0.1:8080</code></p>
+<p>To test if everything works, you can also run <code>php -S 0.0.0.0:8080</code> instead of running a webserver for now and navigate to <code>http://127.0.0.1:8080</code></p>
 
-<h2 id="common-pitfalls">Common Pitfalls</h2>
+<h3 id="common-pitfalls">Common Pitfalls</h3>
 
 <ul>
 <li>Check your folder owner/group if you&rsquo;re using sqlite as your database! Otherwise strichliste can&rsquo;t write to it.</li>
 </ul>
+
+<h3 id="commands">Commands</h3>
+
+<h4 id="import-strichliste-1-database">Import strichliste 1 database</h4>
+
+<p>To import your old strichliste 1 database, copy your <code>database.sqlite</code> file, copy it to the strichliste2 directory and run:</p>
+
+<p><code>php bin/console app:import database.sqlite</code></p>
+
+<p>After import the terminal outputs &ldquo;Import done!&rdquo;</p>
 
     </div>
 </div>
