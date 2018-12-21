@@ -59,7 +59,7 @@
 
 <p>If you want to keep sqlite as your database, you&rsquo;re done. Continue configuring your webserver</p>
 
-<h4 id="using-a-different-database-optional">Using a different database (optional)</h4>
+<h3 id="using-a-different-database-optional">Using a different database (optional)</h3>
 
 <p>The <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html">ORM</a> used in
 Strichliste supports multiple database backends such as:</p>
@@ -84,7 +84,7 @@ php bin/console doctrine:schema:create
 
 <p>Make sure you have a user and database created beforehand.</p>
 
-<h4 id="configuring-nginx">Configuring NGINX</h4>
+<h3 id="configuring-nginx">Configuring NGINX</h3>
 
 <p>Config examples for nginx can be found here:</p>
 
@@ -93,14 +93,14 @@ php bin/console doctrine:schema:create
 <li><a href="https://github.com/strichliste/server/blob/master/examples/nginx.conf">https://github.com/strichliste/server/blob/master/examples/nginx.conf</a> (without SSL)</li>
 </ul>
 
-<h4 id="configuring-apache">Configuring Apache</h4>
+<h3 id="configuring-apache">Configuring Apache</h3>
 
 <ul>
 <li><a href="https://github.com/strichliste/server/blob/master/examples/apache.conf">https://github.com/strichliste/server/blob/master/examples/apache.conf</a> (without SSL)</li>
 <li>TODO: SSL-Config</li>
 </ul>
 
-<h4 id="test-your-setup">Test your setup</h4>
+<h3 id="test-your-setup">Test your setup</h3>
 
 <p>To test if everything works, you can also run <code>php -S 0.0.0.0:8080</code> instead of running a webserver for now and navigate to <code>http://127.0.0.1:8080</code></p>
 
