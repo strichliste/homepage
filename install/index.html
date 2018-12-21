@@ -53,7 +53,7 @@
 
 <p>For strichliste to run, php7.1 is required at least. You should have a webserver running which supports mod_php or php-fpm.</p>
 
-<h3 id="installing">Installing</h3>
+<h2 id="installing">Installing</h2>
 
 <ol>
 <li>Go to the Github project to download the <a href="https://github.com/strichliste/server/releases">latest release</a>.</li>
@@ -61,7 +61,9 @@
 <li>Move the database in <code>var/</code> from <code>app.db.example</code> to <code>app.db</code> if you want to use the default sqlite setup</li>
 </ol>
 
-<h4 id="using-a-different-database-optional">Using a different database (optional)</h4>
+<p>If you want to keep sqlite as your database, you&rsquo;re done. Continue configuring your webserver</p>
+
+<h3 id="using-a-different-database-optional">Using a different database (optional)</h3>
 
 <p>The <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html">ORM</a> used in
 Strichliste supports multiple database backends such as:</p>
@@ -86,7 +88,7 @@ php bin/console doctrine:schema:create
 
 <p>to create the database and schema</p>
 
-<h4 id="configuring-nginx">Configuring NGINX</h4>
+<h3 id="configuring-nginx">Configuring NGINX</h3>
 
 <p>Config examples for nginx can be found here:</p>
 
@@ -95,21 +97,21 @@ php bin/console doctrine:schema:create
 <li><a href="https://github.com/strichliste/server/blob/master/examples/nginx.conf">https://github.com/strichliste/server/blob/master/examples/nginx.conf</a> (without SSL)</li>
 </ul>
 
-<h4 id="configuring-apache">Configuring Apache</h4>
+<h3 id="configuring-apache">Configuring Apache</h3>
 
 <ul>
 <li><a href="https://github.com/strichliste/server/blob/master/examples/apache.conf">https://github.com/strichliste/server/blob/master/examples/apache.conf</a> (without SSL)</li>
 <li>TODO: SSL-Config</li>
 </ul>
 
-<h4 id="test-your-setup">Test your setup</h4>
+<h3 id="test-your-setup">Test your setup</h3>
 
 <p>To test if everything works, you can also run <code>php -S 0.0.0.0:8080</code> and navigate to <code>http://127.0.0.1:8080</code></p>
 
-<h3 id="common-pitfalls">Common Pitfalls</h3>
+<h2 id="common-pitfalls">Common Pitfalls</h2>
 
 <ul>
-<li>Check your folder owner/group! Otherwise strichliste can&rsquo;t write to it&rsquo;s sqlite database</li>
+<li>Check your folder owner/group if you&rsquo;re using sqlite as your database! Otherwise strichliste can&rsquo;t write to it.</li>
 </ul>
 
     </div>
