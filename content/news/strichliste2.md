@@ -1,5 +1,5 @@
 ---
-title: "Strichliste2 released!"
+title: "Strichliste 2 released!"
 date: 2018-12-21T08:59:19+01:00
 draft: false
 ---
@@ -19,3 +19,9 @@ New features of strichliste are:
 * Manage articles with Barcodes
 * Buy articles by click or barcode scanner
 * Several CLI commands like User-Cleanup, Strichliste1-Import, Retire Data, Edit Users
+* Database independent
+
+There are more features planned - from simple tools to UI improvements. Stay tuned
+
+Best,
+sanderdrummer and schinken
