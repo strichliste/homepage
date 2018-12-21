@@ -51,17 +51,6 @@ Twitter You can also reach us at @strichliste_org on Twitter! Just follow us to 
     </item>
     
     <item>
-      <title>Install strichliste</title>
-      <link>https://www.strichliste.org/install/</link>
-      <pubDate>Sun, 12 Jul 2015 00:34:08 +0200</pubDate>
-      
-      <guid>https://www.strichliste.org/install/</guid>
-      <description>Installing strichliste is done in two steps.
-Backend Prerequisites The backend is a nodejs application. As such, you need to have nodejs installed.
-sudo apt-get install nodejs  Installing the Backend  Go to the Github project to download the latest release. Unpack the contents of the tarball to your target directory. Run npm install to install the package depencies. Create the SQLite database by running make database. (You might need the package sqlite3 or the equivalent on your distro.</description>
-    </item>
-    
-    <item>
       <title>What is this project about?</title>
       <link>https://www.strichliste.org/about/</link>
       <pubDate>Sat, 11 Jul 2015 20:23:21 +0200</pubDate>
