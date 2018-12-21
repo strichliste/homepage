@@ -1,5 +1,5 @@
 +++
-date = "2018-12-31T12:16:08+02:00"
+date = "2018-12-21T00:00:08+02:00"
 draft = false
 title = "Install strichliste"
 [menu]
