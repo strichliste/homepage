@@ -4,15 +4,9 @@ go:
   - 1.11
 install:
   - go get -v github.com/spf13/hugo
-  - (cd themes/hckspc-bootstrap && npm install && ./node_modules/.bin/bower install)
 script:
   - export PATH=$HOME/gopath/bin:$PATH
   - hugo --theme=hckspc-bootstrap
-cache:
-  bundler: true
-  directories:
-    - themes/hckspc-bootstrap/node_modules
-    - themes/hckspc-bootstrap/static/bower_components
 deploy:
   local-dir: public/
   fqdn: www.strichliste.org
