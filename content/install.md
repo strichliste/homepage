@@ -13,13 +13,15 @@ Installing strichliste2 is easy
 
 For strichliste to run, php7.1 is required at least. You should have a webserver running which supports mod_php or php-fpm.
 
-### Installing
+## Installing
 
 1. Go to the Github project to download the [latest release](https://github.com/strichliste/server/releases).
 2. Extract the package content to your target directory (e.g. `tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld`)
 3. Move the database in `var/` from `app.db.example` to `app.db` if you want to use the default sqlite setup
 
-#### Using a different database (optional)
+If you want to keep sqlite as your database, you're done. Continue configuring your webserver
+
+### Using a different database (optional)
 
 The [ORM](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html) used in
 Strichliste supports multiple database backends such as:
@@ -43,22 +45,22 @@ php bin/console doctrine:schema:create
 
 to create the database and schema 
 
-#### Configuring NGINX
+### Configuring NGINX
 
 Config examples for nginx can be found here:
 
 * https://github.com/strichliste/server/blob/master/examples/nginx_ssl.conf (with SSL)
 * https://github.com/strichliste/server/blob/master/examples/nginx.conf (without SSL)
 
-#### Configuring Apache
+### Configuring Apache
 
 * https://github.com/strichliste/server/blob/master/examples/apache.conf (without SSL)
 * TODO: SSL-Config
 
-#### Test your setup
+### Test your setup
 
 To test if everything works, you can also run `php -S 0.0.0.0:8080` and navigate to `http://127.0.0.1:8080`
 
-### Common Pitfalls
+## Common Pitfalls
 
-* Check your folder owner/group! Otherwise strichliste can't write to it's sqlite database 
+* Check your folder owner/group if you're using sqlite as your database! Otherwise strichliste can't write to it. 
