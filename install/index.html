@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Strichliste ‒ The Tally Sheet Replacement for Your Organization</title>
+
+    <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png">
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+    
+</head>
+<body lang="en">
+    <div class="header">
+        <div class="container">
+            <a class="logo pull-left" href="/">
+                <img src="/img/strichliste-logo.png">
+            </a>
+        </div>
+        <div class="container">
+    <ul class="nav navbar-nav pull-right collapse navbar-collapse">
+        
+        
+        <li class=""><a href="/">Home</a></li>
+        
+        <li class=""><a href="/about/">About</a></li>
+        
+        <li class=" active"><a href="/install/">Install</a></li>
+        
+        <li class=""><a href="https://demo.strichliste.org">Demo</a></li>
+        
+        <li class=""><a href="https://github.com/strichliste">Source</a></li>
+        
+        <li class=""><a href="/contact/">Contact</a></li>
+        
+    </ul>
+</div>
+
+    </div>
+
+
+<div class="container">
+    <div class="row content margin-bottom-20">
+        <h2>Install strichliste</h2>
+        
+
+<p>Installing strichliste2 is easy</p>
+
+<h4 id="prerequisites">Prerequisites</h4>
+
+<p>For strichliste to run, php7.1 is required at least. You should have a webserver running which supports mod_php or php-fpm.</p>
+
+<h3 id="installing">Installing</h3>
+
+<ol>
+<li>Go to the Github project to download the <a href="https://github.com/strichliste/server/releases">latest release</a>.</li>
+<li>Extract the package content to your target directory (e.g. <code>tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld</code>)</li>
+<li>Move the database in <code>var/</code> from <code>app.db.example</code> to <code>app.db</code> if you want to use the default sqlite setup</li>
+</ol>
+
+<h4 id="using-a-different-database-optional">Using a different database (optional)</h4>
+
+<p>The <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html">ORM</a> used in
+Strichliste supports multiple database backends such as:</p>
+
+<ul>
+<li>MySQL / MariaDB</li>
+<li>Oracle</li>
+<li>Microsoft SQL Server</li>
+<li>PostgreSQL</li>
+<li>SQLite</li>
+</ul>
+
+<p>If you want to use another Database, just adjust the <code>DATABASE_URL</code> variable in your <code>.env</code> file in your root
+directory according to the <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#connecting-using-a-url">Doctrine ORM</a>
+recommendations.</p>
+
+<p>Afterwards just run:</p>
+
+<pre><code class="language-bash">php bin/console doctrine:database:create
+php bin/console doctrine:schema:create
+</code></pre>
+
+<p>to create the database and schema</p>
+
+<h4 id="configuring-nginx">Configuring NGINX</h4>
+
+<p>Config examples for nginx can be found here:</p>
+
+<ul>
+<li><a href="https://github.com/strichliste/server/blob/master/examples/nginx_ssl.conf">https://github.com/strichliste/server/blob/master/examples/nginx_ssl.conf</a> (with SSL)</li>
+<li><a href="https://github.com/strichliste/server/blob/master/examples/nginx.conf">https://github.com/strichliste/server/blob/master/examples/nginx.conf</a> (without SSL)</li>
+</ul>
+
+<h4 id="configuring-apache">Configuring Apache</h4>
+
+<ul>
+<li>TODO</li>
+</ul>
+
+<h4 id="test-your-setup">Test your setup</h4>
+
+<p>To test if everything works, you can also run <code>php -S 0.0.0.0:8080</code> and navigate to <code>http://127.0.0.1:8080</code></p>
+
+<h3 id="common-pitfalls">Common Pitfalls</h3>
+
+<ul>
+<li>Check your folder owner/group! Otherwise strichliste can&rsquo;t write to it&rsquo;s sqlite database</li>
+</ul>
+
+    </div>
+</div>
+</body>
+</html> 
+
