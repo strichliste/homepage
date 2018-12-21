@@ -17,7 +17,7 @@ For strichliste to run, **PHP 7.1 or higher is required**. You should have a web
 
 If you want to keep sqlite as your database, you're done. Continue configuring your webserver
 
-#### Using a different database (optional)
+### Using a different database (optional)
 
 The [ORM](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html) used in
 Strichliste supports multiple database backends such as:
@@ -41,19 +41,19 @@ php bin/console doctrine:schema:create
 
 Make sure you have a user and database created beforehand.
 
-#### Configuring NGINX
+### Configuring NGINX
 
 Config examples for nginx can be found here:
 
 * https://github.com/strichliste/server/blob/master/examples/nginx_ssl.conf (with SSL)
 * https://github.com/strichliste/server/blob/master/examples/nginx.conf (without SSL)
 
-#### Configuring Apache
+### Configuring Apache
 
 * https://github.com/strichliste/server/blob/master/examples/apache.conf (without SSL)
 * TODO: SSL-Config
 
-#### Test your setup
+### Test your setup
 
 To test if everything works, you can also run `php -S 0.0.0.0:8080` instead of running a webserver for now and navigate to `http://127.0.0.1:8080`
 
