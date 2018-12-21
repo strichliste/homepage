@@ -66,9 +66,9 @@ Twitter You can also reach us at @strichliste_org on Twitter! Just follow us to 
       <pubDate>Sat, 11 Jul 2015 20:23:21 +0200</pubDate>
       
       <guid>https://www.strichliste.org/about/</guid>
-      <description>strichliste ([ʃtʀɪçˈlɪstə], German word for tally sheet) is a tool to replace a tally sheet inside a hackerspace. It is the first project developed by the hackerspace bootstrap organization.
-It&amp;rsquo;s aim is to provide a no-frills, easy-to-setup and -to-use solution for managing your organization&amp;rsquo;s snack bar. 
-Demo That&amp;rsquo;s what you&amp;rsquo;re here for, right? You can access a demo of strichliste here. But, just to be sure, here&amp;rsquo;s how it looks like:</description>
+      <description>strichliste ([ʃtʀɪçˈlɪstə], German word for tally sheet) is a tool to replace a tally sheet inside a hackerspace. It&amp;rsquo;s aim is to provide a no-frills, easy-to-setup and -to-use solution for managing your organization&amp;rsquo;s snack bar. 
+Demo That&amp;rsquo;s what you&amp;rsquo;re here for, right? You can access a demo of strichliste here. But, just to be sure, here&amp;rsquo;s how it looks like:
+Architecture strichliste consists of two components: the frontend and the backend.</description>
     </item>
     
     <item>
