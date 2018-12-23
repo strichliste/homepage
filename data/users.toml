@@ -32,3 +32,8 @@ img = "/img/users/nerd2nerd.png"
 name = "Schaffenburg"
 link = "https://schaffenburg.de/"
 img = "/img/users/schaffenburg.png"
+
+[[user]]
+name = "Chaos Computer Club Darmstadt e.V."
+link = "https://www.chaos-darmstadt.de/"
+img = "/img/users/ccc-darmstadt.png"
