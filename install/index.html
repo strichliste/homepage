@@ -76,13 +76,24 @@ Strichliste supports multiple database backends such as:</p>
 directory according to the <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#connecting-using-a-url">Doctrine ORM</a>
 recommendations.</p>
 
-<p>Afterwards just run the following commands to create the database and schema.</p>
+<p>For example, to configure <strong>mysql/mariadb</strong>:</p>
 
-<pre><code class="language-bash">php bin/console doctrine:database:create
-php bin/console doctrine:schema:create
+<pre><code>DATABASE_URL=&quot;mysql://strichliste:32YourPassWord42@localhost/strichliste&quot;
 </code></pre>
 
-<p>Make sure you have a user and database created beforehand.</p>
+<p>Create a database and a separate user:</p>
+
+<pre><code class="language-sql">CREATE USER 'strichliste'@'localhost' IDENTIFIED BY '32YourPassWord42';
+GRANT ALL PRIVILEGES ON strichliste.* TO 'strichliste'@'localhost';
+FLUSH PRIVILEGES;
+</code></pre>
+
+<p>Afterwards just run the following commands to create the schema:</p>
+
+<pre><code class="language-bash">php bin/console doctrine:schema:create
+</code></pre>
+
+<p>You&rsquo;re done! Strichliste now works with mysql instead of sqlite.</p>
 
 <h3 id="configuring-nginx">Configuring NGINX</h3>
 
@@ -114,7 +125,7 @@ php bin/console doctrine:schema:create
 
 <h4 id="import-strichliste-1-database">Import strichliste 1 database</h4>
 
-<p>To import your old strichliste 1 database, copy your <code>database.sqlite</code> file, copy it to the strichliste2 directory and run:</p>
+<p>To import your old strichliste 1 database, copy the <code>database.sqlite</code>-file to the strichliste2 directory and run:</p>
 
 <p><code>php bin/console app:import database.sqlite</code></p>
 
