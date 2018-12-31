@@ -11,7 +11,7 @@ For strichliste to run, **PHP 7.1 or higher is required**. You should have a web
 
 ### Installing
 
-1. Go to the Github project to download the [latest release](https://github.com/strichliste/server/releases).
+1. Go to the Github project to download the [latest release](https://github.com/strichliste/server/releases). It comes already with a bundled front-end.
 2. Extract the package content to your target directory (e.g. `tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld`)
 3. Move the database in `var/` from `app.db.example` to `app.db` if you want to use the default sqlite setup
 
@@ -28,7 +28,7 @@ Strichliste supports multiple database backends such as:
 * PostgreSQL
 * SQLite
 
-If you want to use another Database, just adjust the `DATABASE_URL` variable in your `.env` file in your root
+If you want to use another database then sqlite, just adjust the `DATABASE_URL` variable in your `.env` file in your root
 directory according to the [Doctrine ORM](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#connecting-using-a-url)
 recommendations.
 
@@ -65,10 +65,6 @@ Config examples for nginx can be found here:
 
 * https://github.com/strichliste/server/blob/master/examples/apache.conf (without SSL)
 * TODO: SSL-Config
-
-### Test your setup
-
-To test if everything works, you can also run `php -S 0.0.0.0:8080` instead of running a webserver for now and navigate to `http://127.0.0.1:8080`
 
 ### Common Pitfalls
 
