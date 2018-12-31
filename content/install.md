@@ -32,14 +32,27 @@ If you want to use another Database, just adjust the `DATABASE_URL` variable in 
 directory according to the [Doctrine ORM](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#connecting-using-a-url)
 recommendations.
 
-Afterwards just run the following commands to create the database and schema.
+For example, to configure **mysql/mariadb**:
+
+```
+DATABASE_URL="mysql://strichliste:32YourPassWord42@localhost/strichliste"
+```
+
+Create a database and a separate user:
+
+```sql
+CREATE USER 'strichliste'@'localhost' IDENTIFIED BY '32YourPassWord42';
+GRANT ALL PRIVILEGES ON strichliste.* TO 'strichliste'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+Afterwards just run the following commands to create the schema:
 
 ```bash
-php bin/console doctrine:database:create
 php bin/console doctrine:schema:create
 ```
 
-Make sure you have a user and database created beforehand.
+You're done! Strichliste now works with mysql instead of sqlite.
 
 ### Configuring NGINX
 
@@ -65,7 +78,7 @@ To test if everything works, you can also run `php -S 0.0.0.0:8080` instead of r
 
 #### Import strichliste 1 database
 
-To import your old strichliste 1 database, copy your `database.sqlite` file, copy it to the strichliste2 directory and run:
+To import your old strichliste 1 database, copy the `database.sqlite`-file to the strichliste2 directory and run:
 
 `php bin/console app:import database.sqlite`
 
