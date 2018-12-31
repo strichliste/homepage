@@ -52,7 +52,7 @@
 <h3 id="installing">Installing</h3>
 
 <ol>
-<li>Go to the Github project to download the <a href="https://github.com/strichliste/server/releases">latest release</a>.</li>
+<li>Go to the Github project to download the <a href="https://github.com/strichliste/server/releases">latest release</a>. It comes already with a bundled front-end.</li>
 <li>Extract the package content to your target directory (e.g. <code>tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld</code>)</li>
 <li>Move the database in <code>var/</code> from <code>app.db.example</code> to <code>app.db</code> if you want to use the default sqlite setup</li>
 </ol>
@@ -72,7 +72,7 @@ Strichliste supports multiple database backends such as:</p>
 <li>SQLite</li>
 </ul>
 
-<p>If you want to use another Database, just adjust the <code>DATABASE_URL</code> variable in your <code>.env</code> file in your root
+<p>If you want to use another database then sqlite, just adjust the <code>DATABASE_URL</code> variable in your <code>.env</code> file in your root
 directory according to the <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#connecting-using-a-url">Doctrine ORM</a>
 recommendations.</p>
 
@@ -110,10 +110,6 @@ FLUSH PRIVILEGES;
 <li><a href="https://github.com/strichliste/server/blob/master/examples/apache.conf">https://github.com/strichliste/server/blob/master/examples/apache.conf</a> (without SSL)</li>
 <li>TODO: SSL-Config</li>
 </ul>
-
-<h3 id="test-your-setup">Test your setup</h3>
-
-<p>To test if everything works, you can also run <code>php -S 0.0.0.0:8080</code> instead of running a webserver for now and navigate to <code>http://127.0.0.1:8080</code></p>
 
 <h3 id="common-pitfalls">Common Pitfalls</h3>
 
