@@ -32,8 +32,8 @@ verboselog = true
 
 [[menu.main]]
   weight = 60
-  name = "Contact"
-  url = "/contact/"
+  name = "FAQ"
+  url = "/faq/"
 
 [params]
   logo = "/img/strichliste-logo.png"
