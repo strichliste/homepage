@@ -1,122 +1,68 @@
-a, a:hover {}
+* {
+  box-sizing: border-box; }
 
-.header .logo img {
-    margin: 24px 0 -20px 0;
-}
+:root {
+  font-size: 16px; }
 
-.nav {
-    color: #687074;
-    text-transform: uppercase;
-    line-height: 1.6;
-}
+@media only screen and (min-width: 30em) {
+  :root {
+    font-size: 20px; } }
 
-.nav a {
-    padding: 10px 25px 10px 25px !important;
-    font-size: 15px;
-    color: #687074;
-}
+body,
+html {
+  margin: 0;
+  min-height: 100vh;
+  padding: 0; }
 
-.nav li a:hover {
-    background-color: transparent;
-    border-bottom: 2px solid #d9230f;
-}
+body {
+  background: #eee;
+  color: #888;
+  font-family: Arial, sans-serif; }
 
-.nav li.active a {
-    color: #d9230f;
-    border-bottom: 2px solid #d9230f;
-}
+pre {
+  padding: 12px;
+  margin: 0;
+  overflow: auto;
+  background: #18303e;
+  color: lightgrey; }
 
-.nav li {
-    bottom: -2px;
-}
+a:hover,
+a:visited,
+a {
+  color: black; }
+
+img {
+  max-width: 100%; }
+
+.single-content {
+  max-width: 960px;
+  padding: 1rem;
+  margin: 0 auto; }
+
+.card {
+  padding: 1rem;
+  background: white; }
+
+.has-shadow {
+  box-shadow: '0 3px 4px 0 rgba(0,0,0,.14),0 3px 3px -2px rgba(0,0,0,.2),0 1px 8px 0 rgba(0,0,0,.12)'; }
 
 .header {
-    border-bottom: 2px solid #eeeeee;
-}
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  position: fixed;
+  width: 100%;
+  background: white;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 3rem; }
+  .header a {
+    text-decoration: none; }
+  .header a.active {
+    font-weight: bold; }
 
-.slider {
-    border-bottom: 2px solid #eeeeee;
-}
-
-.content {
-    padding: 40px 0;
-}
-
-.example-img {
-    height: 140px;
-    background-color: #ccc;
-}
-
-.headline {
-    border-bottom: 1px dotted #e4e9f0;
-    margin: 10px 0 25px 0;
-}
-
-.headline h2 {
-    margin: 0 0 -2px 0;
-    padding-bottom: 5px;
-    display: inline-block;
-    border-bottom: 2px solid #d9230f;
-}
-
-.margin-bottom-20 {
-    margin-bottom: 20px;
-}
-.margin-bottom-30 {
-    margin-bottom: 30px;
-}
-
-.users .img-container {
-    height: 120px;
-}
-
-
-.users .user {
-
-}
-
-.vertical-align {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.slider {
-    background-size: cover;
-    background-image: url(../img/teaser/strichliste-blur.jpg);
-
-    background-color: gray;
-    height: 350px;
-
-    position: relative;
-}
-
-.slider-text {
-    position: absolute;
-
-    left: 100px;
-    top: 50px;
-}
-
-.slider-headline-1 {
-    text-transform: uppercase;
-    font-size: 50px;
-}
-
-.slider-headline-1, .slider-headline-2 {
-    background-color: rgba(0,0,0,0.5);
-    padding: 5px 10px;
-
-    display: inline-block;
-    color: #fff;
-}
-
-.slider-headline-2 {
-    font-size: 20px;
-    margin-top: 20px;
-}
-
+.header-placeholder {
+  height: 3rem; }

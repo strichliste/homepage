@@ -1,8 +1,6 @@
 {{ partial "header.html" . }}
-<div class="container">
-    <div class="row content margin-bottom-20">
-        <h2>{{ .Title }}</h2>
-        {{ .Content }}
-    </div>
+<div class="single-content card ">
+  <h2>{{ .Title }}</h2>
+  {{ .Content }}
 </div>
 {{ partial "footer.html" . }}

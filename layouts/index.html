@@ -1,37 +1,38 @@
 {{ partial "header.html" . }}
 
-    <div class="slider">
-        <div class="container slide">
-            <div class="slider-headline-1">SELF-SERVICE CHECKLIST</div><br>
-            <div class="slider-headline-2">Manage your kiosk in a breeze.</div>
-        </div>
+<div class="container slide">
+  <div class="slider-headline-1">SELF-SERVICE CHECKLIST</div>
+  <br />
+  <div class="slider-headline-2">Manage your kiosk in a breeze.</div>
+</div>
+
+<div class="container">
+  <div class="row content margin-bottom-20">
+    <div class="col-sm-4">
+      <h4>Fully responsive</h4>
+      <p>
+        Strichliste is based on bootstrap and uses its responsive features to
+        work properly on your phone, tablet or pc
+      </p>
     </div>
-
-    <div class="container">
-
-        <div class="row content margin-bottom-20">
-            <div class="col-sm-4">
-                <h4>Fully responsive</h4>
-                <p>Strichliste is based on bootstrap and uses its responsive features to work properly on your
-                phone, tablet or pc</p>
-            </div>
-            <div class="col-sm-4">
-                <h4>HTML5 + CSS3 + JS</h4>
-                <p>Strichliste uses the latest web technologies like react and redux</p>
-            </div>
-            <div class="col-sm-4">
-                <h4>Open Source</h4>
-                <p>This project is completely open source and is hosted on our GitHub account. Feel free
-                to submit issues or pull requests!</p>
-            </div>
-        </div>
-
-        {{ partial "lastnews.html" . }}
-
-        {{ partial "features.html" . }}
-
-        {{ partial "users.html" . }}
-
+    <div class="col-sm-4">
+      <h4>HTML5 + CSS3 + JS</h4>
+      <p>Strichliste uses the latest web technologies like react and redux</p>
     </div>
+    <div class="col-sm-4">
+      <h4>Open Source</h4>
+      <p>
+        This project is completely open source and is hosted on our GitHub
+        account. Feel free to submit issues or pull requests!
+      </p>
+    </div>
+  </div>
+
+  {{ partial "lastnews.html" . }}
+
+  {{ partial "features.html" . }}
+
+  {{ partial "users.html" . }}
+</div>
 
 {{ partial "footer.html" . }}
