@@ -66,3 +66,27 @@ img {
 
 .header-placeholder {
   height: 3rem; }
+
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  grid-gap: 1rem; }
+
+.hero {
+  position: relative; }
+  .hero section {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    color: white;
+    text-shadow: 1px 1px 0px black;
+    padding-left: 2rem; }
+  .hero img {
+    width: 100%; }
+
+.index-container {
+  margin-top: 2rem; }
