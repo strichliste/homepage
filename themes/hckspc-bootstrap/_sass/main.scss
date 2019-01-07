@@ -64,13 +64,19 @@ pre {
   padding: 12px;
   margin: 0;
   overflow: auto;
+  font-size: 0.75rem;
   background: #18303e;
   color: lightgrey;
+}
+
+code {
+  word-wrap: break-word;
 }
 
 a:hover,
 a:visited,
 a {
+  word-wrap: break-word;
   color: $primary;
 }
 
@@ -80,8 +86,7 @@ img {
 
 .single-content {
   max-width: 960px;
-  padding: 1rem;
-  margin: 0 auto;
+  margin: 2rem auto;
 }
 
 .card {
@@ -90,7 +95,8 @@ img {
 }
 
 .has-shadow {
-  box-shadow: '0 3px 4px 0 rgba(0,0,0,.14),0 3px 3px -2px rgba(0,0,0,.2),0 1px 8px 0 rgba(0,0,0,.12)';
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2),
+    0 1px 8px 0 rgba(0, 0, 0, 0.12);
 }
 
 //header
@@ -107,8 +113,11 @@ img {
   z-index: 1;
   top: 0;
   left: 0;
-  height: 3rem;
+  height: 4rem;
   a {
+    text-transform: uppercase;
+    display: inline-flex;
+    margin-left: 1rem;
     text-decoration: none;
   }
   a.active {
@@ -117,13 +126,36 @@ img {
 }
 
 .header-placeholder {
-  height: 3rem;
+  height: 4rem;
+}
+
+.header-icon {
+  margin-right: 2rem;
+}
+
+.has-text-centered {
+  text-align: center;
 }
 
 .auto-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  grid-gap: 1rem;
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  .card {
+    max-width: 16rem;
+    margin: 1rem;
+  }
+}
+
+.is-center-center {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  flex-direction: column;
+  height: 100%;
 }
 
 //index
@@ -146,8 +178,64 @@ img {
   img {
     width: 100%;
   }
+  h1 {
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-size: 1rem;
+    margin: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero {
+    h1 {
+      font-size: 2rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+    }
+  }
+}
+@media (min-width: 1024px) {
+  .hero {
+    h1 {
+      font-size: 3rem;
+    }
+    h2 {
+      font-size: 1.8rem;
+    }
+  }
 }
 
 .index-container {
   margin-top: 2rem;
+}
+
+.users-list {
+  p {
+    margin-top: 1rem;
+  }
+}
+
+.news-grid {
+  display: grid;
+  grid-gap: 1rem;
+  margin: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .news-grid {
+    grid-template-columns: 3fr 1fr;
+  }
+}
+
+.latest-news {
+  a {
+    display: block;
+    margin: 1rem;
+  }
 }

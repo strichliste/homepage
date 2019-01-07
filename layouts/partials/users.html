@@ -1,15 +1,11 @@
-<div class="row margin-bottom-30 users">
-    <div class="headline col-xs-12">
-        <h2>Users</h2>
-    </div>
-    {{ range sort $.Site.Data.users.user }}
-    <div class="col-md-2 user  text-center">
-        <a href="{{ .link }}">
-            <div class="img-container vertical-align">
-                <img src="{{ .img }}" alt="{{ .name }}">
-            </div>
-            {{ .name }}
-        </a>
-    </div>
-    {{ end }}
+<div class="has-text-centered"><h2>Users</h2></div>
+<div class="auto-grid">
+  {{ range sort $.Site.Data.users.user }}
+  <div class="card has-shadow">
+    <a class="is-center-center users-list" href="{{ .link }}">
+      <img src="{{ .img }}" alt="{{ .name }}" />
+      <p>{{ .name }}</p>
+    </a>
+  </div>
+  {{ end }}
 </div>

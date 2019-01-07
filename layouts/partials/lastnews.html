@@ -1,21 +1,17 @@
-<div class="row margin-bottom-30">
-    <div class="headline col-xs-12">
-        <h2>Latest Updates</h2>
-    </div>
+<div class="has-text-centered"><h2>Latest Updates</h2></div>
+<div class="news-grid">
+  <div class="card has-shadow">
+    {{ range first 1 (where .Data.Pages "Section" "news") }}
+    <h4>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </h4>
+    <p>{{ .Summary }}</p>
+    {{ end }}
+  </div>
 
-    <div class="col-xs-12 col-md-8">
-        {{ range first 1 (where .Data.Pages "Section" "news") }}
-        <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
-        <p>{{ .Summary }}</p>
-        {{ end }}
-    </div>
-
-    <div class="hidden-xs col-md-4">
-        <h4>Latest news</h4>
-        <ul>
-        {{ range first 5 (where .Data.Pages "Section" "news") }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-        {{ end }}
-        </ul>
-    </div>
+  <div class="card has-shadow latest-news">
+    <h4>Latest news</h4>
+    {{ range first 5 (where .Data.Pages "Section" "news") }}
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a> {{ end }}
+  </div>
 </div>
