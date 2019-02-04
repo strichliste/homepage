@@ -3,7 +3,7 @@ language: go
 go:
   - 1.11
 install:
-  - go get -v github.com/spf13/hugo
+  - go get -v github.com/gohugoio/hugo
 script:
   - export PATH=$HOME/gopath/bin:$PATH
   - hugo --theme=hckspc-bootstrap
