@@ -6,10 +6,21 @@
     <description>Recent content in News on Strichliste ‒ The Tally Sheet Replacement for Your Organization</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Dec 2018 08:59:19 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 04 Feb 2019 16:00:32 +0100</lastBuildDate>
     
 	<atom:link href="https://www.strichliste.org/news/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LDAP Importer</title>
+      <link>https://www.strichliste.org/news/ldapimport/</link>
+      <pubDate>Mon, 04 Feb 2019 16:00:32 +0100</pubDate>
+      
+      <guid>https://www.strichliste.org/news/ldapimport/</guid>
+      <description>Strichliste just got a new, experimental command! You can now import users from a LDAP source. See the documentation here at our Commands.md for more details!
+You can also let this run as a cronjob to update the users mailaddress or create new ones as they appear in your LDAP directory.
+Feedback is appreciated!</description>
+    </item>
     
     <item>
       <title>Strichliste 2 released!</title>
