@@ -13,11 +13,14 @@ For strichliste to run, **PHP 7.1 or higher is required**. You should have a web
 
 1. Go to the Github project to download the [latest release](https://github.com/strichliste/server/releases). It comes already with a bundled front-end.
 2. Extract the package content to your target directory (e.g. `tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld`)
-3. Move the database in `var/` from `app.db.example` to `app.db` if you want to use the default sqlite setup
+3. Move the database in `var/` from `app.db.example` to `app.db` if you want to use the default sqlite setup. 
 
-If you want to keep sqlite as your database, you're done. Continue configuring your webserver
+   **Attention:** This is not recommended, because sqlite does not support some of the database transactional
+    features which are needed to handle concurrent request.
 
-### Using a different database (optional)
+Continue configuring your webserver.
+
+### Using a different database (recommended)
 
 The [ORM](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html) used in
 Strichliste supports multiple database backends such as:
