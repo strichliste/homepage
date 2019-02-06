@@ -54,25 +54,21 @@
 <ol>
 <li>Go to the Github project to download the <a href="https://github.com/strichliste/server/releases">latest release</a>. It comes already with a bundled front-end.</li>
 <li>Extract the package content to your target directory (e.g. <code>tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld</code>)</li>
-<li>Move the database in <code>var/</code> from <code>app.db.example</code> to <code>app.db</code> if you want to use the default sqlite setup.</li>
+<li>Configure your database (e.g. mysql)</li>
+<li>Configure webserver (nginx or apache)</li>
 </ol>
 
-<p><strong>Attention:</strong> This is not recommended, because sqlite does not support some of the database transactional
-    features which are needed to handle concurrent request.</p>
-
-<p>Continue configuring your webserver.</p>
-
-<h3 id="using-a-different-database-recommended">Using a different database (recommended)</h3>
+<h3 id="database-configuration">Database configuration</h3>
 
 <p>The <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html">ORM</a> used in
 Strichliste supports multiple database backends such as:</p>
 
 <ul>
-<li>MySQL / MariaDB</li>
+<li>MySQL / MariaDB (recommended)</li>
 <li>Oracle</li>
 <li>Microsoft SQL Server</li>
 <li>PostgreSQL</li>
-<li>SQLite</li>
+<li>SQLite (not recommended)</li>
 </ul>
 
 <p>If you want to use another database then sqlite, just adjust the <code>DATABASE_URL</code> variable in your <code>.env</code> file in your root
@@ -96,7 +92,20 @@ FLUSH PRIVILEGES;
 <pre><code class="language-bash">php bin/console doctrine:schema:create
 </code></pre>
 
-<p>You&rsquo;re done! Strichliste now works with mysql instead of sqlite.</p>
+<p>You&rsquo;re done!</p>
+
+<h4 id="sqlite-testing-only">Sqlite (testing only)</h4>
+
+<p>Sqlite should <strong>only be used for testing</strong>. sqlite does not support most of the database transactional features
+which are needed to handle concurrent request.</p>
+
+<p>If you really want to use this, execute the following steps:</p>
+
+<pre><code class="language-bash">php bin/console doctrine:database:create
+php bin/console doctrine:schema:create
+</code></pre>
+
+<p>You now have a database-file in <code>var/app.db</code></p>
 
 <h3 id="configuring-nginx">Configuring NGINX</h3>
 
