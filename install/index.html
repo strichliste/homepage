@@ -54,12 +54,15 @@
 <ol>
 <li>Go to the Github project to download the <a href="https://github.com/strichliste/server/releases">latest release</a>. It comes already with a bundled front-end.</li>
 <li>Extract the package content to your target directory (e.g. <code>tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld</code>)</li>
-<li>Move the database in <code>var/</code> from <code>app.db.example</code> to <code>app.db</code> if you want to use the default sqlite setup</li>
+<li>Move the database in <code>var/</code> from <code>app.db.example</code> to <code>app.db</code> if you want to use the default sqlite setup.</li>
 </ol>
 
-<p>If you want to keep sqlite as your database, you&rsquo;re done. Continue configuring your webserver</p>
+<p><strong>Attention:</strong> This is not recommended, because sqlite does not support some of the database transactional
+    features which are needed to handle concurrent request.</p>
 
-<h3 id="using-a-different-database-optional">Using a different database (optional)</h3>
+<p>Continue configuring your webserver.</p>
+
+<h3 id="using-a-different-database-recommended">Using a different database (recommended)</h3>
 
 <p>The <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html">ORM</a> used in
 Strichliste supports multiple database backends such as:</p>

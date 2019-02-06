@@ -39,7 +39,7 @@ The new frontend is completely responsive and uses react and redux as it&amp;rsq
       
       <guid>https://www.strichliste.org/install/</guid>
       <description>For strichliste to run, PHP 7.1 or higher is required. You should have a webserver running which supports mod_php or php-fpm.
-Installing  Go to the Github project to download the latest release. It comes already with a bundled front-end. Extract the package content to your target directory (e.g. tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld) Move the database in var/ from app.db.example to app.db if you want to use the default sqlite setup  If you want to keep sqlite as your database, you&amp;rsquo;re done.</description>
+Installing  Go to the Github project to download the latest release. It comes already with a bundled front-end. Extract the package content to your target directory (e.g. tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld) Move the database in var/ from app.db.example to app.db if you want to use the default sqlite setup.</description>
     </item>
     
     <item>
