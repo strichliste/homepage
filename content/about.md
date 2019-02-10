@@ -24,12 +24,14 @@ it looks like:
 
 strichliste consists of two components: the `frontend` and the `backend`.
 
-The frontend [strichliste](https://github.com/strichliste/strichliste) is an react based
+The frontend [strichliste-web-frontend](https://github.com/strichliste/strichliste-web-frontend) is an react based
 application that accesses the backend via a RESTful HTTP interface.
 
-The [backend](https://github.com/strichliste/strichliste-backend) is written in PHP using the symfony web framework.
+The [strichliste-backend](https://github.com/strichliste/strichliste-backend) is written in PHP using the symfony web framework.
 All data is writting into a database. By default it utilises a SQLite database, but can be changed
 easily thanks to the Doctrine ORM
+
+The frontend and backend is bundled inside [strichliste](https://github.com/strichliste/strichliste) repo in releases.
 
 ### How it works
 

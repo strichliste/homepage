@@ -11,7 +11,7 @@ For strichliste to run, **PHP 7.1 or higher is required**. You should have a web
 
 ### Installing
 
-1. Go to the Github project to download the [latest release](https://github.com/strichliste/strichliste-backend/releases). It comes already with a bundled front-end.
+1. Go to the Github project to download the [latest release](https://github.com/strichliste/strichliste/releases). It comes already with a bundled front-end.
 2. Extract the package content to your target directory (e.g. `tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld`)
 3. Configure your database (e.g. mysql)
 4. Configure webserver (nginx or apache)
