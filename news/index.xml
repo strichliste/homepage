@@ -33,16 +33,6 @@ The new frontend is completely responsive and uses react and redux as it&amp;rsq
     </item>
     
     <item>
-      <title>Static builds are now available!</title>
-      <link>https://www.strichliste.org/news/static-builds/</link>
-      <pubDate>Thu, 07 Jan 2016 09:00:00 +0000</pubDate>
-      
-      <guid>https://www.strichliste.org/news/static-builds/</guid>
-      <description>Now it&amp;rsquo;s easier to setup your strichliste instance, because we now provide static builds for strichliste-web! You can easily grab the latest build from github and follow the install instructions.
-We&amp;rsquo;re currently working on major features. Stay tuned for the next major release</description>
-    </item>
-    
-    <item>
       <title>More features to come</title>
       <link>https://www.strichliste.org/news/more-features/</link>
       <pubDate>Wed, 25 Nov 2015 09:00:00 +0000</pubDate>
