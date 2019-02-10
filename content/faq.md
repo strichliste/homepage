@@ -11,11 +11,11 @@ title = "Frequently Asked Questions"
 
 #### API
 
-You can find the server API documentation right in the [server repos API.md](https://github.com/strichliste/server/blob/master/docs/API.md).
+You can find the server API documentation right in the [server repos API.md](https://github.com/strichliste/strichliste-backend/blob/master/docs/API.md).
 
 #### Commands
 
-Available commands are documented here: [Commands.md](https://github.com/strichliste/server/blob/master/docs/Commands.md)
+Available commands are documented here: [Commands.md](https://github.com/strichliste/strichliste-backend/blob/master/docs/Commands.md)
 
 ### How to get in touch?
 

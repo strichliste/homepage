@@ -11,7 +11,7 @@ For strichliste to run, **PHP 7.1 or higher is required**. You should have a web
 
 ### Installing
 
-1. Go to the Github project to download the [latest release](https://github.com/strichliste/server/releases). It comes already with a bundled front-end.
+1. Go to the Github project to download the [latest release](https://github.com/strichliste/strichliste-backend/releases). It comes already with a bundled front-end.
 2. Extract the package content to your target directory (e.g. `tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld`)
 3. Move the database in `var/` from `app.db.example` to `app.db` if you want to use the default sqlite setup
 
@@ -58,12 +58,12 @@ You're done! Strichliste now works with mysql instead of sqlite.
 
 Config examples for nginx can be found here:
 
-* https://github.com/strichliste/server/blob/master/examples/nginx_ssl.conf (with SSL)
-* https://github.com/strichliste/server/blob/master/examples/nginx.conf (without SSL)
+* https://github.com/strichliste/strichliste-backend/blob/master/examples/nginx_ssl.conf (with SSL)
+* https://github.com/strichliste/strichliste-backend/blob/master/examples/nginx.conf (without SSL)
 
 ### Configuring Apache
 
-* https://github.com/strichliste/server/blob/master/examples/apache.conf (without SSL)
+* https://github.com/strichliste/strichliste-backend/blob/master/examples/apache.conf (without SSL)
 * TODO: SSL-Config
 
 ### Common Pitfalls
