@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>{{ .Site.Title }}</title>
 
-    <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png">
+    <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/app.css" rel="stylesheet" />
     {{ partial "head_includes.html" . }}
-</head>
-<body lang="en">
-    <div class="header">
-        <div class="container">
-            <a class="logo pull-left" href="/">
-                <img src="{{ .Site.Params.logo }}">
-            </a>
-        </div>
+  </head>
+  <body lang="en">
+    <div class="header navbar container">
+      <div class="navbar-left">
+        <a class="logo" href="/">
+          <img src="{{ .Site.Params.logo }}" />
+        </a>
+      </div>
+      <div class="navbar-right">
         {{ partial "menu.html" . }}
+      </div>
     </div>
-
+  </body>
+</html>
