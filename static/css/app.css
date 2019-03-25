@@ -74,10 +74,12 @@ a.logo {
 }
 
 .users .img-container {
-  height: 120px;
+  height: 110px;
+  margin-bottom: 10px;
 }
 
 .users .user {
+  margin-bottom: 20px;
 }
 
 .vertical-align {
