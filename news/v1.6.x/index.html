@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Strichliste ‒ The Tally Sheet Replacement for Your Organization</title>
+
+    <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/app.css" rel="stylesheet" />
+    
+  </head>
+  <body lang="en">
+    <div class="header navbar container">
+      <div class="navbar-left">
+        <a class="logo" href="/">
+          <img src="/img/strichliste-logo.png" />
+        </a>
+      </div>
+      <div class="navbar-right">
+            <ul class="nav navbar-nav">
+        
+        
+        <li class=""><a href="/">Home</a></li>
+        
+        <li class=""><a href="/about/">About</a></li>
+        
+        <li class=""><a href="/install/">Install</a></li>
+        
+        <li class=""><a href="https://demo.strichliste.org">Demo</a></li>
+        
+        <li class=""><a href="https://github.com/strichliste">Source</a></li>
+        
+        <li class=""><a href="/faq/">FAQ</a></li>
+        
+    </ul>
+
+      </div>
+    </div>
+  </body>
+</html>
+
+<div class="container">
+    <div class="row content margin-bottom-20">
+        <h2>Release v1.6.1</h2>
+        <p>We&rsquo;re proud to announce the new strichliste release v1.61 with a lot of fixes and some new features:</p>
+
+<ul>
+<li>Charge account by PayPal</li>
+<li>Visual fixes (contrast, colors, &hellip;)</li>
+<li>More input validation</li>
+<li>! Extracted strichliste config to separate <code>strichliste.yaml</code> file !</li>
+</ul>
+
+<p>To use the PayPal-Feature, you have to configure your recipient address in the <a href="https://github.com/strichliste/strichliste-backend/blob/master/docs/Config.md">strichliste-server</a> <code>strichliste.yaml</code>.
+To complete a PayPal-transaction it&rsquo;s mandatory to press &ldquo;return to merchant&rdquo; at the end of the paypal transaction. We&rsquo;re currently investigating ways to do that automatically. PayPal&rsquo;s own <code>rm=1</code> parameter does not seem to work here.</p>
+
+    </div>
+</div>
+</body>
+</html> 
+

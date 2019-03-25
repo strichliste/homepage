@@ -6,10 +6,20 @@
     <description>Recent content on Strichliste ‒ The Tally Sheet Replacement for Your Organization</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Feb 2019 16:52:25 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 25 Mar 2019 10:32:14 +0100</lastBuildDate>
     
 	<atom:link href="https://www.strichliste.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Release v1.6.1</title>
+      <link>https://www.strichliste.org/news/v1.6.x/</link>
+      <pubDate>Mon, 25 Mar 2019 10:32:14 +0100</pubDate>
+      
+      <guid>https://www.strichliste.org/news/v1.6.x/</guid>
+      <description>We&amp;rsquo;re proud to announce the new strichliste release v1.61 with a lot of fixes and some new features:
+ Charge account by PayPal Visual fixes (contrast, colors, &amp;hellip;) More input validation ! Extracted strichliste config to separate strichliste.yaml file !  To use the PayPal-Feature, you have to configure your recipient address in the strichliste-server strichliste.yaml. To complete a PayPal-transaction it&amp;rsquo;s mandatory to press &amp;ldquo;return to merchant&amp;rdquo; at the end of the paypal transaction.</description>
+    </item>
     
     <item>
       <title>Builds</title>

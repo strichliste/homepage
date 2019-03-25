@@ -3,6 +3,23 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.strichliste.org/news/</loc>
+    <lastmod>2019-03-25T10:32:14+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.strichliste.org/news/v1.6.x/</loc>
+    <lastmod>2019-03-25T10:32:14+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.strichliste.org/</loc>
+    <lastmod>2019-03-25T10:32:14+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.strichliste.org/news/builds/</loc>
     <lastmod>2019-02-10T16:52:25+01:00</lastmod>
   </url>
@@ -44,18 +61,6 @@
   
   <url>
     <loc>https://www.strichliste.org/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.strichliste.org/news/</loc>
-    <lastmod>2019-02-10T16:52:25+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.strichliste.org/</loc>
-    <lastmod>2019-02-10T16:52:25+01:00</lastmod>
     <priority>0</priority>
   </url>
   
