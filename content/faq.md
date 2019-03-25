@@ -13,6 +13,10 @@ title = "Frequently Asked Questions"
 
 You can find the server API documentation right in the [server repos API.md](https://github.com/strichliste/strichliste-backend/blob/master/docs/API.md).
 
+#### Config values
+
+All the config values are explained in our [Config.md](https://github.com/strichliste/strichliste-backend/blob/master/docs/Config.md) file. Be aware that all version above v1.6.0 use a separate config file `strichliste.yaml`
+
 #### Commands
 
 Available commands are documented here: [Commands.md](https://github.com/strichliste/strichliste-backend/blob/master/docs/Commands.md)
