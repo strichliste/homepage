@@ -37,3 +37,8 @@ img = "/img/users/schaffenburg.png"
 name = "Chaos Computer Club Darmstadt e.V."
 link = "https://www.chaos-darmstadt.de/"
 img = "/img/users/ccc-darmstadt.png"
+
+[[user]]
+name = "Magrathea Laboratories e.V."
+link = "https://magalbs.space/"
+img = "/img/users/maglab.png"
