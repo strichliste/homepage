@@ -78,6 +78,10 @@ a.logo {
   margin-bottom: 10px;
 }
 
+.users .img-container img {
+  max-height: 110px;
+}
+
 .users .user {
   margin-bottom: 20px;
 }
