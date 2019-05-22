@@ -42,3 +42,13 @@ img = "/img/users/ccc-darmstadt.png"
 name = "Magrathea Laboratories e.V."
 link = "https://mag.lab.sh/"
 img = "/img/users/maglab.png"
+
+[[user]]
+name = "Toolbox Bodensee e.V."
+link = "https://toolbox-bodensee.de/"
+img = "/img/users/toolbox-bodensee.png"
+
+[[user]]
+name = "Hackerspace see-base"
+link = "https://see-base.de/"
+img = "/img/users/see-base.png"
