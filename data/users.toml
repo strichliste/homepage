@@ -52,3 +52,8 @@ img = "/img/users/toolbox-bodensee.png"
 name = "Hackerspace see-base"
 link = "https://see-base.de/"
 img = "/img/users/see-base.png"
+
+[[user]]
+name = "Förderkreis innovatives Spiel e.V."
+link = "https://fis-ev.de"
+img = "/img/users/fis-ev.png"
