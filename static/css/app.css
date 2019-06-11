@@ -80,6 +80,7 @@ a.logo {
 
 .users .img-container img {
   max-height: 110px;
+  max-width: 170px;
 }
 
 .users .user {
