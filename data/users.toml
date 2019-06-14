@@ -57,3 +57,8 @@ img = "/img/users/see-base.png"
 name = "Förderkreis innovatives Spiel e.V."
 link = "https://fis-ev.de"
 img = "/img/users/fis-ev.png"
+
+[[user]]
+name = "Westwoodlabs"
+link = "https://westwoodlabs.de"
+img = "/img/users/wwlabs-banner.png"
