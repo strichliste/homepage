@@ -73,7 +73,7 @@ Strichliste supports multiple database backends such as:</p>
 <li>SQLite (not recommended)</li>
 </ul>
 
-<p>If you want to use another database then sqlite, just adjust the <code>DATABASE_URL</code> variable in your <code>.env</code> file in your root
+<p>If you want to use another database than sqlite, just adjust the <code>DATABASE_URL</code> variable in your <code>.env</code> file in your root
 directory according to the <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#connecting-using-a-url">Doctrine ORM</a>
 recommendations.</p>
 
@@ -84,7 +84,8 @@ recommendations.</p>
 
 <p>Create a database and a separate user:</p>
 
-<pre><code class="language-sql">CREATE USER 'strichliste'@'localhost' IDENTIFIED BY '32YourPassWord42';
+<pre><code class="language-sql">CREATE DATABASE strichliste;
+CREATE USER 'strichliste'@'localhost' IDENTIFIED BY '32YourPassWord42';
 GRANT ALL PRIVILEGES ON strichliste.* TO 'strichliste'@'localhost';
 FLUSH PRIVILEGES;
 </code></pre>
