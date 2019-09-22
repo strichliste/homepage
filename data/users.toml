@@ -62,3 +62,8 @@ img = "/img/users/fis-ev.png"
 name = "Westwoodlabs"
 link = "https://westwoodlabs.de"
 img = "/img/users/wwlabs-banner.png"
+
+[[user]]
+name = "Nerdberg e.V."
+link = "https://www.nerdberg.de/"
+img = "/img/users/nerdberg.jpg"
