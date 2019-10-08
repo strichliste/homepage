@@ -67,3 +67,8 @@ img = "/img/users/wwlabs-banner.png"
 name = "Nerdberg e.V."
 link = "https://www.nerdberg.de/"
 img = "/img/users/nerdberg.jpg"
+
+[[user]]
+name = "MHP Software GmbH"
+link = "https://www.mhp-solution-group.com/"
+img = "/img/users/mhp-software-gmbh.png"
