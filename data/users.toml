@@ -72,3 +72,8 @@ img = "/img/users/nerdberg.jpg"
 name = "MHP Software GmbH"
 link = "https://www.mhp-solution-group.com/"
 img = "/img/users/mhp-software-gmbh.png"
+
+[[user]]
+name = "Thomann Bits & Beats"
+link = "https://www.bitsbeats.io/"
+img = "/img/users/thobits.png"
