@@ -46,12 +46,8 @@
 <div class="container">
     <div class="row content margin-bottom-20">
         <h2>Install strichliste</h2>
-        
-
-<p>For strichliste to run, <strong>PHP 7.1 or higher is required</strong>. You should have a webserver running which supports <strong>mod_php</strong> or <strong>php-fpm</strong>.</p>
-
+        <p>For strichliste to run, <strong>PHP 7.1 or higher is required</strong>. You should have a webserver running which supports <strong>mod_php</strong> or <strong>php-fpm</strong>.</p>
 <h3 id="installing">Installing</h3>
-
 <ol>
 <li>Go to the Github project to download the <a href="https://github.com/strichliste/strichliste/releases">latest release</a>. It comes already with a bundled front-end.</li>
 <li>Extract the package content to your target directory (e.g. <code>tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld</code>)</li>
@@ -59,12 +55,9 @@
 <li>Configure webserver (nginx or apache)</li>
 <li>Change <a href="https://github.com/strichliste/strichliste-backend/blob/master/docs/Config.md">strichliste.yaml</a> config to your needs (optional)</li>
 </ol>
-
 <h3 id="database-configuration">Database configuration</h3>
-
 <p>The <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html">ORM</a> used in
 Strichliste supports multiple database backends such as:</p>
-
 <ul>
 <li>MySQL / MariaDB (recommended)</li>
 <li>Oracle</li>
@@ -72,74 +65,45 @@ Strichliste supports multiple database backends such as:</p>
 <li>PostgreSQL</li>
 <li>SQLite (not recommended)</li>
 </ul>
-
 <p>If you want to use another database than sqlite, just adjust the <code>DATABASE_URL</code> variable in your <code>.env</code> file in your root
 directory according to the <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#connecting-using-a-url">Doctrine ORM</a>
 recommendations.</p>
-
 <p>For example, to configure <strong>mysql/mariadb</strong>:</p>
-
 <pre><code>DATABASE_URL=&quot;mysql://strichliste:32YourPassWord42@localhost/strichliste&quot;
-</code></pre>
-
-<p>Create a database and a separate user:</p>
-
-<pre><code class="language-sql">CREATE DATABASE strichliste;
-CREATE USER 'strichliste'@'localhost' IDENTIFIED BY '32YourPassWord42';
-GRANT ALL PRIVILEGES ON strichliste.* TO 'strichliste'@'localhost';
-FLUSH PRIVILEGES;
-</code></pre>
-
-<p>Afterwards just run the following commands to create the schema:</p>
-
-<pre><code class="language-bash">php bin/console doctrine:schema:create
-</code></pre>
-
-<p>You&rsquo;re done!</p>
-
+</code></pre><p>Create a database and a separate user:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> strichliste;
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">USER</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">strichliste</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">localhost</span><span style="color:#e6db74">&#39;</span> IDENTIFIED <span style="color:#66d9ef">BY</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">32YourPassWord42</span><span style="color:#e6db74">&#39;</span>;
+<span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">ALL</span> <span style="color:#66d9ef">PRIVILEGES</span> <span style="color:#66d9ef">ON</span> strichliste.<span style="color:#f92672">*</span> <span style="color:#66d9ef">TO</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">strichliste</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">localhost</span><span style="color:#e6db74">&#39;</span>;
+FLUSH <span style="color:#66d9ef">PRIVILEGES</span>;
+</code></pre></div><p>Afterwards just run the following commands to create the schema:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">php bin/console doctrine:schema:create
+</code></pre></div><p>You&rsquo;re done!</p>
 <h4 id="sqlite-testing-only">Sqlite (testing only)</h4>
-
 <p>Sqlite should <strong>only be used for testing</strong>. sqlite does not support most of the database transactional features
 which are needed to handle concurrent request.</p>
-
 <p>If you really want to use this, execute the following steps:</p>
-
-<pre><code class="language-bash">php bin/console doctrine:database:create
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">php bin/console doctrine:database:create
 php bin/console doctrine:schema:create
-</code></pre>
-
-<p>You now have a database-file in <code>var/app.db</code></p>
-
+</code></pre></div><p>You now have a database-file in <code>var/app.db</code></p>
 <h3 id="configuring-nginx">Configuring NGINX</h3>
-
 <p>Config examples for nginx can be found here:</p>
-
 <ul>
 <li><a href="https://github.com/strichliste/strichliste-backend/blob/master/examples/nginx_ssl.conf">https://github.com/strichliste/strichliste-backend/blob/master/examples/nginx_ssl.conf</a> (with SSL)</li>
 <li><a href="https://github.com/strichliste/strichliste-backend/blob/master/examples/nginx.conf">https://github.com/strichliste/strichliste-backend/blob/master/examples/nginx.conf</a> (without SSL)</li>
 </ul>
-
 <h3 id="configuring-apache">Configuring Apache</h3>
-
 <ul>
 <li><a href="https://github.com/strichliste/strichliste-backend/blob/master/examples/apache.conf">https://github.com/strichliste/strichliste-backend/blob/master/examples/apache.conf</a> (without SSL)</li>
 <li>TODO: SSL-Config</li>
 </ul>
-
 <h3 id="common-pitfalls">Common Pitfalls</h3>
-
 <ul>
 <li>Check your folder owner/group if you&rsquo;re using sqlite as your database! Otherwise strichliste can&rsquo;t write to it.</li>
 </ul>
-
 <h3 id="commands">Commands</h3>
-
 <h4 id="import-strichliste-1-database">Import strichliste 1 database</h4>
-
 <p>To import your old strichliste 1 database, copy the <code>database.sqlite</code>-file to the strichliste2 directory and run:</p>
-
 <p><code>php bin/console app:import database.sqlite</code></p>
-
 <p>After import the terminal outputs &ldquo;Import done!&rdquo;</p>
 
     </div>
