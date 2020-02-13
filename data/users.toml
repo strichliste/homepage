@@ -77,3 +77,8 @@ img = "/img/users/mhp-software-gmbh.png"
 name = "Thomann Bits & Beats"
 link = "https://www.bitsbeats.io/"
 img = "/img/users/thobits.png"
+
+[[user]]
+name = "Forschungsgemeinschaft elektronische Medien e.V."
+link = "https://fem.tu-ilmenau.de/"
+img = "/img/users/fem.png"
