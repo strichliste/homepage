@@ -2,6 +2,7 @@ baseurl = "https://www.strichliste.org"
 locale = "en-us"
 title = "Strichliste ‒ The Tally Sheet Replacement for Your Organization"
 theme = "hckspc-bootstrap"
+disableKinds = ["taxonomy", "term"]
 
 [[menu.main]]
   weight = 10
@@ -17,6 +18,11 @@ theme = "hckspc-bootstrap"
   weight = 30
   name = "Install"
   pageRef = "/install"
+
+[[menu.main]]
+  weight = 35
+  name = "Docs"
+  pageRef = "/docs"
 
 [[menu.main]]
   weight = 40
