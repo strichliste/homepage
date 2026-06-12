@@ -3,10 +3,10 @@
         <h2>Users</h2>
     </div>
     {{ range sort hugo.Data.users.user }}
-    <div class="col-md-2 user  text-center">
+    <div class="col-xs-6 col-sm-3 col-md-2 user text-center">
         <a href="{{ .link }}">
             <div class="img-container vertical-align">
-                <img src="{{ .img }}" alt="{{ .name }}">
+                <img src="{{ .img }}" alt="">
             </div>
             {{ .name }}
         </a>
