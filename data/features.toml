@@ -1,7 +1,7 @@
 [[feature]]
 title = "Statistics"
 img = "/img/features/statistics.png"
-text = "Stay on top of your organization's finances: the metrics page shows the sum of all balances, transaction volume and top articles ‒ and every user gets personal statistics."
+text = "Stay on top of your organization's finances: the metrics page shows the sum of all balances, transaction volume and top articles — and every user gets personal statistics."
 
 [[feature]]
 title = "Database agnostic"
@@ -11,9 +11,9 @@ text = "Using Doctrine as ORM, strichliste is database agnostic: SQLite for a si
 [[feature]]
 title = "REST-API"
 img = "/img/features/rest.png"
-text = "Write your own client for our easy-to-use REST API ‒ with interactive OpenAPI/Swagger documentation served by your own instance at /api/doc."
+text = "Write your own client for our easy-to-use REST API — with interactive OpenAPI/Swagger documentation served by your own instance at /api/doc."
 
 [[feature]]
 title = "Web-based"
-text = "Being a web application, strichliste can be accessed on any device that runs a web browser ‒ and the UI works even with JavaScript disabled."
+text = "Being a web application, strichliste can be accessed on any device that runs a web browser — and the UI works even with JavaScript disabled."
 img = "/img/features/web-based.png"
