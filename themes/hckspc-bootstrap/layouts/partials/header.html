@@ -2,10 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>{{ .Site.Title }}</title>
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} ‒ {{ .Site.Title }}{{ end }}</title>
+    {{ with or .Description .Site.Params.description }}
+    <meta name="description" content="{{ . }}" />
+    {{ end }}
 
     <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
 
