@@ -6,7 +6,7 @@
     <div class="col-xs-12 col-md-8">
         {{ range first 1 (where .Site.RegularPages "Section" "news") }}
         <h3 class="h4"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-        <p>{{ .Summary }}</p>
+        <div>{{ .Summary }}</div>
         {{ end }}
     </div>
 
