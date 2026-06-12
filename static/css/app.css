@@ -1,57 +1,99 @@
-.nav {
-  color: #687074;
-  text-transform: uppercase;
-  line-height: 1.6;
+/* Brand link color via Bootstrap's link variables. #d9230f on white is ~5:1. */
+:root {
+  --bs-link-color: #d9230f;
+  --bs-link-color-rgb: 217, 35, 15;
+  --bs-link-hover-color: #91170a;
+  --bs-link-hover-color-rgb: 145, 23, 10;
 }
 
-.nav a {
-  padding: 10px 25px 10px 25px !important;
-  font-size: 15px;
-  color: #687074;
-}
-
-.nav li a:hover {
-  background-color: transparent;
-  border-bottom: 2px solid #d9230f;
-}
-
-.nav li.active a {
-  color: #d9230f;
-  border-bottom: 2px solid #d9230f;
-}
-
-.nav li {
-  bottom: -2px;
-}
-
-a.logo {
-  display: block;
-  margin-top: -15px;
+/* Visible keyboard focus indicator; :focus-visible leaves mouse clicks alone. */
+a:focus-visible {
+  outline: 2px solid #d9230f;
+  outline-offset: 2px;
 }
 
 .header {
   border-bottom: 2px solid #eeeeee;
-  min-height: 44px;
   padding-top: 40px;
-  margin: 0 auto;
 }
 
-.header.logo {
-  display: flex;
-  align-content: bottom;
+a.logo {
+  display: block;
+  padding-bottom: 10px;
+}
+
+.nav {
+  color: #687074;
+  text-transform: uppercase;
+  line-height: 1.6;
+  /* Pull the list down so the links' 2px underline paints exactly on top of
+     the header's 2px bottom border instead of floating below it. */
+  margin-bottom: -2px;
+}
+
+.nav a {
+  display: block;
+  padding: 10px 25px;
+  font-size: 15px;
+  color: #687074;
+  text-decoration: none;
+  /* Transparent placeholder so hover/active only recolor the underline and
+     never shift the layout. */
+  border-bottom: 2px solid transparent;
+}
+
+.nav li a:hover,
+.nav li a:focus {
+  color: #687074;
+  border-bottom-color: #d9230f;
+}
+
+.nav li.active a {
+  color: #d9230f;
+  border-bottom-color: #d9230f;
+}
+
+@media (max-width: 767.98px) {
+  .nav a {
+    padding: 8px 14px;
+  }
 }
 
 .slider {
+  background-size: cover;
+  background-image: url(../img/teaser/strichliste-blur.jpg);
+  background-color: #595959;
+  min-height: 350px;
+  position: relative;
   border-bottom: 2px solid #eeeeee;
+}
+
+.slider-headline-1 {
+  text-transform: uppercase;
+  font-size: 50px;
+  font-weight: normal;
+  line-height: inherit;
+  margin-top: 50px;
+  margin-bottom: 0;
+}
+
+.slider-headline-1,
+.slider-headline-2 {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 5px 10px;
+
+  display: inline-block;
+  color: #fff;
+}
+
+.slider-headline-2 {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 0;
 }
 
 .content {
   padding: 40px 0;
-}
-
-.example-img {
-  height: 140px;
-  background-color: #ccc;
 }
 
 .headline {
@@ -66,6 +108,26 @@ a.logo {
   border-bottom: 2px solid #d9230f;
 }
 
+/* Breathing room between sections on long reference pages. Declared before
+   the .intro rule so its tighter margins keep winning where both apply. */
+.content h2 {
+  margin-top: 30px;
+}
+
+.content h3 {
+  margin-top: 20px;
+}
+
+/* Section sub-headings: semantically h2/h3, visually the size the
+   design always used for these slots. */
+.intro h2,
+.lastnews h3,
+.features h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+/* 20/30px have no Bootstrap spacing equivalent (mb-4 is 24px, mb-5 is 48px). */
 .margin-bottom-20 {
   margin-bottom: 20px;
 }
@@ -78,56 +140,78 @@ a.logo {
   margin-bottom: 10px;
 }
 
-.users .img-container img {
-  max-height: 110px;
-  max-width: 170px;
-}
-
 .users .user {
   margin-bottom: 20px;
 }
 
-.vertical-align {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Uniform look for fenced code blocks: highlighted blocks come with an
+   inline background but no padding, plain ones with neither. */
+.content pre {
+  background-color: #f7f7f7;
+  border: 1px solid #e4e9f0;
+  border-radius: 4px;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  overflow-x: auto;
 }
 
-.slider {
-  background-size: cover;
-  background-image: url(../img/teaser/strichliste-blur.jpg);
-
-  background-color: gray;
-  height: 350px;
-
-  position: relative;
+/* A plain pre is a direct row child: our padding replaces the row gutter
+   it would otherwise get, so restore the offset as margin to keep it
+   aligned with the highlighted blocks. */
+.content.row > pre {
+  margin-right: calc(var(--bs-gutter-x) * 0.5);
+  margin-left: calc(var(--bs-gutter-x) * 0.5);
+  width: calc(100% - var(--bs-gutter-x));
 }
 
-.slider-headline-1 {
-  text-transform: uppercase;
-  font-size: 50px;
-  margin-top: 50px;
+/* Markdown lists are direct row children too, so the row gutter overrides
+   the browser/Bootstrap 2rem list indent and the bullets hang outside the
+   text column. Restore the indent on top of the gutter. */
+.content.row > ul:not(.page-list),
+.content.row > ol {
+  padding-left: calc(var(--bs-gutter-x) * 0.5 + 2rem);
 }
 
-.slider-headline-1,
-.slider-headline-2 {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 5px 10px;
-
-  display: inline-block;
-  color: #fff;
+.content.row > ul:not(.page-list) > li + li,
+.content.row > ol > li + li {
+  margin-top: 6px;
 }
 
-.slider-headline-2 {
-  font-size: 20px;
-  margin-top: 20px;
+/* Listing pages (news archive, docs index). The ul is a direct row child,
+   so it keeps the row gutter padding and lines up with the heading. */
+.page-list {
+  list-style: none;
+  margin-top: 10px;
 }
 
-.footer {
-  padding: 40px 0;
-  background-color: #272727;
+.page-list li {
+  padding: 12px 0;
+  border-bottom: 1px dotted #e4e9f0;
+}
+
+.page-list li:last-child {
+  border-bottom: 0;
+}
+
+.page-list a {
+  font-size: 18px;
+}
+
+.page-list p {
+  margin: 2px 0 0;
+}
+
+.page-meta {
+  color: #687074;
+  font-size: 15px;
+}
+
+.page-list .page-meta {
+  display: block;
+  margin-top: 2px;
+}
+
+.content blockquote {
+  border-left: 5px solid #d9230f;
+  padding-left: 15px;
 }

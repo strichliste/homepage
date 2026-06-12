@@ -1,6 +1,8 @@
-    <ul class="nav navbar-nav">
+    <ul class="nav" role="list">
         {{ $currentNode := . }}
         {{ range .Site.Menus.main }}
-        <li class="{{if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }} active{{end}}"><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ $isPage := $currentNode.IsMenuCurrent "main" . }}
+        {{ $isAncestor := $currentNode.HasMenuCurrent "main" . }}
+        <li{{ if or $isPage $isAncestor }} class="active"{{ end }}><a href="{{ .URL }}"{{ if $isPage }} aria-current="page"{{ else if $isAncestor }} aria-current="true"{{ end }}>{{ .Name }}</a></li>
         {{ end }}
     </ul>

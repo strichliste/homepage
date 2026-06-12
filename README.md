@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/strichliste/homepage.svg?branch=master)](https://travis-ci.org/strichliste/homepage)
+[![Build Status](https://github.com/strichliste/homepage/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/strichliste/homepage/actions/workflows/build.yml)
 
 ### strichliste Homepage
 
-[hugo](http://gohugo.io/)-based static homepage for strichliste.
+[hugo](https://gohugo.io/)-based static homepage for strichliste.
 
 #### Authoring
 
@@ -12,10 +12,10 @@ In order to create a new blogpost, run `hugo new news/myblogpost.md`. Make sure
 to set the draft status to false (only non-draft entries will be published).
 
 `news` is the so-called section. You can set default frontmatter settings by
-defining an archetype in the `archetype` folder. See the [hugo manual](http://gohugo.io/content/archetypes/)
+defining an archetype in the `archetype` folder. See the [hugo manual](https://gohugo.io/content/archetypes/)
 for more information on this.
 
-The title of the first 5 blgopost entries will be listed on the homepage; the
+The title of the first 5 blogpost entries will be listed on the homepage; the
 first one will be teasered (only the summary is shown).
 
 ##### Create a content page
@@ -28,6 +28,7 @@ You can create menu entries by modifying `config.toml`.
 
 #### Deployment
 
-This homepage is auto-deployed using travis. For details on the deployment
-process, please check `.travis.yml` and the `deploy.sh` script. Deployment
+This homepage is auto-deployed using GitHub Actions. For details on the
+deployment process, please check `.github/workflows/build.yml`. The site is
+built on every push to `master` and on every pull request; deployment to the `gh-pages` branch
 only happens upon new commits on the `master` branch.

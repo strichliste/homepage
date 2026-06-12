@@ -1,24 +1,28 @@
 baseurl = "https://www.strichliste.org"
-languageCode = "en-us"
+locale = "en-us"
 title = "Strichliste ‒ The Tally Sheet Replacement for Your Organization"
-log = true
-verbose = true
-verboselog = true
+theme = "hckspc-bootstrap"
+disableKinds = ["taxonomy", "term"]
 
 [[menu.main]]
   weight = 10
   name = "Home"
-  url = "/"
+  pageRef = "/"
 
 [[menu.main]]
   weight = 20
   name = "About"
-  url = "/about/"
+  pageRef = "/about"
 
 [[menu.main]]
   weight = 30
   name = "Install"
-  url = "/install/"
+  pageRef = "/install"
+
+[[menu.main]]
+  weight = 35
+  name = "Docs"
+  pageRef = "/docs"
 
 [[menu.main]]
   weight = 40
@@ -33,7 +37,12 @@ verboselog = true
 [[menu.main]]
   weight = 60
   name = "FAQ"
-  url = "/faq/"
+  pageRef = "/faq"
+
+[markup]
+  [markup.highlight]
+    style = "github"
 
 [params]
   logo = "/img/strichliste-logo.png"
+  description = "strichliste is the digital tally sheet for hackerspaces, club rooms and small offices. It makes managing your kiosk a breeze."
