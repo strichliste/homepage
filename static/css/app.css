@@ -158,6 +158,19 @@ a.logo {
   width: calc(100% - var(--bs-gutter-x));
 }
 
+/* Markdown lists are direct row children too, so the row gutter overrides
+   the browser/Bootstrap 2rem list indent and the bullets hang outside the
+   text column. Restore the indent on top of the gutter. */
+.content.row > ul:not(.page-list),
+.content.row > ol {
+  padding-left: calc(var(--bs-gutter-x) * 0.5 + 2rem);
+}
+
+.content.row > ul:not(.page-list) > li + li,
+.content.row > ol > li + li {
+  margin-top: 6px;
+}
+
 /* Listing pages (news archive, docs index). The ul is a direct row child,
    so it keeps the row gutter padding and lines up with the heading. */
 .page-list {
