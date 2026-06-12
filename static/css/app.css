@@ -1,3 +1,13 @@
+/* Brand link color (Bootstrap 5 defaults to blue). #d9230f on white is ~5:1. */
+a {
+  color: #d9230f;
+}
+
+a:hover,
+a:focus {
+  color: #91170a;
+}
+
 .skip-link {
   position: absolute;
   top: 0;
@@ -31,23 +41,38 @@ a.logo {
   color: #687074;
   text-transform: uppercase;
   line-height: 1.6;
+  /* Pull the list down so the links' 2px underline paints exactly on top of
+     the header's 2px bottom border instead of floating below it. */
+  margin-bottom: -2px;
 }
 
 .nav a {
-  padding: 10px 25px 10px 25px !important;
+  display: block;
+  padding: 10px 25px;
   font-size: 15px;
   color: #687074;
   text-decoration: none;
+  /* Transparent placeholder so hover/active only recolor the underline and
+     never shift the layout. */
+  border-bottom: 2px solid transparent;
 }
 
-.nav li a:hover {
+.nav li a:hover,
+.nav li a:focus {
   background-color: transparent;
-  border-bottom: 2px solid #d9230f;
+  color: #687074;
+  border-bottom-color: #d9230f;
 }
 
 .nav li.active a {
   color: #d9230f;
-  border-bottom: 2px solid #d9230f;
+  border-bottom-color: #d9230f;
+}
+
+@media (max-width: 767.98px) {
+  .nav a {
+    padding: 8px 14px;
+  }
 }
 
 .slider {
@@ -70,12 +95,28 @@ a.logo {
   border-bottom: 2px solid #d9230f;
 }
 
+/* Breathing room between sections on long reference pages. Declared before
+   the .intro rule so its tighter margins keep winning where both apply. */
+.content h2 {
+  margin-top: 30px;
+}
+
+.content h3 {
+  margin-top: 20px;
+}
+
 /* Section sub-headings: semantically h2/h3, visually the size the
    design always used for these slots. */
 .intro h2,
-.lastnews h3 {
+.lastnews h3,
+.features h3 {
   font-size: 18px;
   margin: 10px 0;
+}
+
+.features img {
+  max-width: 100%;
+  height: auto;
 }
 
 .margin-bottom-20 {
@@ -150,6 +191,64 @@ a.logo {
 .content img {
   max-width: 100%;
   height: auto;
+  /* App screenshots sit on the same white as the page; a hairline frame
+     keeps them from bleeding into the background. */
+  border: 1px solid #e4e9f0;
+  border-radius: 4px;
+}
+
+/* Uniform look for fenced code blocks: highlighted blocks come with an
+   inline background but no padding, plain ones with neither. */
+.content pre {
+  background-color: #f7f7f7;
+  border: 1px solid #e4e9f0;
+  border-radius: 4px;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+/* A plain pre is a direct row child: our padding replaces the row gutter
+   it would otherwise get, so restore the offset as margin to keep it
+   aligned with the highlighted blocks. */
+.content.row > pre {
+  margin-right: calc(var(--bs-gutter-x) * 0.5);
+  margin-left: calc(var(--bs-gutter-x) * 0.5);
+  width: calc(100% - var(--bs-gutter-x));
+}
+
+/* Listing pages (news archive, docs index). The ul is a direct row child,
+   so it keeps the row gutter padding and lines up with the heading. */
+.page-list {
+  list-style: none;
+  margin-top: 10px;
+}
+
+.page-list li {
+  padding: 12px 0;
+  border-bottom: 1px dotted #e4e9f0;
+}
+
+.page-list li:last-child {
+  border-bottom: 0;
+}
+
+.page-list a {
+  font-size: 18px;
+}
+
+.page-list p {
+  margin: 2px 0 0;
+}
+
+.page-meta {
+  color: #687074;
+  font-size: 15px;
+}
+
+.page-list .page-meta {
+  display: block;
+  margin-top: 2px;
 }
 
 .content table {
