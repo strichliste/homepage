@@ -3,7 +3,7 @@ date = "2026-06-12T09:00:00+02:00"
 draft = false
 weight = 30
 title = "REST API"
-description = "The frozen v1.8 API contract: endpoints, conventions, examples."
+description = "The REST API (unchanged since strichliste v1.8): endpoints, conventions, examples."
 [menu]
   [menu.main]
     parent = "Docs"

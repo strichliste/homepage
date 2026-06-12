@@ -3,7 +3,7 @@ date = "2026-06-12T09:00:00+02:00"
 draft = false
 weight = 20
 title = "Console commands"
-description = "CLI tools: import, user cleanup, data retirement, LDAP import."
+description = "Command-line tools: import, user cleanup, deleting old data, LDAP import."
 [menu]
   [menu.main]
     parent = "Docs"
@@ -20,7 +20,7 @@ docker compose exec app php bin/console …
 | `app:import <file>` | Import a strichliste 1 `database.sqlite`. **Wipes the target database first.** |
 | `app:user:status <user> <true\|false>` | Enable/disable an account by name or id. |
 | `app:user:cleanup` | Bulk-disable accounts inactive for longer than an interval. |
-| `app:retire-data` | **Delete** transactions older than an interval — the data-privacy lever. |
+| `app:retire-data` | **Delete** transactions older than an interval — the data-privacy tool. |
 | `app:ldapimport` | Create/update users from an LDAP directory (cron-able). |
 | `cache:clear` | Apply `strichliste.yaml` changes (bare metal; the Docker entrypoint does this on boot). |
 | `doctrine:migrations:migrate` | Apply schema migrations (automatic in Docker). |

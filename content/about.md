@@ -20,7 +20,7 @@ account, just like anyone could make a pencil mark on paper. What you gain
 over paper is arithmetic that is always correct, an undo button, statistics,
 and an API for barcode scanners and phone apps.
 
-![The user list — the screen the kiosk shows by default](/img/screenshots/user-list.png)
+![The user list — what the screen by the fridge shows by default](/img/screenshots/user-list.png)
 
 ## Feature tour
 
@@ -60,10 +60,11 @@ and an API for barcode scanners and phone apps.
 
 ## Architecture
 
-strichliste 3 is a **single Symfony application** (PHP 8.4+, Symfony 7.4).
-The separate React frontend of strichliste 2 is gone — the backend renders
-the complete UI itself, with the same look and feel. One application to
-deploy instead of two, serving two faces:
+strichliste 3 is **one single application**. The previous version was two
+pieces — a server and a separate web frontend — that had to be installed
+and updated separately. The new version draws all its pages itself, with
+the same look and feel. (For the curious: PHP 8.4+, Symfony 7.4.) That one
+application serves two faces:
 
 * **The web UI** — server-rendered pages designed for a wall-mounted
   touchscreen.
@@ -75,11 +76,11 @@ deploy instead of two, serving two faces:
   is **frozen** — JSON shapes are byte-compatible with strichliste v1.8, so
   existing integrations keep working.
 
-All data is stored through the Doctrine ORM, so the database is a
-connection-string choice: **SQLite** is a fine default for a single kiosk in
-a small space, **PostgreSQL or MariaDB/MySQL** are the better pick when
-several devices write at once. Everything monetary is an integer number of
-cents — there is no floating-point money anywhere.
+strichliste works with several databases, and switching is a one-line
+setting: **SQLite** is a fine default for a single kiosk in a small space,
+**PostgreSQL or MariaDB/MySQL** are the better pick when several devices
+write at once. Everything monetary is an integer number of cents — there is
+no floating-point money anywhere.
 
 Development happens in the
 [strichliste-backend](https://github.com/strichliste/strichliste-backend)
@@ -88,10 +89,10 @@ repository.
 ## Demo
 
 A public demo runs at [demo.strichliste.org](https://demo.strichliste.org/).
-Note that the demo still runs the *previous* version (strichliste 2, the
-React frontend) — it looks nearly identical, but the install instructions on
-this site describe strichliste 3. The rewrite has no tagged release yet; it
-is installed from the git repository.
+Heads-up: the demo still runs the previous version, strichliste 2 — it
+looks nearly identical. Everything else on this site (install instructions,
+docs) describes strichliste 3. strichliste 3 has no official release yet;
+you install it straight from GitHub.
 
 ## Troubleshooting
 

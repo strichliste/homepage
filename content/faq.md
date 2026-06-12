@@ -14,20 +14,22 @@ The reference documentation lives on this site now:
 [configuration](/docs/configuration/), [console commands](/docs/commands/),
 the [REST API](/docs/api/) and a guide for
 [the screen by the fridge](/docs/screen/). The interactive API
-documentation (Swagger UI) is served by your own instance at `/api/doc`.
+documentation (Swagger UI) is built into your own strichliste server at
+`/api/doc`.
 
 ## Is there a login or admin role?
 
 No — by design. strichliste is a digital tally sheet, not a banking
 product. Anyone standing at the kiosk can book on any account, just like
-anyone could make a pencil mark on paper. Consequently, put it on a trusted
-network only.
+anyone could make a pencil mark on paper. So: put it on a trusted network
+only.
 
 ## Can I make it reachable from the internet?
 
-Please don't. The UI, the API and the Swagger UI are all unauthenticated.
-Keep strichliste on your LAN/VPN, or put a reverse proxy with HTTP basic
-auth in front. See [Install](/install/) for details.
+Please don't. Nothing in strichliste has password protection — neither the
+pages nor the API. Keep strichliste inside your own network (LAN/VPN), or
+put a password-protecting proxy in front. See [Install](/install/) for
+details.
 
 ## Does the PayPal feature verify payments?
 
@@ -49,9 +51,8 @@ retention duties before deleting financial records.
 ## Is the demo the new version?
 
 No — [demo.strichliste.org](https://demo.strichliste.org) still runs the
-previous version (strichliste 2 with the React frontend). strichliste 3
-looks nearly identical but is a single server-rendered application — see
-[About](/about/).
+previous version, strichliste 2. strichliste 3 looks nearly identical but
+is one single application instead of two — see [About](/about/).
 
 ## How do I import my old strichliste 1 data?
 

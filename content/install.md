@@ -2,7 +2,7 @@
 date = "2026-06-12T09:00:00+02:00"
 draft = false
 title = "Install strichliste"
-description = "How to install strichliste 3: Docker (recommended) or classic bare metal."
+description = "How to install strichliste 3: with Docker (recommended) or directly on your own server."
 [menu]
   [menu.main]
     parent = "Install"
@@ -12,12 +12,12 @@ This page describes installing **strichliste 3**. The short version:
 use Docker, set two values in `.env`, run one command. The
 [README](https://github.com/strichliste/strichliste-backend#readme) is the
 full operations manual (TLS options, every knob, backup & restore, upgrades,
-rollback); this page is the orientation.
+rollback); this page covers the essentials.
 
-> **Security first:** everything — the UI, `/api/*`, and the Swagger UI at
-> `/api/doc` — is unauthenticated by design. strichliste trusts the network
-> like the kiosk trusts the room. Keep it restricted to your LAN/VPN at the
-> firewall, or put a reverse proxy with HTTP basic auth in front.
+> **Security first:** strichliste has no passwords anywhere — by design. It
+> trusts the network like the kiosk trusts the room. Keep it reachable only
+> inside your own network (LAN/VPN), or put a password-protecting proxy
+> (HTTP basic auth) in front.
 > **Do not port-forward strichliste to the internet.**
 
 ## Try it in five minutes
@@ -31,29 +31,32 @@ docker compose up -d --build --wait
 ```
 
 Open **https://localhost** (accept the one-time certificate warning, or run
-`make tls` to trust the local CA). You get a dev environment with Postgres
-and the database schema already migrated. Add a user, add an article under
-*Article List*, buy it — that's the whole loop.
+`make tls` to trust the local CA). You get a test setup with the database
+already prepared. Add a user, add an article under *Article List*, buy it —
+that's the whole loop.
 
 To wipe the dev data and start fresh: `docker compose down -v`, then `up`
 again.
 
 ## Production with Docker (recommended)
 
-The repository ships a production-grade container setup: FrankenPHP
-(Caddy + PHP) running the app in worker mode — Symfony boots once and stays
-resident, which a Raspberry-Pi-class box appreciates. The image is
-multi-arch and works on arm64 (e.g. Pi 4/5 with a 64-bit OS).
+The repository ships a ready-to-run production container. Under the hood it
+uses FrankenPHP (a web server with PHP built in) and keeps the app loaded
+between requests — so it stays fast even on a Raspberry Pi. The image works
+on arm64 too (e.g. Pi 4/5 with a 64-bit OS).
 
 1. Edit `.env`:
    * set a unique `APP_SECRET` (`openssl rand -hex 32`),
-   * uncomment `COMPOSE_FILE=compose.yaml:compose.prod.yaml`, so a casual
-     `docker compose up` later doesn't load the *development* override,
-   * optionally set `SERVER_NAME`: a real hostname for automatic Let's
-     Encrypt certificates (requires the box to be publicly reachable, which
-     contradicts the LAN-only advice), `localhost` (default) for a
-     self-signed local CA, or `":80"` for plain HTTP behind your own
-     TLS-terminating proxy.
+   * uncomment `COMPOSE_FILE=compose.yaml:compose.prod.yaml`, so that
+     running plain `docker compose up` later doesn't accidentally start the
+     development version,
+   * optionally set `SERVER_NAME`. Three choices:
+     * `localhost` (the default) — a self-signed certificate; browsers show
+       a one-time warning.
+     * `":80"` — plain HTTP, for when your own proxy handles HTTPS.
+     * a real hostname — automatic Let's Encrypt certificates. This
+       requires the box to be reachable from the internet, which goes
+       against the LAN-only advice above, so most installs won't want it.
 
    Two things to know about `.env`: it is **git-tracked**, so your local
    edits must survive `git pull` (watch for conflicts when upgrading). And
@@ -91,11 +94,12 @@ database is a connection-string choice, not a code choice:
 * **PostgreSQL / MariaDB** — pick one of these when several devices write at
   once or the instance is long-lived and busy.
 
-**With Docker** it is a pure `.env` decision: the bundled Postgres is the
-default; or set `DATABASE_URL` to any Doctrine DSN (SQLite file, external
-MariaDB/MySQL or Postgres) and switch the bundled Postgres off with
-`COMPOSE_PROFILES=` (empty). The image contains all three drivers, and the
-container applies migrations on boot.
+**With Docker** you choose the database in `.env`. The bundled Postgres is
+the default. To use something else, set `DATABASE_URL` to your database's
+connection string (an SQLite file, or an external MariaDB/MySQL or
+Postgres) and turn the bundled Postgres off by setting `COMPOSE_PROFILES=`
+to empty. The image contains all three drivers, and the container prepares
+the database schema on boot.
 
 **On bare metal**, for example with **mysql/mariadb** on the same host:
 
@@ -164,6 +168,6 @@ To import a **strichliste 1** `database.sqlite`, see the
 
 Read the
 [backup, upgrades & rollback section](https://github.com/strichliste/strichliste-backend#backup-upgrades-rollback)
-in the README and set up the nightly backup *before* go-live. It is short,
-tested, and the difference between "restore from last night" and a shoebox
-full of receipts.
+in the README and set up the nightly backup *before* go-live. That section
+is short, and a tested backup is the difference between "restore from last
+night" and a shoebox full of receipts.

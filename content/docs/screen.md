@@ -10,9 +10,10 @@ description = "Hardware, fullscreen browser and barcode scanners for the screen 
 +++
 
 The server is half the job — the other half is the screen by the fridge.
-strichliste's part is ready (touch-sized buttons, a no-JS fallback for weak
-hardware, a dark theme via `prefers-color-scheme`, idle return to the user
-list); the OS side is yours.
+strichliste's part is ready: big touch buttons, works without JavaScript on
+weak hardware, a dark theme that follows the device, and a screen that
+returns to the user list when idle. Setting up the device itself is up to
+you.
 
 ## Hardware
 
@@ -34,8 +35,8 @@ chromium --kiosk --noerrdialogs --disable-pinch \
 ```
 
 plus `unclutter` to hide the cursor and disabling screen blanking.
-Ready-made kiosk distributions (FullPageOS, Porteus Kiosk, a Wayland `cage`
-session) all work — strichliste is just a web page. The `--autoplay-policy`
+Ready-made fullscreen-browser systems (FullPageOS, Porteus Kiosk, a Wayland
+`cage` session) all work — strichliste is just a web page. The `--autoplay-policy`
 flag is what allows the booking sound; `--force-dark-mode` forces the dark
 theme on a screen that runs at night.
 

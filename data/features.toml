@@ -6,12 +6,12 @@ text = "Stay on top of your organization's finances: the metrics page shows the 
 [[feature]]
 title = "Database agnostic"
 img = "/img/features/sqlite.png"
-text = "Using Doctrine as ORM, strichliste is database agnostic: SQLite for a single kiosk, PostgreSQL or MariaDB for busy installs. Use what you like!"
+text = "strichliste runs on the database you already have: SQLite for a single kiosk, PostgreSQL or MariaDB for busy installs. Switching is a single setting — use what you like!"
 
 [[feature]]
 title = "REST-API"
 img = "/img/features/rest.png"
-text = "Write your own client for our easy-to-use REST API — with interactive OpenAPI/Swagger documentation served by your own instance at /api/doc."
+text = "Write your own client for our easy-to-use REST API — with interactive documentation built right into your installation at /api/doc."
 
 [[feature]]
 title = "Web-based"

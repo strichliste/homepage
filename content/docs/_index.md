@@ -6,4 +6,5 @@ description = "Reference documentation for strichliste 3: configuration, console
 +++
 
 Reference documentation for **strichliste 3**. The interactive API
-documentation (Swagger UI) is served by your own instance at `/api/doc`.
+documentation (Swagger UI) is built into your own strichliste server at
+`/api/doc`.
