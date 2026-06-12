@@ -115,8 +115,8 @@ a.logo {
   background-size: cover;
   background-image: url(../img/teaser/strichliste-blur.jpg);
 
-  background-color: gray;
-  height: 350px;
+  background-color: #595959;
+  min-height: 350px;
 
   position: relative;
 }
@@ -132,7 +132,7 @@ a.logo {
 
 .slider-headline-1,
 .slider-headline-2 {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 5px 10px;
 
   display: inline-block;
@@ -150,14 +150,19 @@ a.logo {
   background-color: #272727;
 }
 
+.content a {
+  text-decoration: underline;
+}
+
 .content img {
   max-width: 100%;
   height: auto;
 }
 
 .content table {
+  display: block;
   width: 100%;
-  max-width: 100%;
+  overflow-x: auto;
   margin-bottom: 20px;
   border-collapse: collapse;
 }

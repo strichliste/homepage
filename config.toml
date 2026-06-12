@@ -39,6 +39,10 @@ disableKinds = ["taxonomy", "term"]
   name = "FAQ"
   pageRef = "/faq"
 
+[markup]
+  [markup.highlight]
+    style = "github"
+
 [params]
   logo = "/img/strichliste-logo.png"
   description = "strichliste is the digital tally sheet for hackerspaces, club rooms and small offices: manage your kiosk in a breeze."
