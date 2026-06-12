@@ -18,8 +18,8 @@ What's new:
   on top: snappier navigation, the barcode listener, the idle timer.
 * **Modern stack** — PHP 8.4+ and Symfony 7.4 instead of PHP 7.1.
 * **Docker first** — the repository ships a production-grade FrankenPHP
-  setup; install and upgrade are the same single command. Multi-arch images
-  work on a Raspberry Pi 4/5.
+  setup; install and upgrade are the same single command. The image builds
+  multi-arch and runs on a Raspberry Pi 4/5 (arm64).
 * **Database your choice** — SQLite is now a fine default for small
   installs; the Docker setup bundles PostgreSQL, and MariaDB/MySQL works
   too.

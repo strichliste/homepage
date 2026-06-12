@@ -46,9 +46,9 @@ decide a retention period. The
 transactions older than a chosen interval — but check your bookkeeping
 retention duties before deleting financial records.
 
-## Why does the demo look different from the docs?
+## Is the demo the new version?
 
-[demo.strichliste.org](https://demo.strichliste.org) still runs the
+No — [demo.strichliste.org](https://demo.strichliste.org) still runs the
 previous version (strichliste 2 with the React frontend). strichliste 3
 looks nearly identical but is a single server-rendered application — see
 [About](/about/).
@@ -62,5 +62,4 @@ Mind that it wipes the target database first.
 
 If you have any questions which are not answered by the documentation,
 please open an issue on the
-[GitHub issue tracker](https://github.com/strichliste). You can also reach
-us at [@strichliste_org](https://twitter.com/strichliste_org).
+[GitHub issue tracker](https://github.com/strichliste/strichliste-backend/issues).

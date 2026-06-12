@@ -42,6 +42,7 @@ and an API for barcode scanners and phone apps.
 * **Statistics** — a metrics page for the whole system (sum of all balances
   for cash-box reconciliation, transaction volume, top articles) and a
   personal metrics page per user.
+* **Search** — find users and articles from the header on every page.
 * **PayPal top-up** *(optional)* — users can settle their balance via
   paypal.me-style payment links, with a configurable percentage fee passed on
   to the payer.
@@ -54,6 +55,8 @@ and an API for barcode scanners and phone apps.
   [API documentation](/docs/api/).
 
 ![A user's page with the buy tab open](/img/screenshots/user-buy.png)
+
+![The metrics page: sum of all balances, transaction volume and top articles](/img/screenshots/metrics.png)
 
 ## Architecture
 
@@ -92,4 +95,4 @@ is installed from the git repository.
 ## Troubleshooting
 
 In case of problems, please file an issue on our
-[GitHub issue tracker](https://github.com/strichliste).
+[GitHub issue tracker](https://github.com/strichliste/strichliste-backend/issues).

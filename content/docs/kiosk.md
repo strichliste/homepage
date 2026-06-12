@@ -33,7 +33,7 @@ chromium --kiosk --noerrdialogs --disable-pinch \
 ```
 
 plus `unclutter` to hide the cursor and disabling screen blanking.
-Ready-made kiosk distributions (FullPageOS, porteus-kiosk, a Wayland `cage`
+Ready-made kiosk distributions (FullPageOS, Porteus Kiosk, a Wayland `cage`
 session) all work — strichliste is just a web page. The `--autoplay-policy`
 flag is what allows the booking sound; `--force-dark-mode` forces the dark
 theme on a screen that runs at night.
