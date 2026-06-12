@@ -15,8 +15,8 @@
     {{ partial "head_includes.html" . }}
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to main content</a>
-    <header class="header container">
+    <a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a>
+    <header class="header container d-flex justify-content-between align-items-end flex-wrap">
       <a class="logo" href="/">
         <img src="{{ .Site.Params.logo }}" alt="strichliste — home" width="251" height="35" />
       </a>

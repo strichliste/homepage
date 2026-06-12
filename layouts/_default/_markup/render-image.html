@@ -1,9 +1,10 @@
 {{- /* Emit width/height for site-local images so they can't cause layout
-       shift, and lazy-load images since content images sit below the fold. */ -}}
+       shift, and lazy-load images since content images sit below the fold.
+       img-fluid/border/rounded come from Bootstrap. */ -}}
 {{- $local := and (hasPrefix .Destination "/") (fileExists (printf "static%s" .Destination)) -}}
 {{- if $local -}}
 {{- $dims := imageConfig (printf "static%s" .Destination) -}}
-<img src="{{ .Destination }}" alt="{{ .Text }}" width="{{ $dims.Width }}" height="{{ $dims.Height }}" loading="lazy" decoding="async">
+<img src="{{ .Destination }}" alt="{{ .Text }}" width="{{ $dims.Width }}" height="{{ $dims.Height }}" loading="lazy" decoding="async" class="img-fluid border rounded">
 {{- else -}}
-<img src="{{ .Destination }}" alt="{{ .Text }}" loading="lazy" decoding="async">
+<img src="{{ .Destination }}" alt="{{ .Text }}" loading="lazy" decoding="async" class="img-fluid border rounded">
 {{- end -}}
