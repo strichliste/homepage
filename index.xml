@@ -3,105 +3,59 @@
   <channel>
     <title>Strichliste ‒ The Tally Sheet Replacement for Your Organization</title>
     <link>https://www.strichliste.org/</link>
-    <description>Recent content on Strichliste ‒ The Tally Sheet Replacement for Your Organization</description>
+    <description>News from Strichliste ‒ The Tally Sheet Replacement for Your Organization</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Mar 2019 10:32:14 +0100</lastBuildDate>
-    
-	<atom:link href="https://www.strichliste.org/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 12 Jun 2026 09:00:00 &#43;0200</lastBuildDate>
+    <atom:link href="https://www.strichliste.org/index.xml" rel="self" type="application/rss&#43;xml" />
+    <item>
+      <title>strichliste 3 is here</title>
+      <link>https://www.strichliste.org/news/strichliste3/</link>
+      <pubDate>Fri, 12 Jun 2026 09:00:00 &#43;0200</pubDate>
+      <guid>https://www.strichliste.org/news/strichliste3/</guid>
+      <description>The next generation of strichliste is here: one single application with the look and feel long-time users know. One thing to install, one thing to update — and a lot of care for the screen by the fridge.&#xA;</description>
+    </item>
     <item>
       <title>Release v1.6.1</title>
       <link>https://www.strichliste.org/news/v1.6.x/</link>
-      <pubDate>Mon, 25 Mar 2019 10:32:14 +0100</pubDate>
-      
+      <pubDate>Mon, 25 Mar 2019 10:32:14 &#43;0100</pubDate>
       <guid>https://www.strichliste.org/news/v1.6.x/</guid>
-      <description>We&amp;rsquo;re proud to announce the new strichliste release v1.61 with a lot of fixes and some new features:
- Charge account by PayPal Visual fixes (contrast, colors, &amp;hellip;) More input validation ! Extracted strichliste config to separate strichliste.yaml file !  To use the PayPal-Feature, you have to configure your recipient address in the strichliste-server strichliste.yaml. To complete a PayPal-transaction it&amp;rsquo;s mandatory to press &amp;ldquo;return to merchant&amp;rdquo; at the end of the paypal transaction.</description>
+      <description>We&amp;rsquo;re proud to announce the new strichliste release v1.61 with a lot of fixes and some new features:&#xA;Charge account by PayPal Visual fixes (contrast, colors, &amp;hellip;) More input validation ! Extracted strichliste config to separate strichliste.yaml file ! To use the PayPal-Feature, you have to configure your recipient address in the strichliste-server strichliste.yaml. To complete a PayPal-transaction it&amp;rsquo;s mandatory to press &amp;ldquo;return to merchant&amp;rdquo; at the end of the paypal transaction. We&amp;rsquo;re currently investigating ways to do that automatically. PayPal&amp;rsquo;s own rm=1 parameter does not seem to work here.&#xA;</description>
     </item>
-    
     <item>
       <title>Builds</title>
       <link>https://www.strichliste.org/news/builds/</link>
-      <pubDate>Sun, 10 Feb 2019 16:52:25 +0100</pubDate>
-      
+      <pubDate>Sun, 10 Feb 2019 16:52:25 &#43;0100</pubDate>
       <guid>https://www.strichliste.org/news/builds/</guid>
-      <description>Our build infrastructure and repo names have changed!
-If you want a build with frontend and backend included, just head to strichliste/releases. The front-end and it&amp;rsquo;s builds are available at strichliste-web-frontend and the backend is located at strichliste-backend</description>
+      <description>Our build infrastructure and repo names have changed!&#xA;If you want a build with frontend and backend included, just head to strichliste/releases. The front-end and it&amp;rsquo;s builds are available at strichliste-web-frontend and the backend is located at strichliste-backend&#xA;</description>
     </item>
-    
     <item>
       <title>LDAP Importer</title>
       <link>https://www.strichliste.org/news/ldapimport/</link>
-      <pubDate>Mon, 04 Feb 2019 16:00:32 +0100</pubDate>
-      
+      <pubDate>Mon, 04 Feb 2019 16:00:32 &#43;0100</pubDate>
       <guid>https://www.strichliste.org/news/ldapimport/</guid>
-      <description>Strichliste just got a new, experimental command! You can now import users from a LDAP source. See the documentation here at our Commands.md for more details!
-You can also let this run as a cronjob to update the users mailaddress or create new ones as they appear in your LDAP directory.
-Feedback is appreciated!</description>
+      <description>Strichliste just got a new, experimental command! You can now import users from a LDAP source. See the documentation here at our Commands.md for more details!&#xA;You can also let this run as a cronjob to update the users mailaddress or create new ones as they appear in your LDAP directory.&#xA;Feedback is appreciated!&#xA;</description>
     </item>
-    
     <item>
       <title>Strichliste 2 released!</title>
       <link>https://www.strichliste.org/news/strichliste2/</link>
-      <pubDate>Fri, 21 Dec 2018 08:59:19 +0100</pubDate>
-      
+      <pubDate>Fri, 21 Dec 2018 08:59:19 &#43;0100</pubDate>
       <guid>https://www.strichliste.org/news/strichliste2/</guid>
-      <description>After a lot of concept work, strichliste 2 has now a stable API and also a well designed front-end. We&amp;rsquo;ve also changed our tech stack completely. Instead of node.js in the backend, and angular js in the front-end, we&amp;rsquo;re now using a symfony based PHP backend providing the API and also command-line tools for several tasks.
-The new frontend is completely responsive and uses react and redux as it&amp;rsquo;s core components.</description>
+      <description>After a lot of concept work, strichliste 2 has now a stable API and also a well designed front-end. We&amp;rsquo;ve also changed our tech stack completely. Instead of node.js in the backend, and angular js in the front-end, we&amp;rsquo;re now using a symfony based PHP backend providing the API and also command-line tools for several tasks.&#xA;The new frontend is completely responsive and uses react and redux as it&amp;rsquo;s core components.&#xA;</description>
     </item>
-    
-    <item>
-      <title>Install strichliste</title>
-      <link>https://www.strichliste.org/install/</link>
-      <pubDate>Fri, 21 Dec 2018 00:00:08 +0200</pubDate>
-      
-      <guid>https://www.strichliste.org/install/</guid>
-      <description>For strichliste to run, PHP 7.1 or higher is required. You should have a webserver running which supports mod_php or php-fpm.
-Installing  Go to the Github project to download the latest release. It comes already with a bundled front-end. Extract the package content to your target directory (e.g. tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld) Configure your database (e.g. mysql) Configure webserver (nginx or apache) Change strichliste.yaml config to your needs (optional)  Database configuration The ORM used in Strichliste supports multiple database backends such as:</description>
-    </item>
-    
-    <item>
-      <title>Frequently Asked Questions</title>
-      <link>https://www.strichliste.org/faq/</link>
-      <pubDate>Sat, 02 Jan 2016 20:15:00 +0200</pubDate>
-      
-      <guid>https://www.strichliste.org/faq/</guid>
-      <description>Documentation API You can find the server API documentation right in the server repos API.md.
-Config values All the config values are explained in our Config.md file. Be aware that all version above v1.6.0 use a separate config file strichliste.yaml
-Commands Available commands are documented here: Commands.md
-How to get in touch? IRC If you have any questions which are not answered by the Documentation, please do not hesitate to contact us: The IRC channel is irc://irc.</description>
-    </item>
-    
     <item>
       <title>More features to come</title>
       <link>https://www.strichliste.org/news/more-features/</link>
-      <pubDate>Wed, 25 Nov 2015 09:00:00 +0000</pubDate>
-      
+      <pubDate>Wed, 25 Nov 2015 09:00:00 &#43;0000</pubDate>
       <guid>https://www.strichliste.org/news/more-features/</guid>
-      <description>Stay tuned for more features! We&amp;rsquo;re now working on some wanted features in the next strichliste release. These features are: money transfer, splitting bills, cancellation of the last order within a specific time range and we&amp;rsquo;re preparing the database for articles</description>
+      <description>Stay tuned for more features! We&amp;rsquo;re now working on some wanted features in the next strichliste release. These features are: money transfer, splitting bills, cancellation of the last order within a specific time range and we&amp;rsquo;re preparing the database for articles&#xA;</description>
     </item>
-    
-    <item>
-      <title>What is this project about?</title>
-      <link>https://www.strichliste.org/about/</link>
-      <pubDate>Sat, 11 Jul 2015 20:23:21 +0200</pubDate>
-      
-      <guid>https://www.strichliste.org/about/</guid>
-      <description>strichliste ([ʃtʀɪçˈlɪstə], German word for tally sheet) is a tool to replace a tally sheet inside a hackerspace. It&amp;rsquo;s aim is to provide a no-frills, easy-to-setup and -to-use solution for managing your organization&amp;rsquo;s snack bar.
-Demo That&amp;rsquo;s what you&amp;rsquo;re here for, right? You can access a demo of strichliste here. But, just to be sure, here&amp;rsquo;s how it looks like:
-Architecture strichliste consists of two components: the frontend and the backend.</description>
-    </item>
-    
     <item>
       <title>Hello World</title>
       <link>https://www.strichliste.org/news/helloworld/</link>
-      <pubDate>Sat, 11 Jul 2015 12:31:53 +0000</pubDate>
-      
+      <pubDate>Sat, 11 Jul 2015 12:31:53 &#43;0000</pubDate>
       <guid>https://www.strichliste.org/news/helloworld/</guid>
-      <description>strichliste has it&amp;rsquo;s own homepage now! We&amp;rsquo;re in the process of getting the content ready, stay tuned for updates.</description>
+      <description>strichliste has it&amp;rsquo;s own homepage now! We&amp;rsquo;re in the process of getting the content ready, stay tuned for updates.&#xA;</description>
     </item>
-    
   </channel>
 </rss>

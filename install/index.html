@@ -2,10 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Strichliste ‒ The Tally Sheet Replacement for Your Organization</title>
+    <title>Install strichliste · strichliste</title>
+    <meta name="description" content="How to install strichliste 3: with Docker (recommended) or directly on your own server." />
+    
 
     <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
 
@@ -13,101 +14,194 @@
     <link href="/css/app.css" rel="stylesheet" />
     
   </head>
-  <body lang="en">
-    <div class="header navbar container">
-      <div class="navbar-left">
-        <a class="logo" href="/">
-          <img src="/img/strichliste-logo.png" />
-        </a>
-      </div>
-      <div class="navbar-right">
-            <ul class="nav navbar-nav">
+  <body>
+    <a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a>
+    <header class="header container d-flex justify-content-between align-items-end flex-wrap">
+      <a class="logo" href="/">
+        <img src="/img/strichliste-logo.png" alt="strichliste — home" width="251" height="35" />
+      </a>
+      <nav aria-label="Main">
+            <ul class="nav" role="list">
         
         
-        <li class=""><a href="/">Home</a></li>
         
-        <li class=""><a href="/about/">About</a></li>
         
-        <li class=" active"><a href="/install/">Install</a></li>
+        <li><a href="/">Home</a></li>
         
-        <li class=""><a href="https://demo.strichliste.org">Demo</a></li>
         
-        <li class=""><a href="https://github.com/strichliste">Source</a></li>
         
-        <li class=""><a href="/faq/">FAQ</a></li>
+        <li><a href="/about/">About</a></li>
+        
+        
+        
+        <li class="active"><a href="/install/" aria-current="page">Install</a></li>
+        
+        
+        
+        <li><a href="/docs/">Docs</a></li>
+        
+        
+        
+        <li><a href="https://demo.strichliste.org">Demo</a></li>
+        
+        
+        
+        <li><a href="https://github.com/strichliste">Source</a></li>
+        
+        
+        
+        <li><a href="/faq/">FAQ</a></li>
         
     </ul>
 
-      </div>
-    </div>
-  </body>
-</html>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1">
 
 <div class="container">
     <div class="row content margin-bottom-20">
-        <h2>Install strichliste</h2>
-        <p>For strichliste to run, <strong>PHP 7.1 or higher is required</strong>. You should have a webserver running which supports <strong>mod_php</strong> or <strong>php-fpm</strong>.</p>
-<h3 id="installing">Installing</h3>
+        <h1>Install strichliste</h1>
+        
+        <p>This page describes installing <strong>strichliste 3</strong>. The short version:
+use Docker, set two values in <code>.env</code>, run one command. The
+<a href="https://github.com/strichliste/strichliste-backend#readme">README</a> is the
+full operations manual (TLS options, every knob, backup &amp; restore, upgrades,
+rollback); this page covers the essentials.</p>
+<blockquote>
+<p><strong>Security first:</strong> strichliste has no passwords anywhere — by design. It
+trusts the network like the kiosk trusts the room. Keep it reachable only
+inside your own network (LAN/VPN), or put a password-protecting proxy
+(HTTP basic auth) in front.
+<strong>Do not port-forward strichliste to the internet.</strong></p>
+</blockquote>
+<h2 id="try-it-in-five-minutes">Try it in five minutes</h2>
+<p>With a current Docker (Engine 25+, Compose v2.30+):</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/strichliste/strichliste-backend.git
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> strichliste-backend
+</span></span><span style="display:flex;"><span>docker compose up -d --build --wait
+</span></span></code></pre></div><p>Open <strong>https://localhost</strong> (accept the one-time certificate warning, or run
+<code>make tls</code> to trust the local CA). You get a test setup with the database
+already prepared. Add a user, add an article under <em>Article List</em>, buy it —
+that&rsquo;s the whole loop.</p>
+<p>To wipe the dev data and start fresh: <code>docker compose down -v</code>, then <code>up</code>
+again.</p>
+<h2 id="production-with-docker-recommended">Production with Docker (recommended)</h2>
+<p>The repository ships a ready-to-run production container. Under the hood it
+uses FrankenPHP (a web server with PHP built in) and keeps the app loaded
+between requests — so it stays fast even on a Raspberry Pi. The image works
+on arm64 too (e.g. Pi 4/5 with a 64-bit OS).</p>
 <ol>
-<li>Go to the Github project to download the <a href="https://github.com/strichliste/strichliste/releases">latest release</a>. It comes already with a bundled front-end.</li>
-<li>Extract the package content to your target directory (e.g. <code>tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld</code>)</li>
-<li>Configure your database (e.g. mysql)</li>
-<li>Configure webserver (nginx or apache)</li>
-<li>Change <a href="https://github.com/strichliste/strichliste-backend/blob/master/docs/Config.md">strichliste.yaml</a> config to your needs (optional)</li>
+<li>
+<p>Edit <code>.env</code>:</p>
+<ul>
+<li>set a unique <code>APP_SECRET</code> (<code>openssl rand -hex 32</code>),</li>
+<li>uncomment <code>COMPOSE_FILE=compose.yaml:compose.prod.yaml</code>, so that
+running plain <code>docker compose up</code> later doesn&rsquo;t accidentally start the
+development version,</li>
+<li>optionally set <code>SERVER_NAME</code>. Three choices:
+<ul>
+<li><code>localhost</code> (the default) — a self-signed certificate; browsers show
+a one-time warning.</li>
+<li><code>&quot;:80&quot;</code> — plain HTTP, for when your own proxy handles HTTPS.</li>
+<li>a real hostname — automatic Let&rsquo;s Encrypt certificates. This
+requires the box to be reachable from the internet, which goes
+against the LAN-only advice above, so most installs won&rsquo;t want it.</li>
+</ul>
+</li>
+</ul>
+<p>Two things to know about <code>.env</code>: it is <strong>git-tracked</strong>, so your local
+edits must survive <code>git pull</code> (watch for conflicts when upgrading). And
+it gets <strong>baked into the image</strong> at build time — that is fine when the
+image is built and run on the same box, but never push such an image to
+a registry; for registry-based deploys pass <code>APP_SECRET</code> as a real
+environment variable instead.</p>
+</li>
+<li>
+<p>Start it:</p>
+</li>
 </ol>
-<h3 id="database-configuration">Database configuration</h3>
-<p>The <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html">ORM</a> used in
-Strichliste supports multiple database backends such as:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose -f compose.yaml -f compose.prod.yaml up -d --build --wait
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># or: make prod</span>
+</span></span></code></pre></div><p>The container waits for the database and applies migrations on every boot —
+first install and upgrades are the same command (<code>git pull &amp;&amp; make prod</code>).
+Health checks, restart policy and log rotation are preconfigured.</p>
+<p>Note that there is <strong>no prebuilt image on a registry</strong> — NAS/Portainer
+users build with <code>docker build --target frankenphp_prod</code> and push to their
+own registry (mind the baked-<code>.env</code> warning above).</p>
+<p>When something breaks, the page to open is <code>docker compose logs app</code> —
+access log, PHP errors and the entrypoint&rsquo;s progress all go to container
+output. For external uptime monitoring, probe <code>GET /api/settings</code> (cheap,
+unauthenticated, returns 200 + JSON).</p>
+<h2 id="choosing-a-database">Choosing a database</h2>
+<p><strong>SQLite</strong>, <strong>MySQL/MariaDB</strong> and <strong>PostgreSQL</strong> are all supported — the
+database is a connection-string choice, not a code choice:</p>
 <ul>
-<li>MySQL / MariaDB (recommended)</li>
-<li>Oracle</li>
-<li>Microsoft SQL Server</li>
-<li>PostgreSQL</li>
-<li>SQLite (not recommended)</li>
+<li><strong>SQLite</strong> — perfect for a single kiosk in a small space; zero
+administration, one file to back up.</li>
+<li><strong>PostgreSQL / MariaDB</strong> — pick one of these when several devices write at
+once or the instance is long-lived and busy.</li>
 </ul>
-<p>If you want to use another database than sqlite, just adjust the <code>DATABASE_URL</code> variable in your <code>.env</code> file in your root
-directory according to the <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#connecting-using-a-url">Doctrine ORM</a>
-recommendations.</p>
-<p>For example, to configure <strong>mysql/mariadb</strong>:</p>
-<pre><code>DATABASE_URL=&quot;mysql://strichliste:32YourPassWord42@localhost/strichliste&quot;
+<p><strong>With Docker</strong> you choose the database in <code>.env</code>. The bundled Postgres is
+the default. To use something else, set <code>DATABASE_URL</code> to your database&rsquo;s
+connection string (an SQLite file, or an external MariaDB/MySQL or
+Postgres) and turn the bundled Postgres off by setting <code>COMPOSE_PROFILES=</code>
+to empty. The image contains all three drivers, and the container prepares
+the database schema on boot.</p>
+<p><strong>On bare metal</strong>, for example with <strong>mysql/mariadb</strong> on the same host:</p>
+<pre tabindex="0"><code>DATABASE_URL=&#34;mysql://strichliste:32YourPassWord42@localhost/strichliste?serverVersion=10.11.2-MariaDB&#34;
 </code></pre><p>Create a database and a separate user:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> strichliste;
-<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">USER</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">strichliste</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">localhost</span><span style="color:#e6db74">&#39;</span> IDENTIFIED <span style="color:#66d9ef">BY</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">32YourPassWord42</span><span style="color:#e6db74">&#39;</span>;
-<span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">ALL</span> <span style="color:#66d9ef">PRIVILEGES</span> <span style="color:#66d9ef">ON</span> strichliste.<span style="color:#f92672">*</span> <span style="color:#66d9ef">TO</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">strichliste</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">localhost</span><span style="color:#e6db74">&#39;</span>;
-FLUSH <span style="color:#66d9ef">PRIVILEGES</span>;
-</code></pre></div><p>Afterwards just run the following commands to create the schema:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">php bin/console doctrine:schema:create
-</code></pre></div><p>You&rsquo;re done!</p>
-<h4 id="sqlite-testing-only">Sqlite (testing only)</h4>
-<p>Sqlite should <strong>only be used for testing</strong>. sqlite does not support most of the database transactional features
-which are needed to handle concurrent request.</p>
-<p>If you really want to use this, execute the following steps:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">php bin/console doctrine:database:create
-php bin/console doctrine:schema:create
-</code></pre></div><p>You now have a database-file in <code>var/app.db</code></p>
-<h3 id="configuring-nginx">Configuring NGINX</h3>
-<p>Config examples for nginx can be found here:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#cf222e">CREATE</span><span style="color:#fff"> </span><span style="color:#cf222e">DATABASE</span><span style="color:#fff"> </span>strichliste<span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">CREATE</span><span style="color:#fff"> </span><span style="color:#cf222e">USER</span><span style="color:#fff"> </span><span style="color:#0a3069">&#39;strichliste&#39;</span><span style="color:#0550ae">@</span><span style="color:#0a3069">&#39;localhost&#39;</span><span style="color:#fff"> </span>IDENTIFIED<span style="color:#fff"> </span><span style="color:#cf222e">BY</span><span style="color:#fff"> </span><span style="color:#0a3069">&#39;32YourPassWord42&#39;</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">GRANT</span><span style="color:#fff"> </span><span style="color:#cf222e">ALL</span><span style="color:#fff"> </span><span style="color:#cf222e">PRIVILEGES</span><span style="color:#fff"> </span><span style="color:#cf222e">ON</span><span style="color:#fff"> </span>strichliste<span style="color:#1f2328">.</span><span style="color:#0550ae">*</span><span style="color:#fff"> </span><span style="color:#cf222e">TO</span><span style="color:#fff"> </span><span style="color:#0a3069">&#39;strichliste&#39;</span><span style="color:#0550ae">@</span><span style="color:#0a3069">&#39;localhost&#39;</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>FLUSH<span style="color:#fff"> </span><span style="color:#cf222e">PRIVILEGES</span><span style="color:#1f2328">;</span><span style="color:#fff">
+</span></span></span></code></pre></div><p>Then apply the schema:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php bin/console doctrine:migrations:migrate
+</span></span></code></pre></div><h2 id="bare-metal-without-docker">Bare metal (without Docker)</h2>
+<p>The classic setup still works, modernized:</p>
+<ol>
+<li><strong>Requirements</strong>: PHP ≥ 8.4 with <code>intl</code>, <code>ctype</code>, <code>iconv</code>, <code>json</code> and the
+PDO driver for your database (<code>pdo_sqlite</code>, <code>pdo_mysql</code> or <code>pdo_pgsql</code>);
+a web server with PHP-FPM.</li>
+<li><strong>Get the code</strong>: build from a git checkout (tagged releases with a
+ready-built package will follow):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>composer install --no-dev --optimize-autoloader
+</span></span><span style="display:flex;"><span>php bin/console importmap:install
+</span></span><span style="display:flex;"><span>php bin/console asset-map:compile
+</span></span></code></pre></div><ol start="3">
+<li><strong>Configure the database</strong> via environment (or <code>.env.local</code>) as shown
+above, then run the migrations.</li>
+<li><strong>Configure the web server</strong>: point the document root at <code>public/</code> and
+route everything through <code>public/index.php</code>. Working nginx (plain + SSL)
+and Apache examples live in the repository&rsquo;s
+<a href="https://github.com/strichliste/strichliste-backend/tree/master/examples"><code>examples/</code></a>
+directory.</li>
+<li>Set <code>APP_ENV=prod</code>, <code>APP_DEBUG=0</code> and a unique <code>APP_SECRET</code> in the
+environment, then warm the cache: <code>php bin/console cache:clear</code>.
+Errors land in your PHP-FPM/web-server error log — the app does not
+write log files of its own.</li>
+</ol>
+<h2 id="common-pitfalls">Common pitfalls</h2>
 <ul>
-<li><a href="https://github.com/strichliste/strichliste-backend/blob/master/examples/nginx_ssl.conf">https://github.com/strichliste/strichliste-backend/blob/master/examples/nginx_ssl.conf</a> (with SSL)</li>
-<li><a href="https://github.com/strichliste/strichliste-backend/blob/master/examples/nginx.conf">https://github.com/strichliste/strichliste-backend/blob/master/examples/nginx.conf</a> (without SSL)</li>
+<li>Check your folder owner/group if you&rsquo;re using SQLite as your database!
+Otherwise strichliste can&rsquo;t write to it.</li>
+<li>JSON API requests need a <code>Content-Type: application/json</code> header — without
+it the body is silently ignored.</li>
 </ul>
-<h3 id="configuring-apache">Configuring Apache</h3>
-<ul>
-<li><a href="https://github.com/strichliste/strichliste-backend/blob/master/examples/apache.conf">https://github.com/strichliste/strichliste-backend/blob/master/examples/apache.conf</a> (without SSL)</li>
-<li>TODO: SSL-Config</li>
-</ul>
-<h3 id="common-pitfalls">Common Pitfalls</h3>
-<ul>
-<li>Check your folder owner/group if you&rsquo;re using sqlite as your database! Otherwise strichliste can&rsquo;t write to it.</li>
-</ul>
-<h3 id="commands">Commands</h3>
-<h4 id="import-strichliste-1-database">Import strichliste 1 database</h4>
-<p>To import your old strichliste 1 database, copy the <code>database.sqlite</code>-file to the strichliste2 directory and run:</p>
-<p><code>php bin/console app:import database.sqlite</code></p>
-<p>After import the terminal outputs &ldquo;Import done!&rdquo;</p>
+<h2 id="importing-your-old-data">Importing your old data</h2>
+<p>To import a <strong>strichliste 1</strong> <code>database.sqlite</code>, see the
+<a href="/docs/commands/#import-a-strichliste-1-database"><code>app:import</code> command</a>.
+<strong>It wipes the target database first</strong> — only run it on a fresh install.</p>
+<h2 id="before-you-rely-on-it-for-real-money">Before you rely on it for real money</h2>
+<p>Read the
+<a href="https://github.com/strichliste/strichliste-backend#backup-upgrades-rollback">backup, upgrades &amp; rollback section</a>
+in the README and set up the nightly backup <em>before</em> go-live. That section
+is short, and a tested backup is the difference between &ldquo;restore from last
+night&rdquo; and a shoebox full of receipts.</p>
 
     </div>
 </div>
-</body>
-</html> 
+    </main>
+  </body>
+</html>
 

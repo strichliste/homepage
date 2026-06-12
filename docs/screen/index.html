@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>The screen by the fridge · strichliste</title>
+    <meta name="description" content="Hardware, fullscreen browser and barcode scanners for the screen at your kiosk." />
+    
+
+    <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/app.css" rel="stylesheet" />
+    
+  </head>
+  <body>
+    <a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a>
+    <header class="header container d-flex justify-content-between align-items-end flex-wrap">
+      <a class="logo" href="/">
+        <img src="/img/strichliste-logo.png" alt="strichliste — home" width="251" height="35" />
+      </a>
+      <nav aria-label="Main">
+            <ul class="nav" role="list">
+        
+        
+        
+        
+        <li><a href="/">Home</a></li>
+        
+        
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        
+        <li><a href="/install/">Install</a></li>
+        
+        
+        
+        <li class="active"><a href="/docs/" aria-current="true">Docs</a></li>
+        
+        
+        
+        <li><a href="https://demo.strichliste.org">Demo</a></li>
+        
+        
+        
+        <li><a href="https://github.com/strichliste">Source</a></li>
+        
+        
+        
+        <li><a href="/faq/">FAQ</a></li>
+        
+    </ul>
+
+      </nav>
+    </header>
+    <main id="main" tabindex="-1">
+
+<div class="container">
+    <div class="row content margin-bottom-20">
+        <h1>The screen by the fridge</h1>
+        
+        <p>The server is half the job — the other half is the screen by the fridge.
+strichliste&rsquo;s part is ready: big touch buttons, works without JavaScript on
+weak hardware, a dark theme that follows the device, and a screen that
+returns to the user list when idle. Setting up the device itself is up to
+you.</p>
+<h2 id="hardware">Hardware</h2>
+<p>A Raspberry Pi 4/5 with a 64-bit OS runs server <em>and</em> fullscreen browser at
+once (4 GB RAM comfortably; 2 GB if the server runs elsewhere). Older
+32-bit Pis: run the server elsewhere and use the Pi only as a browser
+terminal. Any old tablet pointed at the server works too — the UI works
+without JavaScript, so even ancient browsers hold up.</p>
+<h2 id="fullscreen-browser">Fullscreen browser</h2>
+<p>The usual recipe is Chromium in &ldquo;kiosk mode&rdquo; — that&rsquo;s the browser&rsquo;s name
+for fullscreen without any controls:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chromium --kiosk --noerrdialogs --disable-pinch <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  --autoplay-policy<span style="color:#0550ae">=</span>no-user-gesture-required <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  https://your-server/user/active
+</span></span></code></pre></div><p>plus <code>unclutter</code> to hide the cursor and disabling screen blanking.
+Ready-made fullscreen-browser systems (FullPageOS, Porteus Kiosk, a Wayland
+<code>cage</code> session) all work — strichliste is just a web page. The <code>--autoplay-policy</code>
+flag is what allows the booking sound; <code>--force-dark-mode</code> forces the dark
+theme on a screen that runs at night.</p>
+<p>There is no lockdown in strichliste itself — preventing people from
+browsing elsewhere is the browser&rsquo;s job. strichliste also does not
+ship an on-screen keyboard; for adding users on a pure touchscreen, enable
+the OS keyboard (<code>squeekboard</code>, <code>onboard</code>, or the tablet&rsquo;s native one).</p>
+<h2 id="barcode-scanner">Barcode scanner</h2>
+<p>Any scanner that presents as a <strong>USB/Bluetooth HID keyboard</strong> works — scans
+are recognized by their fast keystroke burst (keys &lt; 200 ms apart, ending
+with Enter, ≥ 3 characters), so no driver or configuration is needed.
+Precisely:</p>
+<ul>
+<li>Scanning works <strong>on a user&rsquo;s detail page only</strong> — the flow at the fridge
+is: tap your name, scan the bottle. (Set
+<a href="/docs/configuration/#article"><code>article.autoOpen: true</code></a> so the page
+opens on the buy tab — that&rsquo;s the intended setup for scanning.)</li>
+<li>An unknown barcode shows an &ldquo;unknown barcode&rdquo; message and changes nothing.</li>
+<li>To teach an article its barcode: open the article&rsquo;s edit page, click the
+barcode field, scan into it.</li>
+<li>Serial (RS-232/USB-CDC) scanners and very slow Bluetooth scanners that
+type with &gt; 200 ms between keys are <strong>not</strong> recognized — wrap them with a
+small script against the <a href="/docs/api/">API</a> instead.</li>
+</ul>
+<h2 id="offline-behavior">Offline behavior</h2>
+<p>There is none — no service worker, no offline queue. If the screen loses
+the server, the browser shows an error page until it reconnects. The
+practical mitigation is the recommended setup anyway: run server and screen
+on the same box (SQLite), and the Wi-Fi stops mattering.</p>
+<h2 id="integrations">Integrations</h2>
+<ul>
+<li><strong>NFC/RFID member cards</strong>: not built in. A popular DIY pattern: card
+reader → look up the member (<code>GET /api/user/search?query=…</code>) → point the
+browser at <code>/user/{id}</code>.</li>
+<li><strong>Space dashboard</strong>: <code>GET /api/metrics</code> serves the global numbers (sum of
+balances, transaction counts, top articles) as JSON.</li>
+<li><strong>Events/MQTT</strong>: strichliste emits no webhooks or MQTT messages —
+integrations poll the <a href="/docs/api/">API</a>.</li>
+</ul>
+
+    </div>
+</div>
+    </main>
+  </body>
+</html>
+

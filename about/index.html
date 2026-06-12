@@ -2,10 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Strichliste ‒ The Tally Sheet Replacement for Your Organization</title>
+    <title>What is this project about? · strichliste</title>
+    <meta name="description" content="strichliste is the digital tally sheet for hackerspaces, club rooms and small offices." />
+    
 
     <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
 
@@ -13,75 +14,131 @@
     <link href="/css/app.css" rel="stylesheet" />
     
   </head>
-  <body lang="en">
-    <div class="header navbar container">
-      <div class="navbar-left">
-        <a class="logo" href="/">
-          <img src="/img/strichliste-logo.png" />
-        </a>
-      </div>
-      <div class="navbar-right">
-            <ul class="nav navbar-nav">
+  <body>
+    <a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a>
+    <header class="header container d-flex justify-content-between align-items-end flex-wrap">
+      <a class="logo" href="/">
+        <img src="/img/strichliste-logo.png" alt="strichliste — home" width="251" height="35" />
+      </a>
+      <nav aria-label="Main">
+            <ul class="nav" role="list">
         
         
-        <li class=""><a href="/">Home</a></li>
         
-        <li class=" active"><a href="/about/">About</a></li>
         
-        <li class=""><a href="/install/">Install</a></li>
+        <li><a href="/">Home</a></li>
         
-        <li class=""><a href="https://demo.strichliste.org">Demo</a></li>
         
-        <li class=""><a href="https://github.com/strichliste">Source</a></li>
         
-        <li class=""><a href="/faq/">FAQ</a></li>
+        <li class="active"><a href="/about/" aria-current="page">About</a></li>
+        
+        
+        
+        <li><a href="/install/">Install</a></li>
+        
+        
+        
+        <li><a href="/docs/">Docs</a></li>
+        
+        
+        
+        <li><a href="https://demo.strichliste.org">Demo</a></li>
+        
+        
+        
+        <li><a href="https://github.com/strichliste">Source</a></li>
+        
+        
+        
+        <li><a href="/faq/">FAQ</a></li>
         
     </ul>
 
-      </div>
-    </div>
-  </body>
-</html>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1">
 
 <div class="container">
     <div class="row content margin-bottom-20">
-        <h2>What is this project about?</h2>
-        <p><em>strichliste</em> ([ʃtʀɪçˈlɪstə], German word for tally sheet) is a tool to replace a tally sheet inside a hackerspace.
-It&rsquo;s aim is to provide a no-frills, easy-to-setup and -to-use solution for managing your organization&rsquo;s snack bar.</p>
-<h3 id="demo">Demo</h3>
-<p>That&rsquo;s what you&rsquo;re here for, right? You can access a demo of strichliste
-<a href="https://demo.strichliste.org/">here</a>. But, just to be sure, here&rsquo;s how
-it looks like:</p>
-<!-- raw HTML omitted -->
-<h3 id="architecture">Architecture</h3>
-<p>strichliste consists of two components: the <code>frontend</code> and the <code>backend</code>.</p>
-<p>The frontend <a href="https://github.com/strichliste/strichliste-web-frontend">strichliste-web-frontend</a> is an react based
-application that accesses the backend via a RESTful HTTP interface.</p>
-<p>The <a href="https://github.com/strichliste/strichliste-backend">strichliste-backend</a> is written in PHP using the symfony web framework.
-All data is writting into a database. By default it utilises a SQLite database, but can be changed
-easily thanks to the Doctrine ORM</p>
-<p>The frontend and backend is bundled inside <a href="https://github.com/strichliste/strichliste">strichliste</a> repo in releases.</p>
-<h3 id="how-it-works">How it works</h3>
-<p>The processes implemented by strichliste inherently assumes to be used by a
-trusted audience. Each user intending to buy something from your kiosk is
-required to have a user account with strichliste. This can be done by
-registering your username (no other data is required).</p>
-<p>Once an account is available, the user can simply deducting the value from their account, or buy
-articles from the article database. Administrators of strichliste
-can define a lower or upper bound for the users&rsquo; credit balance. For example,
-administrators can configure that it is not allowed to have a negative balance.</p>
-<p>Cashing your account works the same as the inverse of buying an item: Simply
-charge your account with the given amount and it will take effect immediately.</p>
-<p>Also strichliste supports transactions. You can easily send money to another account
-and add a comment to store the purpose.</p>
-<h3 id="barcode-scanner">Barcode Scanner</h3>
-<p>If you add a Barcode to your article database, you can use a simple USB/Serial/Bluetooth Barcode scanner to
-buy articles. Just go to your users page, pick up the barcode scanner and scan your favorite drink/snack.</p>
-<h3 id="troubleshooting">Troubleshooting</h3>
-<p>In case of problems, please file an issue on our Github issue tracker.</p>
+        <h1>What is this project about?</h1>
+        
+        <p><em>strichliste</em> ([ʃtʀɪçˈlɪstə], the German word for <em>tally sheet</em>) replaces the
+paper tally sheet next to the fridge in a hackerspace, club room or small
+office. Members pick their name on a shared screen, tap what they took (a
+drink, a snack) or how much money they put into the cash box, and strichliste
+keeps everyone&rsquo;s balance.</p>
+<p>It is built around the same trust a paper list has — <strong>there are no logins,
+passwords or user roles</strong>. Anyone standing at the kiosk can book on any
+account, just like anyone could make a pencil mark on paper. What you gain
+over paper is arithmetic that is always correct, an undo button, statistics,
+and an API for barcode scanners and phone apps.</p>
+<p><img src="/img/screenshots/user-list.png" alt="The user list — what the screen by the fridge shows by default" width="1280" height="800" loading="lazy" decoding="async" class="img-fluid border rounded"></p>
+<h2 id="feature-tour">Feature tour</h2>
+<ul>
+<li><strong>User accounts</strong> — anyone can add themselves at the kiosk with just a name
+(optionally an e-mail). Users who haven&rsquo;t booked anything for a while are
+tucked away on an &ldquo;inactive&rdquo; tab and reappear on their next booking.</li>
+<li><strong>Deposit / dispense</strong> — put money in or take money out, via configurable
+one-tap amount buttons or a free amount field. Balances may go negative
+down to a configurable limit, so &ldquo;I&rsquo;ll pay next week&rdquo; works — but only up
+to the boundary you set.</li>
+<li><strong>Articles with barcodes</strong> — maintain a product list (&ldquo;Club-Mate, 1.50 €&rdquo;)
+and buy with one tap. A USB barcode scanner works on a user&rsquo;s page without
+drivers or configuration.</li>
+<li><strong>Undo</strong> — every transaction shows an undo button for a configurable grace
+period, so a slipped finger is not a treasury incident.</li>
+<li><strong>Transfers and split invoice</strong> — send money to another account with an
+optional comment, or split one group order across any set of members in
+one step.</li>
+<li><strong>Statistics</strong> — a metrics page for the whole system (sum of all balances
+for cash-box reconciliation, transaction volume, top articles) and a
+personal metrics page per user.</li>
+<li><strong>Search</strong> — find users and articles from the header on every page.</li>
+<li><strong>PayPal top-up</strong> <em>(optional)</em> — users can settle their balance via
+paypal.me-style payment links, with a configurable percentage fee passed on
+to the payer.</li>
+<li><strong>Touch-friendly UI</strong> — touch targets sized for fingers, a dark theme that
+follows the device&rsquo;s dark-mode preference, a booking sound, and an idle
+timer that returns the screen to the user list.</li>
+<li><strong>Localization</strong> — the interface ships in English and German and follows
+the configured currency everywhere.</li>
+<li><strong>REST API + OpenAPI docs</strong> — everything above is also scriptable; see the
+<a href="/docs/api/">API documentation</a>.</li>
+</ul>
+<p><img src="/img/screenshots/user-buy.png" alt="A user&rsquo;s page with the buy tab open" width="1280" height="800" loading="lazy" decoding="async" class="img-fluid border rounded"></p>
+<p><img src="/img/screenshots/metrics.png" alt="The metrics page: sum of all balances, transaction volume and top articles" width="1280" height="800" loading="lazy" decoding="async" class="img-fluid border rounded"></p>
+<h2 id="architecture">Architecture</h2>
+<p>strichliste is <strong>one single application</strong> — one thing to install, one thing
+to update. (For the curious: PHP 8.4+, Symfony 7.4.) That one application
+serves two faces:</p>
+<ul>
+<li><strong>The web UI</strong> — server-rendered pages designed for a wall-mounted
+touchscreen.
+It is <strong>fully operable without JavaScript</strong> — every action is a real HTML
+form, so it stays usable on old donated tablets. JavaScript only layers
+comfort on top: snappier navigation, the barcode listener, the idle timer.</li>
+<li><strong>The REST API</strong> at <code>/api/*</code> for third-party clients (Android apps, DIY
+hardware, space-automation scripts). The API is <strong>stable</strong>, so existing
+integrations keep working.</li>
+</ul>
+<p>strichliste works with several databases, and switching is a one-line
+setting: <strong>SQLite</strong> is a fine default for a single kiosk in a small space,
+<strong>PostgreSQL or MariaDB/MySQL</strong> are the better pick when several devices
+write at once. Everything monetary is an integer number of cents — there is
+no floating-point money anywhere.</p>
+<p>Development happens in the
+<a href="https://github.com/strichliste/strichliste-backend">strichliste-backend</a>
+repository.</p>
+<h2 id="demo">Demo</h2>
+<p>That&rsquo;s what you&rsquo;re here for, right? A public demo runs at
+<a href="https://demo.strichliste.org/">demo.strichliste.org</a>.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>In case of problems, please file an issue on our
+<a href="https://github.com/strichliste/strichliste-backend/issues">GitHub issue tracker</a>.</p>
 
     </div>
 </div>
-</body>
-</html> 
+    </main>
+  </body>
+</html>
 

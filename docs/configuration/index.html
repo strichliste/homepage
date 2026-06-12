@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Configuration · strichliste</title>
+    <meta name="description" content="Every setting in config/strichliste.yaml, with defaults." />
+    
+
+    <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/app.css" rel="stylesheet" />
+    
+  </head>
+  <body>
+    <a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a>
+    <header class="header container d-flex justify-content-between align-items-end flex-wrap">
+      <a class="logo" href="/">
+        <img src="/img/strichliste-logo.png" alt="strichliste — home" width="251" height="35" />
+      </a>
+      <nav aria-label="Main">
+            <ul class="nav" role="list">
+        
+        
+        
+        
+        <li><a href="/">Home</a></li>
+        
+        
+        
+        <li><a href="/about/">About</a></li>
+        
+        
+        
+        <li><a href="/install/">Install</a></li>
+        
+        
+        
+        <li class="active"><a href="/docs/" aria-current="true">Docs</a></li>
+        
+        
+        
+        <li><a href="https://demo.strichliste.org">Demo</a></li>
+        
+        
+        
+        <li><a href="https://github.com/strichliste">Source</a></li>
+        
+        
+        
+        <li><a href="/faq/">FAQ</a></li>
+        
+    </ul>
+
+      </nav>
+    </header>
+    <main id="main" tabindex="-1">
+
+<div class="container">
+    <div class="row content margin-bottom-20">
+        <h1>Configuration</h1>
+        
+        <p>All application-level behavior is configured in <strong>one file</strong>,
+<code>config/strichliste.yaml</code>, under the <code>parameters.strichliste</code> key. The same
+values drive the web UI <strong>and</strong> are exposed verbatim to API clients via
+<code>GET /api/settings</code>.</p>
+<p>Applying changes:</p>
+<ul>
+<li><strong>Bare metal</strong>: edit the file, then <code>php bin/console cache:clear</code>.</li>
+<li><strong>Docker</strong>: bind-mount your copy into the <code>app</code> service — the entrypoint
+recompiles the cache on every boot, so a restart applies it. See the
+README section <em>&ldquo;Settings without rebuilding&rdquo;</em> for the exact snippet.</li>
+</ul>
+<p>Two recurring datatypes:</p>
+<ul>
+<li><strong>money</strong> — always integer <strong>cents</strong>: <code>1000</code> = 10.00 €. There is no
+floating-point money anywhere.</li>
+<li><strong>timeperiod</strong> — a PHP relative date string like <code>'5 minute'</code>,
+<code>'10 day'</code>, <code>'2 week'</code>
+(<a href="https://www.php.net/manual/en/datetime.formats.relative.php">format reference</a>).</li>
+</ul>
+<h2 id="article">article</h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">key</th>
+        <th scope="col">type</th>
+        <th scope="col">default</th>
+        <th scope="col">what it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>enabled</code></td>
+        <td>bool</td>
+        <td><code>true</code></td>
+        <td>Master switch for the article system. Off: no <em>Buy</em> tab on user pages, no article routes in the UI.</td>
+      </tr>
+      <tr>
+        <td><code>autoOpen</code></td>
+        <td>bool</td>
+        <td><code>false</code></td>
+        <td>When on, a user&rsquo;s page opens directly on the <em>Buy</em> tab — the intended mode for screens with a barcode scanner.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h2 id="common">common</h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">key</th>
+        <th scope="col">type</th>
+        <th scope="col">default</th>
+        <th scope="col">what it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>idleTimeout</code></td>
+        <td>int (ms)</td>
+        <td><code>30000</code></td>
+        <td>After this many milliseconds without input, the screen returns to the user list — so it is never left on someone&rsquo;s account page. <code>0</code> disables. (Needs JavaScript; without JS there is simply no auto-return.)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h2 id="paypal">paypal</h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">key</th>
+        <th scope="col">type</th>
+        <th scope="col">default</th>
+        <th scope="col">what it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>enabled</code></td>
+        <td>bool</td>
+        <td><code>false</code></td>
+        <td>Show a PayPal top-up option on user pages. <strong>Change <code>recipient</code> before enabling</strong> — the shipped placeholder is a stranger&rsquo;s address.</td>
+      </tr>
+      <tr>
+        <td><code>recipient</code></td>
+        <td>string</td>
+        <td><code>foo@bar.de</code> (placeholder!)</td>
+        <td>The receiving PayPal account (e-mail address).</td>
+      </tr>
+      <tr>
+        <td><code>fee</code></td>
+        <td>int (percent)</td>
+        <td><code>0</code></td>
+        <td>Percentage added <strong>on top</strong> of the chosen amount and paid by the user, so PayPal&rsquo;s cut doesn&rsquo;t drain the cash box. Example: top-up 10 €, <code>fee: 3</code> → user pays 10.30 €, account is credited 10 €.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p>Note: the account is credited when the member returns from PayPal via a
+signed, single-use return link. strichliste does <strong>not</strong> verify with PayPal
+that the money arrived — reconcile your PayPal account against the books.</p>
+<h2 id="user">user</h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">key</th>
+        <th scope="col">type</th>
+        <th scope="col">default</th>
+        <th scope="col">what it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>stalePeriod</code></td>
+        <td>timeperiod</td>
+        <td><code>'10 day'</code></td>
+        <td>Users with no transaction within this period are moved to the <em>inactive</em> tab (they are hidden, not deleted, and return on their next booking).</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h2 id="i18n">i18n</h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">key</th>
+        <th scope="col">type</th>
+        <th scope="col">default</th>
+        <th scope="col">what it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>dateFormat</code></td>
+        <td>string</td>
+        <td><code>'YYYY-MM-DD HH:mm:ss'</code></td>
+        <td>Display format for timestamps.</td>
+      </tr>
+      <tr>
+        <td><code>timezone</code></td>
+        <td>string</td>
+        <td><code>'auto'</code></td>
+        <td>Timezone for display; <code>auto</code> uses the server/browser default.</td>
+      </tr>
+      <tr>
+        <td><code>language</code></td>
+        <td>string</td>
+        <td><code>'en'</code></td>
+        <td>UI language. Shipped: <code>en</code>, <code>de</code>.</td>
+      </tr>
+      <tr>
+        <td><code>currency.name</code></td>
+        <td>string</td>
+        <td><code>'Euro'</code></td>
+        <td>Currency name.</td>
+      </tr>
+      <tr>
+        <td><code>currency.symbol</code></td>
+        <td>string</td>
+        <td><code>'€'</code></td>
+        <td>Symbol shown next to every amount.</td>
+      </tr>
+      <tr>
+        <td><code>currency.alpha3</code></td>
+        <td>string</td>
+        <td><code>'EUR'</code></td>
+        <td>ISO 4217 code (used e.g. for PayPal).</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h2 id="accountboundary">account.boundary</h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">key</th>
+        <th scope="col">type</th>
+        <th scope="col">default</th>
+        <th scope="col">what it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>upper</code></td>
+        <td>money or <code>false</code></td>
+        <td><code>20000</code></td>
+        <td>Maximum balance (200 €). Transactions that would exceed it are rejected. <code>false</code> = no limit.</td>
+      </tr>
+      <tr>
+        <td><code>lower</code></td>
+        <td>money or <code>false</code></td>
+        <td><code>-20000</code></td>
+        <td>Minimum balance (−200 €) — i.e. <strong>the credit line you extend to every member</strong>. Decide this consciously before go-live. <code>false</code> = no limit.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h2 id="paymentundo">payment.undo</h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">key</th>
+        <th scope="col">type</th>
+        <th scope="col">default</th>
+        <th scope="col">what it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>enabled</code></td>
+        <td>bool</td>
+        <td><code>true</code></td>
+        <td>Show an undo button on recent transactions (in the web UI).</td>
+      </tr>
+      <tr>
+        <td><code>delete</code></td>
+        <td>bool</td>
+        <td><code>false</code></td>
+        <td><code>false</code>: the undone transaction stays in the history, marked as reverted. <code>true</code>: undo removes it from the database entirely — <strong>bad for auditability; leave it off if a treasurer ever has to check the books.</strong></td>
+      </tr>
+      <tr>
+        <td><code>timeout</code></td>
+        <td>timeperiod or <code>false</code></td>
+        <td><code>'5 minute'</code></td>
+        <td>How long a transaction stays undoable in the UI. <code>false</code> = forever.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p>Note: these settings govern the <strong>web UI</strong>. The API&rsquo;s
+<code>DELETE …/transaction/{id}</code> always reverts, regardless of
+<code>enabled</code>/<code>timeout</code> — one more reason the API must only be reachable from a
+trusted network.</p>
+<h2 id="paymentboundary">payment.boundary</h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">key</th>
+        <th scope="col">type</th>
+        <th scope="col">default</th>
+        <th scope="col">what it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>upper</code></td>
+        <td>money or <code>false</code></td>
+        <td><code>15000</code></td>
+        <td>Largest single transaction (150 €) — guards against an accidental extra zero. <code>false</code> = no limit.</td>
+      </tr>
+      <tr>
+        <td><code>lower</code></td>
+        <td>money or <code>false</code></td>
+        <td><code>-2000</code></td>
+        <td>Largest single deduction (−20 €). <code>false</code> = no limit.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h2 id="paymenttransactions">payment.transactions</h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">key</th>
+        <th scope="col">type</th>
+        <th scope="col">default</th>
+        <th scope="col">what it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>enabled</code></td>
+        <td>bool</td>
+        <td><code>true</code></td>
+        <td>Allow user-to-user transfers (with optional comment).</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h2 id="paymentsplitinvoice">payment.splitInvoice</h2>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">key</th>
+        <th scope="col">type</th>
+        <th scope="col">default</th>
+        <th scope="col">what it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>enabled</code></td>
+        <td>bool</td>
+        <td><code>true</code></td>
+        <td>Enable the <em>Split invoice</em> page (divide one amount across several users).</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h2 id="paymentdeposit--paymentdispense">payment.deposit / payment.dispense</h2>
+<p>Deposit = putting money in; dispense = taking money out. Both share the same
+shape:</p>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">key</th>
+        <th scope="col">type</th>
+        <th scope="col">default</th>
+        <th scope="col">what it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>enabled</code></td>
+        <td>bool</td>
+        <td><code>true</code></td>
+        <td>Show this action on user pages.</td>
+      </tr>
+      <tr>
+        <td><code>custom</code></td>
+        <td>bool</td>
+        <td><code>true</code></td>
+        <td>Allow free-form amounts (off: only the step buttons).</td>
+      </tr>
+      <tr>
+        <td><code>steps</code></td>
+        <td>money[]</td>
+        <td><code>[50, 100, 200, 500, 1000]</code></td>
+        <td>The one-tap amount buttons (in cents: 0.50 € … 10 €).</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+    </div>
+</div>
+    </main>
+  </body>
+</html>
+
