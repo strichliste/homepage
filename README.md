@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/strichliste/homepage.svg?branch=master)](https://travis-ci.org/strichliste/homepage)
+[![Build Status](https://github.com/strichliste/homepage/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/strichliste/homepage/actions/workflows/build.yml)
 
 ### strichliste Homepage
 
@@ -28,6 +28,7 @@ You can create menu entries by modifying `config.toml`.
 
 #### Deployment
 
-This homepage is auto-deployed using travis. For details on the deployment
-process, please check `.travis.yml` and the `deploy.sh` script. Deployment
+This homepage is auto-deployed using GitHub Actions. For details on the
+deployment process, please check `.github/workflows/build.yml`. The site is
+built on every push and pull request; deployment to the `gh-pages` branch
 only happens upon new commits on the `master` branch.
