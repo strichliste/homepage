@@ -5,9 +5,14 @@ on:
     branches:
       - master
   pull_request:
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: gh-pages-deploy
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -23,8 +28,28 @@ jobs:
       - name: Build
         run: hugo
 
+      - name: Upload site
+        uses: actions/upload-artifact@v4
+        with:
+          name: public
+          path: public/
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Download site
+        uses: actions/download-artifact@v4
+        with:
+          name: public
+          path: public
+
       - name: Deploy to GitHub Pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
