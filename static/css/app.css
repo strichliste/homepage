@@ -155,3 +155,31 @@ h3.h4 {
   padding: 40px 0;
   background-color: #272727;
 }
+
+.content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.content table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.content table th,
+.content table td {
+  padding: 8px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+
+.content table thead th {
+  border-bottom: 2px solid #ddd;
+}
+
+.content blockquote {
+  border-left: 5px solid #d9230f;
+}
