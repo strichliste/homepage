@@ -1,41 +1,90 @@
 +++
-date = "2018-12-21T00:00:08+02:00"
+date = "2026-06-12T09:00:00+02:00"
 draft = false
 title = "Install strichliste"
+description = "How to install strichliste 3: Docker (recommended) or classic bare metal."
 [menu]
   [menu.main]
     parent = "Install"
 +++
 
-For strichliste to run, **PHP 7.1 or higher is required**. You should have a webserver running which supports **mod_php** or **php-fpm**.
+This page describes installing **strichliste 3**. The short version:
+use Docker, set two values in `.env`, run one command. The
+[README](https://github.com/strichliste/strichliste-backend#readme) is the
+full operations manual (TLS options, every knob, backup & restore, upgrades,
+rollback); this page is the orientation.
 
-### Installing
+> **Security first:** everything — the UI, `/api/*`, and the Swagger UI at
+> `/api/doc` — is unauthenticated by design. strichliste trusts the network
+> like the kiosk trusts the room. Keep it restricted to your LAN/VPN at the
+> firewall, or put a reverse proxy with HTTP basic auth in front.
+> **Do not port-forward strichliste to the internet.**
 
-1. Go to the Github project to download the [latest release](https://github.com/strichliste/strichliste/releases). It comes already with a bundled front-end.
-2. Extract the package content to your target directory (e.g. `tar xvfz strichliste.tar.gz -C /var/www/strichliste.yourdomain.tld`)
-3. Configure your database (e.g. mysql)
-4. Configure webserver (nginx or apache)
-5. Change [strichliste.yaml](https://github.com/strichliste/strichliste-backend/blob/master/docs/Config.md) config to your needs (optional)
+## Try it in five minutes
 
-### Database configuration
+With a current Docker (Engine 25+, Compose v2.30+):
 
-The [ORM](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/platforms.html) used in
-Strichliste supports multiple database backends such as:
+```bash
+git clone https://github.com/strichliste/strichliste-backend.git
+cd strichliste-backend
+docker compose up -d --build --wait
+```
 
-* MySQL / MariaDB (recommended)
-* Oracle
-* Microsoft SQL Server
-* PostgreSQL
-* SQLite (not recommended)
+Open **https://localhost** (accept the one-time certificate warning, or run
+`make tls` to trust the local CA). You get a dev environment with Postgres
+and the database schema already migrated. Add a user, add an article under
+*Article List*, buy it — that's the whole loop.
 
-If you want to use another database than sqlite, just adjust the `DATABASE_URL` variable in your `.env` file in your root
-directory according to the [Doctrine ORM](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html#connecting-using-a-url)
-recommendations.
+To wipe the dev data and start fresh: `docker compose down -v`, then `up`
+again.
+
+## Production with Docker (recommended)
+
+The repository ships a production-grade container setup: FrankenPHP
+(Caddy + PHP) running the app in worker mode — Symfony boots once and stays
+resident, which a Raspberry-Pi-class kiosk box appreciates. The image is
+multi-arch and works on arm64 (e.g. Pi 4/5 with a 64-bit OS).
+
+1. Edit `.env`:
+   * set a unique `APP_SECRET` (`openssl rand -hex 32`),
+   * uncomment `COMPOSE_FILE=compose.yaml:compose.prod.yaml`, so a casual
+     `docker compose up` later doesn't load the *development* override,
+   * optionally set `SERVER_NAME`: a real hostname for automatic Let's
+     Encrypt certificates (requires the box to be publicly reachable, which
+     contradicts the LAN-only advice), `localhost` (default) for a
+     self-signed local CA, or `":80"` for plain HTTP behind your own
+     TLS-terminating proxy.
+2. Start it:
+
+```bash
+docker compose -f compose.yaml -f compose.prod.yaml up -d --build --wait
+# or: make prod
+```
+
+The container waits for the database and applies migrations on every boot —
+first install and upgrades are the same command (`git pull && make prod`).
+Health checks, restart policy and log rotation are preconfigured.
+
+When something breaks, the page to open is `docker compose logs app` —
+access log, PHP errors and the entrypoint's progress all go to container
+output. For external uptime monitoring, probe `GET /api/settings` (cheap,
+unauthenticated, returns 200 + JSON).
+
+## Choosing a database
+
+The database is a pure `.env` decision — the bundled Postgres is the Docker
+default, or set `DATABASE_URL` to any Doctrine DSN. **SQLite**,
+**MySQL/MariaDB** and **PostgreSQL** are all supported:
+
+* **SQLite** — perfect for a single kiosk in a small space; zero
+  administration, one file to back up.
+* **PostgreSQL / MariaDB** — pick one of these when several devices write at
+  once or the instance is long-lived and busy.
 
 For example, to configure **mysql/mariadb**:
 
 ```
-DATABASE_URL="mysql://strichliste:32YourPassWord42@localhost/strichliste"
+DATABASE_URL="mysql://strichliste:32YourPassWord42@localhost/strichliste?serverVersion=10.11.2-MariaDB"
 ```
 
 Create a database and a separate user:
@@ -47,53 +96,56 @@ GRANT ALL PRIVILEGES ON strichliste.* TO 'strichliste'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-Afterwards just run the following commands to create the schema:
+Then apply the schema:
 
 ```bash
-php bin/console doctrine:schema:create
+php bin/console doctrine:migrations:migrate
 ```
 
-You're done!
+## Bare metal (without Docker)
 
-#### Sqlite (testing only)
+The classic setup still works, modernized:
 
-Sqlite should **only be used for testing**. sqlite does not support most of the database transactional features
-which are needed to handle concurrent request.
+1. **Requirements**: PHP ≥ 8.4 with `intl`, `ctype`, `iconv`, `json` and the
+   PDO driver for your database (`pdo_sqlite`, `pdo_mysql` or `pdo_pgsql`);
+   a web server with PHP-FPM.
+2. **Get the code**: download a release tarball (ships with `vendor/` and
+   pre-compiled assets) and extract it to e.g. `/var/www/strichliste`, or
+   build from a git checkout:
 
-If you really want to use this, execute the following steps:
 ```bash
-php bin/console doctrine:database:create
-php bin/console doctrine:schema:create
+composer install --no-dev --optimize-autoloader
+php bin/console importmap:install
+php bin/console asset-map:compile
 ```
 
-You now have a database-file in `var/app.db`
+3. **Configure the database** via environment (or `.env.local`) as shown
+   above, then run the migrations.
+4. **Configure the web server**: point the document root at `public/` and
+   route everything through `public/index.php`. Working nginx (plain + SSL)
+   and Apache examples live in the repository's
+   [`examples/`](https://github.com/strichliste/strichliste-backend/tree/master/examples)
+   directory.
+5. Set `APP_ENV=prod`, `APP_DEBUG=0` and a unique `APP_SECRET` in the
+   environment, then warm the cache: `php bin/console cache:clear`.
 
-### Configuring NGINX
+## Common pitfalls
 
-Config examples for nginx can be found here:
+* Check your folder owner/group if you're using SQLite as your database!
+  Otherwise strichliste can't write to it.
+* JSON API requests need a `Content-Type: application/json` header — without
+  it the body is silently ignored.
 
-* https://github.com/strichliste/strichliste-backend/blob/master/examples/nginx_ssl.conf (with SSL)
-* https://github.com/strichliste/strichliste-backend/blob/master/examples/nginx.conf (without SSL)
+## Importing your old data
 
-### Configuring Apache
+To import a **strichliste 1** `database.sqlite`, see the
+[`app:import` command](/docs/commands/#import-a-strichliste-1-database).
+**It wipes the target database first** — only run it on a fresh install.
 
-* https://github.com/strichliste/strichliste-backend/blob/master/examples/apache.conf (without SSL)
-* TODO: SSL-Config
+## Before you rely on it for real money
 
-### Common Pitfalls
-
-* Check your folder owner/group if you're using sqlite as your database! Otherwise strichliste can't write to it.
-
-### Commands
-
-#### Import strichliste 1 database
-
-To import your old strichliste 1 database, copy the `database.sqlite`-file to the strichliste2 directory and run:
-
-`php bin/console app:import database.sqlite`
-
-After import the terminal outputs "Import done!"
-
-
-
- 
+Read the
+[backup, upgrades & rollback section](https://github.com/strichliste/strichliste-backend#readme)
+in the README and set up the nightly backup *before* go-live. It is short,
+tested, and the difference between "restore from last night" and a shoebox
+full of receipts.
