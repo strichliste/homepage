@@ -124,7 +124,10 @@ a.logo {
 .slider-headline-1 {
   text-transform: uppercase;
   font-size: 50px;
+  font-weight: normal;
+  line-height: inherit;
   margin-top: 50px;
+  margin-bottom: 0;
 }
 
 .slider-headline-1,
@@ -139,6 +142,13 @@ a.logo {
 .slider-headline-2 {
   font-size: 20px;
   margin-top: 20px;
+  margin-bottom: 0;
+}
+
+h2.h4,
+h3.h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .footer {
