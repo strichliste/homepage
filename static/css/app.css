@@ -6,6 +6,12 @@
   --bs-link-hover-color-rgb: 145, 23, 10;
 }
 
+/* Visible keyboard focus indicator; :focus-visible leaves mouse clicks alone. */
+a:focus-visible {
+  outline: 2px solid #d9230f;
+  outline-offset: 2px;
+}
+
 .header {
   border-bottom: 2px solid #eeeeee;
   padding-top: 40px;

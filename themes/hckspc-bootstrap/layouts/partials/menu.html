@@ -1,4 +1,4 @@
-    <ul class="nav">
+    <ul class="nav" role="list">
         {{ $currentNode := . }}
         {{ range .Site.Menus.main }}
         {{ $isPage := $currentNode.IsMenuCurrent "main" . }}

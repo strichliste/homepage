@@ -3,7 +3,7 @@
     <div class="row content margin-bottom-20">
         <h1>{{ .Title }}</h1>
         {{ .Content }}
-        <ul class="page-list">
+        <ul class="page-list" role="list">
         {{ range .Pages }}
             <li>
                 <a href="{{ .RelPermalink }}">{{ .Title }}</a>
