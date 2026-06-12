@@ -1,6 +1,7 @@
     <ul class="nav navbar-nav">
         {{ $currentNode := . }}
         {{ range .Site.Menus.main }}
-        <li class="{{if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }} active{{end}}"><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ $isCurrent := or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }}
+        <li class="{{ if $isCurrent }} active{{ end }}"><a href="{{ .URL }}"{{ if $isCurrent }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
         {{ end }}
     </ul>
