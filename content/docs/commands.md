@@ -33,8 +33,8 @@ php bin/console app:import database.sqlite
 
 **This wipes the target database first** — all existing users, transactions
 *and* articles are deleted — so only run it on a fresh install. It imports
-users and transactions; strichliste 1 had no articles, so the product list
-is re-entered by hand. After the import the terminal outputs "Import done!".
+users and transactions; the product list is entered by hand afterwards.
+After the import the terminal outputs "Import done!".
 
 Importing into Docker — the file must be inside the container:
 

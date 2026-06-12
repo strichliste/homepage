@@ -129,9 +129,8 @@ The classic setup still works, modernized:
 1. **Requirements**: PHP ≥ 8.4 with `intl`, `ctype`, `iconv`, `json` and the
    PDO driver for your database (`pdo_sqlite`, `pdo_mysql` or `pdo_pgsql`);
    a web server with PHP-FPM.
-2. **Get the code**: build from a git checkout (no release of the rewrite
-   has been tagged yet — once releases exist, a tarball with bundled
-   `vendor/` and pre-compiled assets will be the easier route):
+2. **Get the code**: build from a git checkout (tagged releases with a
+   ready-built package will follow):
 
 ```bash
 composer install --no-dev --optimize-autoloader

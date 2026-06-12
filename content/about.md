@@ -60,21 +60,18 @@ and an API for barcode scanners and phone apps.
 
 ## Architecture
 
-strichliste 3 is **one single application**. The previous version was two
-pieces — a server and a separate web frontend — that had to be installed
-and updated separately. The new version draws all its pages itself, with
-the same look and feel. (For the curious: PHP 8.4+, Symfony 7.4.) That one
-application serves two faces:
+strichliste is **one single application** — one thing to install, one thing
+to update. (For the curious: PHP 8.4+, Symfony 7.4.) That one application
+serves two faces:
 
 * **The web UI** — server-rendered pages designed for a wall-mounted
   touchscreen.
   It is **fully operable without JavaScript** — every action is a real HTML
   form, so it stays usable on old donated tablets. JavaScript only layers
   comfort on top: snappier navigation, the barcode listener, the idle timer.
-* **The REST API** at `/api/*`, kept for existing third-party clients
-  (Android apps, DIY hardware, space-automation scripts). The API contract
-  is **frozen** — JSON shapes are byte-compatible with strichliste v1.8, so
-  existing integrations keep working.
+* **The REST API** at `/api/*` for third-party clients (Android apps, DIY
+  hardware, space-automation scripts). The API is **stable**, so existing
+  integrations keep working.
 
 strichliste works with several databases, and switching is a one-line
 setting: **SQLite** is a fine default for a single kiosk in a small space,
@@ -88,11 +85,8 @@ repository.
 
 ## Demo
 
-A public demo runs at [demo.strichliste.org](https://demo.strichliste.org/).
-Heads-up: the demo still runs the previous version, strichliste 2 — it
-looks nearly identical. Everything else on this site (install instructions,
-docs) describes strichliste 3. strichliste 3 has no official release yet;
-you install it straight from GitHub.
+That's what you're here for, right? A public demo runs at
+[demo.strichliste.org](https://demo.strichliste.org/).
 
 ## Troubleshooting
 

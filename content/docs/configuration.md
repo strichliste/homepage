@@ -86,10 +86,10 @@ that the money arrived — reconcile your PayPal account against the books.
 | `delete` | bool | `false` | `false`: the undone transaction stays in the history, marked as reverted. `true`: undo removes it from the database entirely — **bad for auditability; leave it off if a treasurer ever has to check the books.** |
 | `timeout` | timeperiod or `false` | `'5 minute'` | How long a transaction stays undoable in the UI. `false` = forever. |
 
-Note: these settings govern the **web UI**. The legacy API's
-`DELETE …/transaction/{id}` honors the frozen v1.8 contract and reverts
-regardless of `enabled`/`timeout` — one more reason the API must only be
-reachable from a trusted network.
+Note: these settings govern the **web UI**. The API's
+`DELETE …/transaction/{id}` always reverts, regardless of
+`enabled`/`timeout` — one more reason the API must only be reachable from a
+trusted network.
 
 ## payment.boundary
 

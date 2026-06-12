@@ -3,15 +3,15 @@ date = "2026-06-12T09:00:00+02:00"
 draft = false
 weight = 30
 title = "REST API"
-description = "The REST API (unchanged since strichliste v1.8): endpoints, conventions, examples."
+description = "The REST API: endpoints, conventions, examples."
 [menu]
   [menu.main]
     parent = "Docs"
 +++
 
-The `/api/*` endpoints speak the **strichliste v1.8 contract**, unchanged,
-so existing clients keep working. The API is documented as an OpenAPI 3
-specification served by the application itself:
+The `/api/*` endpoints are **stable** — existing clients keep working
+unchanged. The API is documented as an OpenAPI 3 specification served by
+the application itself:
 
 * **`/api/doc`** — interactive Swagger UI on your own instance (browse
   endpoints, try requests — mind that "Try it out" executes *real*
@@ -33,7 +33,7 @@ specification served by the application itself:
            "code": 400, "message": "Transaction boundary reached"}}
 ```
 
-* **Pagination is uneven (frozen contract):** `/api/transaction`,
+* **Pagination is uneven (kept for compatibility):** `/api/transaction`,
   `/api/user/{id}/transaction` and `/api/article` accept
   `?limit=…&offset=…` with a **default limit of 25** — forget `limit` and
   you silently see only 25 rows. `GET /api/user` ignores both and always

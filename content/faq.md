@@ -48,12 +48,6 @@ decide a retention period. The
 transactions older than a chosen interval — but check your bookkeeping
 retention duties before deleting financial records.
 
-## Is the demo the new version?
-
-No — [demo.strichliste.org](https://demo.strichliste.org) still runs the
-previous version, strichliste 2. strichliste 3 looks nearly identical but
-is one single application instead of two — see [About](/about/).
-
 ## How do I import my old strichliste 1 data?
 
 With the [`app:import` command](/docs/commands/#import-a-strichliste-1-database).
