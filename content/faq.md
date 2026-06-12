@@ -12,9 +12,9 @@ description = "Common questions about strichliste, answered."
 
 The reference documentation lives on this site now:
 [configuration](/docs/configuration/), [console commands](/docs/commands/),
-the [REST API](/docs/api/) and a [kiosk building guide](/docs/kiosk/). The
-interactive API documentation (Swagger UI) is served by your own instance
-at `/api/doc`.
+the [REST API](/docs/api/) and a guide for
+[the screen by the fridge](/docs/screen/). The interactive API
+documentation (Swagger UI) is served by your own instance at `/api/doc`.
 
 ## Is there a login or admin role?
 

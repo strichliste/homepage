@@ -2,8 +2,8 @@
 date = "2026-06-12T09:00:00+02:00"
 draft = false
 weight = 40
-title = "Building the kiosk"
-description = "The screen by the fridge: hardware, kiosk browser, barcode scanners."
+title = "The screen by the fridge"
+description = "Hardware, fullscreen browser and barcode scanners for the screen at your kiosk."
 [menu]
   [menu.main]
     parent = "Docs"
@@ -22,9 +22,10 @@ once (4 GB RAM comfortably; 2 GB if the server runs elsewhere). Older
 terminal. Any old tablet pointed at the server works too — the UI works
 without JavaScript, so even ancient browsers hold up.
 
-## Kiosk browser
+## Fullscreen browser
 
-The usual recipe is Chromium in kiosk mode:
+The usual recipe is Chromium in "kiosk mode" — that's the browser's name
+for fullscreen without any controls:
 
 ```bash
 chromium --kiosk --noerrdialogs --disable-pinch \
@@ -38,8 +39,8 @@ session) all work — strichliste is just a web page. The `--autoplay-policy`
 flag is what allows the booking sound; `--force-dark-mode` forces the dark
 theme on a screen that runs at night.
 
-There is no kiosk lockdown in strichliste itself — preventing people from
-browsing elsewhere is the kiosk browser's job. strichliste also does not
+There is no lockdown in strichliste itself — preventing people from
+browsing elsewhere is the browser's job. strichliste also does not
 ship an on-screen keyboard; for adding users on a pure touchscreen, enable
 the OS keyboard (`squeekboard`, `onboard`, or the tablet's native one).
 
@@ -53,7 +54,7 @@ Precisely:
 * Scanning works **on a user's detail page only** — the flow at the fridge
   is: tap your name, scan the bottle. (Set
   [`article.autoOpen: true`](/docs/configuration/#article) so the page
-  opens on the buy tab — that's the intended scanner-kiosk mode.)
+  opens on the buy tab — that's the intended setup for scanning.)
 * An unknown barcode shows an "unknown barcode" message and changes nothing.
 * To teach an article its barcode: open the article's edit page, click the
   barcode field, scan into it.
@@ -63,16 +64,16 @@ Precisely:
 
 ## Offline behavior
 
-There is none — no service worker, no offline queue. If the kiosk loses the
-server, the browser shows an error page until it reconnects. The practical
-mitigation is the recommended setup anyway: run server and kiosk on the
-same box (SQLite), and the Wi-Fi stops mattering.
+There is none — no service worker, no offline queue. If the screen loses
+the server, the browser shows an error page until it reconnects. The
+practical mitigation is the recommended setup anyway: run server and screen
+on the same box (SQLite), and the Wi-Fi stops mattering.
 
 ## Integrations
 
 * **NFC/RFID member cards**: not built in. A popular DIY pattern: card
   reader → look up the member (`GET /api/user/search?query=…`) → point the
-  kiosk browser at `/user/{id}`.
+  browser at `/user/{id}`.
 * **Space dashboard**: `GET /api/metrics` serves the global numbers (sum of
   balances, transaction counts, top articles) as JSON.
 * **Events/MQTT**: strichliste emits no webhooks or MQTT messages —

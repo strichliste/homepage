@@ -46,7 +46,7 @@ and an API for barcode scanners and phone apps.
 * **PayPal top-up** *(optional)* — users can settle their balance via
   paypal.me-style payment links, with a configurable percentage fee passed on
   to the payer.
-* **Kiosk-friendly UI** — touch targets sized for fingers, a dark theme that
+* **Touch-friendly UI** — touch targets sized for fingers, a dark theme that
   follows the device's dark-mode preference, a booking sound, and an idle
   timer that returns the screen to the user list.
 * **Localization** — the interface ships in English and German and follows
@@ -65,12 +65,13 @@ The separate React frontend of strichliste 2 is gone — the backend renders
 the complete UI itself, with the same look and feel. One application to
 deploy instead of two, serving two faces:
 
-* **The web UI** — server-rendered pages designed for a wall-mounted kiosk.
+* **The web UI** — server-rendered pages designed for a wall-mounted
+  touchscreen.
   It is **fully operable without JavaScript** — every action is a real HTML
   form, so it stays usable on old donated tablets. JavaScript only layers
   comfort on top: snappier navigation, the barcode listener, the idle timer.
 * **The REST API** at `/api/*`, kept for existing third-party clients
-  (Android apps, kiosk hardware, space-automation scripts). The API contract
+  (Android apps, DIY hardware, space-automation scripts). The API contract
   is **frozen** — JSON shapes are byte-compatible with strichliste v1.8, so
   existing integrations keep working.
 

@@ -13,9 +13,9 @@ One application to deploy instead of two.
 
 What's new:
 
-* **Works without JavaScript** — every action is a real HTML form, so the
-  kiosk stays usable on old donated tablets. JavaScript only layers comfort
-  on top: snappier navigation, the barcode listener, the idle timer.
+* **Works without JavaScript** — every action is a real HTML form, so it
+  stays usable on old donated tablets. JavaScript only layers comfort on
+  top: snappier navigation, the barcode listener, the idle timer.
 * **Modern stack** — PHP 8.4+ and Symfony 7.4 instead of PHP 7.1.
 * **Docker first** — the repository ships a production-grade FrankenPHP
   setup; install and upgrade are the same single command. The image builds
@@ -28,8 +28,9 @@ What's new:
 * **The API contract is frozen** — JSON shapes stay byte-compatible with
   strichliste v1.8, so existing barcode scanners, Android apps and space
   automations keep working unchanged.
-* **Kiosk polish** — dark theme via `prefers-color-scheme`, booking sound,
-  idle return to the user list, English and German localization.
+* **Made for the screen by the fridge** — dark theme via
+  `prefers-color-scheme`, booking sound, idle return to the user list,
+  English and German localization.
 
 Honest fine print: there is no tagged release of the rewrite yet — you
 install it from the

@@ -34,13 +34,13 @@ Two recurring datatypes:
 | key | type | default | what it does |
 | --- | --- | --- | --- |
 | `enabled` | bool | `true` | Master switch for the article system. Off: no *Buy* tab on user pages, no article routes in the UI. |
-| `autoOpen` | bool | `false` | When on, a user's page opens directly on the *Buy* tab — the intended mode for scanner kiosks. |
+| `autoOpen` | bool | `false` | When on, a user's page opens directly on the *Buy* tab — the intended mode for screens with a barcode scanner. |
 
 ## common
 
 | key | type | default | what it does |
 | --- | --- | --- | --- |
-| `idleTimeout` | int (ms) | `30000` | After this many milliseconds without input, the kiosk returns to the user list — so the screen is never left on someone's account page. `0` disables. (Needs JavaScript; without JS there is simply no auto-return.) |
+| `idleTimeout` | int (ms) | `30000` | After this many milliseconds without input, the screen returns to the user list — so it is never left on someone's account page. `0` disables. (Needs JavaScript; without JS there is simply no auto-return.) |
 
 ## paypal
 

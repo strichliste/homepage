@@ -42,7 +42,7 @@ again.
 
 The repository ships a production-grade container setup: FrankenPHP
 (Caddy + PHP) running the app in worker mode — Symfony boots once and stays
-resident, which a Raspberry-Pi-class kiosk box appreciates. The image is
+resident, which a Raspberry-Pi-class box appreciates. The image is
 multi-arch and works on arm64 (e.g. Pi 4/5 with a 64-bit OS).
 
 1. Edit `.env`:
