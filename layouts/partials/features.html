@@ -2,7 +2,7 @@
     <div class="headline col-xs-12">
         <h2>Features</h2>
     </div>
-    {{ range $.Site.Data.features.feature }}
+    {{ range hugo.Data.features.feature }}
     <div class="col-sm-3">
         <img src="{{ .img }}" width="263" height="140" alt="{{ .title }}">
         <h3>{{ .title }}</h3>

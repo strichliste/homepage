@@ -4,7 +4,7 @@
     </div>
 
     <div class="col-xs-12 col-md-8">
-        {{ range first 1 (where .Data.Pages "Section" "news") }}
+        {{ range first 1 (where .Pages "Section" "news") }}
         <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
         <p>{{ .Summary }}</p>
         {{ end }}
@@ -13,7 +13,7 @@
     <div class="hidden-xs col-md-4">
         <h4>Latest news</h4>
         <ul>
-        {{ range first 5 (where .Data.Pages "Section" "news") }}
+        {{ range first 5 (where .Pages "Section" "news") }}
         <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
         {{ end }}
         </ul>
