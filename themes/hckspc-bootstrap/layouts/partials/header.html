@@ -16,13 +16,11 @@
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
-    <header class="header navbar container">
-      <div class="navbar-left">
-        <a class="logo" href="/">
-          <img src="{{ .Site.Params.logo }}" alt="strichliste — home" width="251" height="35" />
-        </a>
-      </div>
-      <nav class="navbar-right" aria-label="Main">
+    <header class="header container">
+      <a class="logo" href="/">
+        <img src="{{ .Site.Params.logo }}" alt="strichliste — home" width="251" height="35" />
+      </a>
+      <nav aria-label="Main">
         {{ partial "menu.html" . }}
       </nav>
     </header>

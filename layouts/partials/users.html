@@ -1,9 +1,9 @@
 <div class="row margin-bottom-30 users">
-    <div class="headline col-xs-12">
+    <div class="headline col-12">
         <h2>Users</h2>
     </div>
     {{ range sort hugo.Data.users.user }}
-    <div class="col-xs-6 col-sm-3 col-md-2 user text-center">
+    <div class="col-6 col-md-3 col-lg-2 user text-center">
         <a href="{{ .link }}">
             <div class="img-container vertical-align">
                 <img src="{{ .img }}" alt="">

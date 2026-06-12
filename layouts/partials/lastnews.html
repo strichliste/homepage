@@ -1,10 +1,10 @@
 {{ with where .Site.RegularPages "Section" "news" }}
 <div class="row lastnews margin-bottom-30">
-    <div class="headline col-xs-12">
+    <div class="headline col-12">
         <h2>Latest Updates</h2>
     </div>
 
-    <div class="col-xs-12 col-md-8">
+    <div class="col-12 col-lg-8">
         {{ range first 1 . }}
         <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
         <div>{{ .Summary }}</div>
@@ -12,7 +12,7 @@
         <p><a href="/news/">All news</a></p>
     </div>
 
-    <div class="hidden-xs col-md-4">
+    <div class="d-none d-md-block col-lg-4">
         <h3>Latest news</h3>
         <ul>
         {{ range first 5 . }}

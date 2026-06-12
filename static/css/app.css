@@ -12,6 +12,21 @@
   left: 0;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  border-bottom: 2px solid #eeeeee;
+  min-height: 44px;
+  padding-top: 40px;
+}
+
+a.logo {
+  display: block;
+  padding-bottom: 10px;
+}
+
 .nav {
   color: #687074;
   text-transform: uppercase;
@@ -22,6 +37,7 @@
   padding: 10px 25px 10px 25px !important;
   font-size: 15px;
   color: #687074;
+  text-decoration: none;
 }
 
 .nav li a:hover {
@@ -34,38 +50,12 @@
   border-bottom: 2px solid #d9230f;
 }
 
-.nav li {
-  bottom: -2px;
-}
-
-a.logo {
-  display: block;
-  margin-top: -15px;
-}
-
-.header {
-  border-bottom: 2px solid #eeeeee;
-  min-height: 44px;
-  padding-top: 40px;
-  margin: 0 auto;
-}
-
-.header.logo {
-  display: flex;
-  align-content: bottom;
-}
-
 .slider {
   border-bottom: 2px solid #eeeeee;
 }
 
 .content {
   padding: 40px 0;
-}
-
-.example-img {
-  height: 140px;
-  background-color: #ccc;
 }
 
 .headline {
@@ -95,6 +85,10 @@ a.logo {
   margin-bottom: 30px;
 }
 
+.users a {
+  text-decoration: none;
+}
+
 .users .img-container {
   height: 110px;
   margin-bottom: 10px;
@@ -102,7 +96,7 @@ a.logo {
 
 .users .img-container img {
   max-height: 110px;
-  max-width: 170px;
+  max-width: 100%;
 }
 
 .users .user {
@@ -110,10 +104,6 @@ a.logo {
 }
 
 .vertical-align {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -153,11 +143,6 @@ a.logo {
   margin-bottom: 0;
 }
 
-.footer {
-  padding: 40px 0;
-  background-color: #272727;
-}
-
 .content a {
   text-decoration: underline;
 }
@@ -189,4 +174,5 @@ a.logo {
 
 .content blockquote {
   border-left: 5px solid #d9230f;
+  padding-left: 15px;
 }
