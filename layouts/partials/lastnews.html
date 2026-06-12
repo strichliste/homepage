@@ -1,21 +1,24 @@
-<div class="row margin-bottom-30">
+{{ with where .Site.RegularPages "Section" "news" }}
+<div class="row lastnews margin-bottom-30">
     <div class="headline col-xs-12">
         <h2>Latest Updates</h2>
     </div>
 
     <div class="col-xs-12 col-md-8">
-        {{ range first 1 (where .Site.RegularPages "Section" "news") }}
-        <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+        {{ range first 1 . }}
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
         <div>{{ .Summary }}</div>
         {{ end }}
+        <p><a href="/news/">All news</a></p>
     </div>
 
     <div class="hidden-xs col-md-4">
-        <h4>Latest news</h4>
+        <h3>Latest news</h3>
         <ul>
-        {{ range first 5 (where .Site.RegularPages "Section" "news") }}
+        {{ range first 5 . }}
         <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
         {{ end }}
         </ul>
     </div>
 </div>
+{{ end }}

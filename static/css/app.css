@@ -80,6 +80,14 @@ a.logo {
   border-bottom: 2px solid #d9230f;
 }
 
+/* Section sub-headings: semantically h2/h3, visually the size the
+   design always used for these slots. */
+.intro h2,
+.lastnews h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
 .margin-bottom-20 {
   margin-bottom: 20px;
 }
