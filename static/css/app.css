@@ -1,3 +1,17 @@
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  z-index: 1000;
+  padding: 10px 15px;
+  background-color: #fff;
+  color: #d9230f;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
 .nav {
   color: #687074;
   text-transform: uppercase;

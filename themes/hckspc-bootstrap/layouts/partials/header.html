@@ -13,14 +13,16 @@
     <link href="/css/app.css" rel="stylesheet" />
     {{ partial "head_includes.html" . }}
   </head>
-  <body lang="en">
-    <div class="header navbar container">
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="header navbar container">
       <div class="navbar-left">
         <a class="logo" href="/">
-          <img src="{{ .Site.Params.logo }}" />
+          <img src="{{ .Site.Params.logo }}" alt="strichliste ‒ home" width="251" height="35" />
         </a>
       </div>
-      <div class="navbar-right">
+      <nav class="navbar-right" aria-label="Main">
         {{ partial "menu.html" . }}
-      </div>
-    </div>
+      </nav>
+    </header>
+    <main id="main">
