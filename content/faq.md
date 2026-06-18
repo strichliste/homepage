@@ -48,10 +48,20 @@ decide a retention period. The
 transactions older than a chosen interval — but check your bookkeeping
 retention duties before deleting financial records.
 
+## I already run strichliste — do I need to import anything to upgrade?
+
+No. From strichliste 2 onwards there is no import step: point `DATABASE_URL`
+at your existing database (SQLite, MariaDB/MySQL or Postgres) and start the
+app — the migrations bring it up to date safely on first boot. Back up
+first. See [Install](/install/#keeping-your-existing-data).
+
 ## How do I import my old strichliste 1 data?
 
-With the [`app:import` command](/docs/commands/#import-a-strichliste-1-database).
-Mind that it wipes the target database first.
+The much older strichliste 1 used a different schema, so it needs a one-time
+conversion with the
+[`app:import` command](/docs/commands/#import-a-strichliste-1-database). It
+replaces all data and refuses to run against a non-empty database without
+`--force`, so only run it on a fresh install.
 
 ## How to get in touch?
 
