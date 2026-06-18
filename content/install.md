@@ -27,13 +27,26 @@ With a current Docker (Engine 25+, Compose v2.30+):
 ```bash
 git clone https://github.com/strichliste/strichliste-backend.git
 cd strichliste-backend
-docker compose up -d --build --wait
+make up
+```
+
+`make up` is the plain `docker compose up -d --build --wait` with a generous
+first-boot timeout — the initial build downloads all dependencies, which can
+outlast Docker's default wait. No `make`? Run it directly and add the
+timeout yourself:
+
+```bash
+docker compose up -d --build --wait --wait-timeout 300
 ```
 
 Open **https://localhost** (accept the one-time certificate warning, or run
 `make tls` to trust the local CA). You get a test setup with the database
 already prepared. Add a user, add an article under *Article List*, buy it —
 that's the whole loop.
+
+If ports 80/443 are already taken on your machine, set `HTTP_PORT` /
+`HTTPS_PORT` / `HTTP3_PORT` in `.env` and open the HTTPS port directly (e.g.
+`https://localhost:8443`).
 
 To wipe the dev data and start fresh: `docker compose down -v`, then `up`
 again.
@@ -157,11 +170,22 @@ php bin/console asset-map:compile
 * JSON API requests need a `Content-Type: application/json` header — without
   it the body is silently ignored.
 
-## Importing your old data
+## Keeping your existing data
 
-To import a **strichliste 1** `database.sqlite`, see the
-[`app:import` command](/docs/commands/#import-a-strichliste-1-database).
-**It wipes the target database first** — only run it on a fresh install.
+**Already running strichliste (2 or newer)?** There is **no import step** —
+point `DATABASE_URL` at your existing database (SQLite file, MariaDB/MySQL
+or Postgres) and start the app. The schema migrations detect a populated
+database and bring it up to the current version safely on first boot. With
+Docker that means copying the old SQLite file into the `app_var` volume, or
+setting the DSN of your external server, and booting. **Back up first** —
+and on MySQL/MariaDB the backup is your only safety net, because DDL there
+isn't transactional and a half-finished migration can't roll itself back.
+
+Coming from the much older **strichliste 1** (a different schema)? That one
+*does* need a one-time conversion with the
+[`app:import` command](/docs/commands/#import-a-strichliste-1-database). It
+**replaces** all current data, so it refuses to run against a non-empty
+database unless you pass `--force` — only convert into a fresh install.
 
 ## Before you rely on it for real money
 
