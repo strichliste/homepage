@@ -61,7 +61,7 @@ and an API for barcode scanners and phone apps.
 ## Architecture
 
 strichliste is **one single application** — one thing to install, one thing
-to update. (For the curious: PHP 8.4+, Symfony 7.4.) That one application
+to update. (For the curious: PHP 8.4+, Symfony 8.1.) That one application
 serves two faces:
 
 * **The web UI** — server-rendered pages designed for a wall-mounted

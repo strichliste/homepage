@@ -15,7 +15,7 @@ What strichliste 3 brings to your club, hackerspace or kiosk:
 * **Works without JavaScript** — every action is a real HTML form, so it
   stays usable on old donated tablets. JavaScript only layers comfort on
   top: snappier navigation, the barcode listener, the idle timer.
-* **Modern stack** — built on PHP 8.4+ and Symfony 7.4.
+* **Modern stack** — built on PHP 8.4+ and Symfony 8.1.
 * **Docker first** — the repository ships a ready-to-run Docker setup;
   install and upgrade are the same single command. The image builds
   multi-arch and runs on a Raspberry Pi 4/5 (arm64).
