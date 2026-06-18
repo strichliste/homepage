@@ -17,8 +17,8 @@ docker compose exec app php bin/console …
 
 | Command | Purpose |
 | --- | --- |
-| `app:import <file>` | Import a strichliste 1 `database.sqlite`. **Wipes the target database first.** |
-| `app:user:status <user> <true\|false>` | Enable/disable an account by name or id. |
+| `app:import <file>` | Import a strichliste 1 `database.sqlite`. **Replaces all data** — refuses a non-empty database without `--force`. |
+| `app:user:status <user> <true\|false>` | Deactivate (`true`) or reactivate (`false`) an account, by name or id. |
 | `app:user:cleanup` | Bulk-disable accounts inactive for longer than an interval. |
 | `app:retire-data` | **Delete** transactions older than an interval — the data-privacy tool. |
 | `app:ldapimport` | Create/update users from an LDAP directory (cron-able). |
@@ -27,14 +27,26 @@ docker compose exec app php bin/console …
 
 ## Import a strichliste 1 database
 
+> **For migrating from strichliste 1 only.** If you are already on
+> strichliste 2 or newer, do **not** use this — point `DATABASE_URL` at
+> your existing database and start the app; the migrations run safely on it
+> (see [Install](/install/#keeping-your-existing-data)).
+
 ```bash
 php bin/console app:import database.sqlite
 ```
 
-**This wipes the target database first** — all existing users, transactions
-*and* articles are deleted — so only run it on a fresh install. It imports
-users and transactions; the product list is entered by hand afterwards.
-After the import the terminal outputs "Import done!".
+**This replaces all data** — every existing user, transaction *and* article
+is deleted before the import. To guard against accidents it **refuses to run
+against a non-empty database unless you pass `--force`**, so only convert
+into a fresh install. It imports users and transactions; the product list is
+entered by hand afterwards. After a successful import the terminal outputs
+"Import done!".
+
+| argument / option | description |
+| --- | --- |
+| `<file>` | strichliste 1 SQLite database to import |
+| `--force` | Required when the target database already holds data (wipes it) |
 
 Importing into Docker — the file must be inside the container:
 
@@ -49,20 +61,22 @@ shell loop over the [API](/docs/api/): `POST /api/user` per member, then
 
 ## User status
 
-Deactivates or activates a user account based on user id or name:
+Deactivates or reactivates a user account by id or name. Note the second
+argument is `disable`, so the sense is inverted: **`true` deactivates** the
+account, `false` brings it back.
 
 ```bash
-php bin/console app:user:status <userId> <active>
+php bin/console app:user:status <userId> <disable>
 ```
 
 | argument | description |
 | --- | --- |
 | userId | username or id |
-| active | true or false to activate or deactivate |
+| disable | `true` deactivates the account, `false` reactivates it |
 
 ## Cleanup accounts
 
-Bulk-disable older unused accounts to clean up your list of stale users:
+Bulk-disable accounts that have been unused for a while:
 
 ```bash
 php bin/console app:user:cleanup --days=3 --months=10 --maxBalance=300 --confirm
