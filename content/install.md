@@ -22,7 +22,8 @@ rollback); this page covers the essentials.
 
 ## Try it in five minutes
 
-With a current Docker (Engine 25+, Compose v2.30+):
+You need **git** and a **running Docker** (Engine 25+, Compose v2.30+ — any
+recent Docker Desktop qualifies):
 
 ```bash
 git clone https://github.com/strichliste/strichliste-backend.git
@@ -39,10 +40,15 @@ timeout yourself:
 docker compose up -d --build --wait --wait-timeout 300
 ```
 
-Open **https://localhost** (accept the one-time certificate warning, or run
-`make tls` to trust the local CA). You get a test setup with the database
-already prepared. Add a user, add an article under *Article List*, buy it —
-that's the whole loop.
+The first `make up` builds the image and downloads dependencies, so it can
+take a few minutes; later starts are quick. Then open **https://localhost**.
+Your browser shows a one-time certificate warning (in Chrome: *Your
+connection is not private* → **Advanced** → **Proceed to localhost**) — that
+is just the self-signed local certificate, expected on localhost. To silence
+it, run `make tls` once to trust the local CA (it asks for your password and
+only affects this machine). You get a test setup with the database already
+prepared. Add a user, add an article under *Article List*, buy it — that's
+the whole loop.
 
 If ports 80/443 are already taken on your machine, set `HTTP_PORT` /
 `HTTPS_PORT` / `HTTP3_PORT` in `.env` and open the HTTPS port directly (e.g.
@@ -76,7 +82,9 @@ on arm64 too (e.g. Pi 4/5 with a 64-bit OS).
    it gets **baked into the image** at build time — that is fine when the
    image is built and run on the same box, but never push such an image to
    a registry; for registry-based deploys pass `APP_SECRET` as a real
-   environment variable instead.
+   environment variable instead. Because it is baked at build time, edit
+   `.env` *before* your first production build — change it later and you
+   must rebuild (`make prod`) for the new value to take effect.
 2. Start it — either the raw command, or `make prod` (the better choice for
    upgrades: it also re-pulls the base images, so FrankenPHP/PHP and Postgres
    security patches arrive — a plain `up --build` reuses the cached base
@@ -115,7 +123,13 @@ the default. To use something else, set `DATABASE_URL` to your database's
 connection string (an SQLite file, or an external MariaDB/MySQL or
 Postgres) and turn the bundled Postgres off by setting `COMPOSE_PROFILES=`
 to empty. The image contains all three drivers, and the container prepares
-the database schema on boot.
+the database schema on boot. For example, single-container SQLite (stored in
+the `app_var` volume — note the **four** slashes for an absolute path):
+
+```dotenv
+DATABASE_URL="sqlite:////app/var/data.db"
+COMPOSE_PROFILES=
+```
 
 **On bare metal**, for example with **mysql/mariadb** on the same host:
 
@@ -157,10 +171,38 @@ php bin/console asset-map:compile
 3. **Configure the database** via environment (or `.env.local`) as shown
    above, then run the migrations.
 4. **Configure the web server**: point the document root at `public/` and
-   route everything through `public/index.php`. Working nginx (plain + SSL)
-   and Apache examples live in the repository's
-   [`examples/`](https://github.com/strichliste/strichliste-backend/tree/master/examples)
-   directory.
+   route every request that isn't a real file through `public/index.php`.
+   For Apache, the repository ships a ready rewrite rule in
+   [`public/.htaccess.example`](https://github.com/strichliste/strichliste-backend/blob/master/public/.htaccess.example)
+   — enable `mod_rewrite` and rename it to `.htaccess`. A minimal nginx
+   server block:
+
+   ```nginx
+   server {
+       listen 80;
+       server_name strichliste.example.com;
+       root /var/www/strichliste/public;
+
+       location / {
+           try_files $uri /index.php$is_args$args;
+       }
+
+       location ~ ^/index\.php(/|$) {
+           # adjust to your PHP-FPM socket or 127.0.0.1:9000
+           fastcgi_pass unix:/run/php/php-fpm.sock;
+           fastcgi_split_path_info ^(.+\.php)(/.*)$;
+           include fastcgi_params;
+           fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+           fastcgi_param DOCUMENT_ROOT $realpath_root;
+       }
+
+       location ~ \.php$ { return 404; }
+   }
+   ```
+
+   This is the standard Symfony layout; the
+   [Symfony web-server docs](https://symfony.com/doc/current/setup/web_server_configuration.html)
+   cover the TLS variant and the full Apache config.
 5. Set `APP_ENV=prod`, `APP_DEBUG=0` and a unique `APP_SECRET` in the
    environment, then warm the cache: `php bin/console cache:clear`.
    Errors land in your PHP-FPM/web-server error log — the app does not
@@ -189,11 +231,27 @@ Coming from the much older **strichliste 1** (a different schema)? That one
 [`app:import` command](/docs/commands/#import-a-strichliste-1-database). It
 **replaces** all current data, so it refuses to run against a non-empty
 database unless you pass `--force` — only convert into a fresh install.
+(strichliste 1 is the original version from before the REST API existed; if
+your current install already serves an `/api`, you are on 2 or newer and
+need no import.)
 
 ## Before you rely on it for real money
 
-Read the
+Set up a nightly backup *before* go-live. With the bundled Postgres it is a
+one-liner you can drop into cron:
+
+```bash
+docker compose exec database pg_dump -U strichliste strichliste > strichliste-$(date +%F).sql
+```
+
+If you use SQLite instead, snapshot it consistently even while running:
+
+```bash
+docker compose exec app php bin/console dbal:run-sql "VACUUM INTO '/app/var/backup.db'"
+docker compose cp app:/app/var/backup.db strichliste-$(date +%F).db
+```
+
+The README's
 [backup, upgrades & rollback section](https://github.com/strichliste/strichliste-backend#backup-upgrades-rollback)
-in the README and set up the nightly backup *before* go-live. That section
-is short, and a tested backup is the difference between "restore from last
-night" and a shoebox full of receipts.
+covers restore and rollback in full. A tested backup is the difference
+between "restore from last night" and a shoebox full of receipts.
