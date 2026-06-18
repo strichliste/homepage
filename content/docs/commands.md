@@ -18,7 +18,7 @@ docker compose exec app php bin/console …
 | Command | Purpose |
 | --- | --- |
 | `app:import <file>` | Import a strichliste 1 `database.sqlite`. **Replaces all data** — refuses a non-empty database without `--force`. |
-| `app:user:status <user> <true\|false>` | Enable/disable an account by name or id. |
+| `app:user:status <user> <true\|false>` | Deactivate (`true`) or reactivate (`false`) an account, by name or id. |
 | `app:user:cleanup` | Bulk-disable accounts inactive for longer than an interval. |
 | `app:retire-data` | **Delete** transactions older than an interval — the data-privacy tool. |
 | `app:ldapimport` | Create/update users from an LDAP directory (cron-able). |
@@ -61,16 +61,18 @@ shell loop over the [API](/docs/api/): `POST /api/user` per member, then
 
 ## User status
 
-Deactivates or activates a user account based on user id or name:
+Deactivates or reactivates a user account by id or name. Note the second
+argument is `disable`, so the sense is inverted: **`true` deactivates** the
+account, `false` brings it back.
 
 ```bash
-php bin/console app:user:status <userId> <active>
+php bin/console app:user:status <userId> <disable>
 ```
 
 | argument | description |
 | --- | --- |
 | userId | username or id |
-| active | true or false to activate or deactivate |
+| disable | `true` deactivates the account, `false` reactivates it |
 
 ## Cleanup accounts
 

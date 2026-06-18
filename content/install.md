@@ -77,7 +77,10 @@ on arm64 too (e.g. Pi 4/5 with a 64-bit OS).
    image is built and run on the same box, but never push such an image to
    a registry; for registry-based deploys pass `APP_SECRET` as a real
    environment variable instead.
-2. Start it:
+2. Start it — either the raw command, or `make prod` (the better choice for
+   upgrades: it also re-pulls the base images, so FrankenPHP/PHP and Postgres
+   security patches arrive — a plain `up --build` reuses the cached base
+   layers):
 
 ```bash
 docker compose -f compose.yaml -f compose.prod.yaml up -d --build --wait

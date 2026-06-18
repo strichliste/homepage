@@ -9,7 +9,7 @@ img = "/img/features/sqlite.png"
 text = "strichliste runs on the database you already have: SQLite for a single kiosk, PostgreSQL or MariaDB for busy installs. Switching is a single setting — use what you like!"
 
 [[feature]]
-title = "REST-API"
+title = "REST API"
 img = "/img/features/rest.png"
 text = "Write your own client for our easy-to-use REST API — with interactive documentation built right into your installation at /api/doc."
 

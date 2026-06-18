@@ -9,9 +9,10 @@ description = "The REST API: endpoints, conventions, examples."
     parent = "Docs"
 +++
 
-The `/api/*` endpoints are **stable** — existing clients keep working
-unchanged. The API is documented as an OpenAPI 3 specification served by
-the application itself:
+The `/api/*` endpoints are **frozen** — the contract keeps the exact shape
+it had before the server-rendered UI shipped, so existing clients keep
+working unchanged. The API is documented as an OpenAPI 3 specification
+served by the application itself:
 
 * **`/api/doc`** — interactive Swagger UI on your own instance (browse
   endpoints, try requests — mind that "Try it out" executes *real*
@@ -37,7 +38,9 @@ the application itself:
   `/api/user/{id}/transaction` and `/api/article` accept
   `?limit=…&offset=…` with a **default limit of 25** — forget `limit` and
   you silently see only 25 rows. `GET /api/user` ignores both and always
-  returns **all** users. The `/search` endpoints accept `limit` only.
+  returns **every enabled (non-disabled) user** (optionally narrowed by
+  `?active=true|false`, which filters by recent activity, not by pagination).
+  The `/search` endpoints accept `limit` only.
 * **No idempotency mechanism**: retrying a timed-out `POST …/transaction`
   books twice. Reconcile via `GET /api/user/{id}/transaction` after network
   errors.
@@ -78,7 +81,7 @@ the repository's
 
 | Resource | Endpoints |
 | --- | --- |
-| Users | `GET/POST /api/user`, `GET/POST /api/user/{id}` (id or exact name), `GET /api/user/search` |
+| Users | `GET /api/user` (all enabled; `?active=true\|false` filters by activity), `POST /api/user`, `GET/POST /api/user/{id}` (id or exact name), `GET /api/user/search` |
 | Transactions | `GET /api/transaction` (global list), `GET/POST /api/user/{id}/transaction`, `GET/DELETE /api/user/{id}/transaction/{tid}` (DELETE = undo/revert) |
 | Articles | `GET/POST /api/article` (filters: `barcode`, `active`, …), `GET/POST /api/article/{id}`, `DELETE /api/article/{id}` (soft delete: deactivates), `GET /api/article/search` |
 | Barcodes / tags | `GET /api/barcode`, `GET /api/tag`, and per article `GET/POST …/barcode`, `GET/DELETE …/barcode/{bid}` (same shape for `…/tag`) |
