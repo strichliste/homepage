@@ -62,9 +62,10 @@
     <div class="row content margin-bottom-20">
         <h1>REST API</h1>
         
-        <p>The <code>/api/*</code> endpoints are <strong>stable</strong> — existing clients keep working
-unchanged. The API is documented as an OpenAPI 3 specification served by
-the application itself:</p>
+        <p>The <code>/api/*</code> endpoints are <strong>frozen</strong> — they keep the exact shape they had
+before the server-rendered UI shipped, so existing clients keep working. The
+API is documented as an OpenAPI 3 specification served by the application
+itself:</p>
 <ul>
 <li><strong><code>/api/doc</code></strong> — interactive Swagger UI on your own instance (browse
 endpoints, try requests — mind that &ldquo;Try it out&rdquo; executes <em>real</em>
@@ -88,7 +89,9 @@ clients switch on:</li>
 <code>/api/user/{id}/transaction</code> and <code>/api/article</code> accept
 <code>?limit=…&amp;offset=…</code> with a <strong>default limit of 25</strong> — forget <code>limit</code> and
 you silently see only 25 rows. <code>GET /api/user</code> ignores both and always
-returns <strong>all</strong> users. The <code>/search</code> endpoints accept <code>limit</code> only.</li>
+returns <strong>every enabled (non-disabled) user</strong> (optionally narrowed by
+<code>?active=true|false</code>, which filters by recent activity, not by pagination).
+The <code>/search</code> endpoints accept <code>limit</code> only.</li>
 <li><strong>No idempotency mechanism</strong>: retrying a timed-out <code>POST …/transaction</code>
 books twice. Reconcile via <code>GET /api/user/{id}/transaction</code> after network
 errors.</li>
@@ -96,10 +99,9 @@ errors.</li>
 <code>GET /api/transaction</code>.</li>
 <li>User routes accept a numeric id <strong>or the exact name</strong>
 (<code>GET /api/user/alice</code>); the transaction routes take numeric ids only.</li>
-<li>There is <strong>no authentication</strong> — the API trusts the network like the
-kiosk trusts the room. CORS is deliberately wide open and there are no
-rate limits. Both are consistent with the trusted-network model — and more
-reasons not to expose it publicly.</li>
+<li>There is <strong>no authentication</strong>. CORS is wide open and there are no rate
+limits — consistent with the trusted-network model, and more reasons not to
+expose it publicly.</li>
 </ul>
 <h2 id="the-two-calls-every-integration-makes">The two calls every integration makes</h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># deposit 1.00 € with a comment</span>
@@ -131,7 +133,7 @@ the repository&rsquo;s
     <tbody>
       <tr>
         <td>Users</td>
-        <td><code>GET/POST /api/user</code>, <code>GET/POST /api/user/{id}</code> (id or exact name), <code>GET /api/user/search</code></td>
+        <td><code>GET /api/user</code> (all enabled; <code>?active=true|false</code> filters by activity), <code>POST /api/user</code>, <code>GET/POST /api/user/{id}</code> (id or exact name), <code>GET /api/user/search</code></td>
       </tr>
       <tr>
         <td>Transactions</td>

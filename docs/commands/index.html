@@ -75,11 +75,11 @@
     <tbody>
       <tr>
         <td><code>app:import &lt;file&gt;</code></td>
-        <td>Import a strichliste 1 <code>database.sqlite</code>. <strong>Wipes the target database first.</strong></td>
+        <td>Import a strichliste 1 <code>database.sqlite</code>. <strong>Replaces all data</strong> — refuses a non-empty database without <code>--force</code>.</td>
       </tr>
       <tr>
         <td><code>app:user:status &lt;user&gt; &lt;true|false&gt;</code></td>
-        <td>Enable/disable an account by name or id.</td>
+        <td>Deactivate (<code>true</code>) or reactivate (<code>false</code>) an account, by name or id.</td>
       </tr>
       <tr>
         <td><code>app:user:cleanup</code></td>
@@ -105,11 +105,39 @@
   </table>
 </div>
 <h2 id="import-a-strichliste-1-database">Import a strichliste 1 database</h2>
+<blockquote>
+<p><strong>For migrating from strichliste 1 only.</strong> If you are already on
+strichliste 2 or newer, do <strong>not</strong> use this — point <code>DATABASE_URL</code> at
+your existing database and start the app; the migrations run safely on it
+(see <a href="/install/#keeping-your-existing-data">Install</a>).</p>
+</blockquote>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php bin/console app:import database.sqlite
-</span></span></code></pre></div><p><strong>This wipes the target database first</strong> — all existing users, transactions
-<em>and</em> articles are deleted — so only run it on a fresh install. It imports
-users and transactions; the product list is entered by hand afterwards.
-After the import the terminal outputs &ldquo;Import done!&rdquo;.</p>
+</span></span></code></pre></div><p><strong>This replaces all data</strong> — every existing user, transaction <em>and</em> article
+is deleted before the import. To guard against accidents it <strong>refuses to run
+against a non-empty database unless you pass <code>--force</code></strong>, so only convert
+into a fresh install. It imports users and transactions; the product list is
+entered by hand afterwards. After a successful import the terminal outputs
+&ldquo;Import done!&rdquo;.</p>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">argument / option</th>
+        <th scope="col">description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>&lt;file&gt;</code></td>
+        <td>strichliste 1 SQLite database to import</td>
+      </tr>
+      <tr>
+        <td><code>--force</code></td>
+        <td>Required when the target database already holds data (wipes it)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <p>Importing into Docker — the file must be inside the container:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose cp database.sqlite app:/tmp/old.sqlite
 </span></span><span style="display:flex;"><span>docker compose <span style="color:#6639ba">exec</span> app php bin/console app:import /tmp/old.sqlite
@@ -117,8 +145,10 @@ After the import the terminal outputs &ldquo;Import done!&rdquo;.</p>
 shell loop over the <a href="/docs/api/">API</a>: <code>POST /api/user</code> per member, then
 <code>POST /api/user/{id}/transaction</code> with the opening balance.</p>
 <h2 id="user-status">User status</h2>
-<p>Deactivates or activates a user account based on user id or name:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php bin/console app:user:status &lt;userId&gt; &lt;active&gt;
+<p>Deactivates or reactivates a user account by id or name. Note the second
+argument is <code>disable</code>, so the sense is inverted: <strong><code>true</code> deactivates</strong> the
+account, <code>false</code> brings it back.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php bin/console app:user:status &lt;userId&gt; &lt;disable&gt;
 </span></span></code></pre></div><div class="table-responsive">
   <table class="table">
     <thead>
@@ -133,14 +163,14 @@ shell loop over the <a href="/docs/api/">API</a>: <code>POST /api/user</code> pe
         <td>username or id</td>
       </tr>
       <tr>
-        <td>active</td>
-        <td>true or false to activate or deactivate</td>
+        <td>disable</td>
+        <td><code>true</code> deactivates the account, <code>false</code> reactivates it</td>
       </tr>
     </tbody>
   </table>
 </div>
 <h2 id="cleanup-accounts">Cleanup accounts</h2>
-<p>Bulk-disable older unused accounts to clean up your list of stale users:</p>
+<p>Bulk-disable accounts that have been unused for a while:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php bin/console app:user:cleanup --days<span style="color:#0550ae">=</span><span style="color:#0550ae">3</span> --months<span style="color:#0550ae">=</span><span style="color:#0550ae">10</span> --maxBalance<span style="color:#0550ae">=</span><span style="color:#0550ae">300</span> --confirm
 </span></span></code></pre></div><div class="table-responsive">
   <table class="table">

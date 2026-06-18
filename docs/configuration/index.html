@@ -62,10 +62,9 @@
     <div class="row content margin-bottom-20">
         <h1>Configuration</h1>
         
-        <p>All application-level behavior is configured in <strong>one file</strong>,
-<code>config/strichliste.yaml</code>, under the <code>parameters.strichliste</code> key. The same
-values drive the web UI <strong>and</strong> are exposed verbatim to API clients via
-<code>GET /api/settings</code>.</p>
+        <p>All behavior is configured in <strong>one file</strong>, <code>config/strichliste.yaml</code>, under
+the <code>parameters.strichliste</code> key. The same values drive the web UI and are
+exposed to API clients via <code>GET /api/settings</code>.</p>
 <p>Applying changes:</p>
 <ul>
 <li><strong>Bare metal</strong>: edit the file, then <code>php bin/console cache:clear</code>.</li>

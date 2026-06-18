@@ -62,92 +62,108 @@
     <div class="row content margin-bottom-20">
         <h1>Install strichliste</h1>
         
-        <p>This page describes installing <strong>strichliste 3</strong>. The short version:
-use Docker, set two values in <code>.env</code>, run one command. The
+        <p>Installing <strong>strichliste 3</strong>, short version: use Docker, set two values in
+<code>.env</code>, run one command. The
 <a href="https://github.com/strichliste/strichliste-backend#readme">README</a> is the
-full operations manual (TLS options, every knob, backup &amp; restore, upgrades,
+full operations manual (TLS, every setting, backup &amp; restore, upgrades,
 rollback); this page covers the essentials.</p>
 <blockquote>
-<p><strong>Security first:</strong> strichliste has no passwords anywhere — by design. It
-trusts the network like the kiosk trusts the room. Keep it reachable only
-inside your own network (LAN/VPN), or put a password-protecting proxy
-(HTTP basic auth) in front.
+<p><strong>Security first:</strong> strichliste has no passwords anywhere — by design.
+Keep it reachable only inside your own network (LAN/VPN), or put a
+password-protecting proxy (HTTP basic auth) in front.
 <strong>Do not port-forward strichliste to the internet.</strong></p>
 </blockquote>
 <h2 id="try-it-in-five-minutes">Try it in five minutes</h2>
-<p>With a current Docker (Engine 25+, Compose v2.30+):</p>
+<p>You need <strong>git</strong> and a <strong>running Docker</strong> (Engine 25+, Compose v2.30+ — any
+recent Docker Desktop qualifies):</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/strichliste/strichliste-backend.git
 </span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> strichliste-backend
-</span></span><span style="display:flex;"><span>docker compose up -d --build --wait
-</span></span></code></pre></div><p>Open <strong>https://localhost</strong> (accept the one-time certificate warning, or run
-<code>make tls</code> to trust the local CA). You get a test setup with the database
-already prepared. Add a user, add an article under <em>Article List</em>, buy it —
-that&rsquo;s the whole loop.</p>
+</span></span><span style="display:flex;"><span>make up
+</span></span></code></pre></div><p><code>make up</code> is <code>docker compose up -d --build --wait</code> with a longer first-boot
+timeout — the initial build downloads all dependencies and can outlast
+Docker&rsquo;s default wait. No <code>make</code>? Run it directly:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up -d --build --wait --wait-timeout <span style="color:#0550ae">300</span>
+</span></span></code></pre></div><p>The first run takes a few minutes; later starts are quick. Then open
+<strong>https://localhost</strong>. The browser shows a one-time certificate warning (in
+Chrome: <em>Your connection is not private</em> → <strong>Advanced</strong> → <strong>Proceed to
+localhost</strong>) — that&rsquo;s the self-signed local certificate, expected on
+localhost. To silence it, run <code>make tls</code> once to trust the local CA (it asks
+for your password and only affects this machine). The database comes ready:
+add a user, add an article under <em>Article List</em>, buy it — that&rsquo;s the whole
+loop.</p>
+<p>If ports 80/443 are already taken, set <code>HTTP_PORT</code> / <code>HTTPS_PORT</code> /
+<code>HTTP3_PORT</code> in <code>.env</code> and open the HTTPS port directly (e.g.
+<code>https://localhost:8443</code>).</p>
 <p>To wipe the dev data and start fresh: <code>docker compose down -v</code>, then <code>up</code>
 again.</p>
 <h2 id="production-with-docker-recommended">Production with Docker (recommended)</h2>
-<p>The repository ships a ready-to-run production container. Under the hood it
-uses FrankenPHP (a web server with PHP built in) and keeps the app loaded
-between requests — so it stays fast even on a Raspberry Pi. The image works
-on arm64 too (e.g. Pi 4/5 with a 64-bit OS).</p>
+<p>The repository ships a ready-to-run production container. It uses FrankenPHP
+(a web server with PHP built in) and keeps the app loaded between requests, so
+it stays fast even on a Raspberry Pi. It runs on arm64 too (Pi 4/5 with a
+64-bit OS).</p>
 <ol>
 <li>
 <p>Edit <code>.env</code>:</p>
 <ul>
 <li>set a unique <code>APP_SECRET</code> (<code>openssl rand -hex 32</code>),</li>
-<li>uncomment <code>COMPOSE_FILE=compose.yaml:compose.prod.yaml</code>, so that
-running plain <code>docker compose up</code> later doesn&rsquo;t accidentally start the
-development version,</li>
+<li>uncomment <code>COMPOSE_FILE=compose.yaml:compose.prod.yaml</code>, so a plain
+<code>docker compose up</code> later doesn&rsquo;t start the development version,</li>
 <li>optionally set <code>SERVER_NAME</code>. Three choices:
 <ul>
 <li><code>localhost</code> (the default) — a self-signed certificate; browsers show
 a one-time warning.</li>
 <li><code>&quot;:80&quot;</code> — plain HTTP, for when your own proxy handles HTTPS.</li>
-<li>a real hostname — automatic Let&rsquo;s Encrypt certificates. This
-requires the box to be reachable from the internet, which goes
-against the LAN-only advice above, so most installs won&rsquo;t want it.</li>
+<li>a real hostname — automatic Let&rsquo;s Encrypt certificates. Needs the box
+reachable from the internet, which goes against the LAN-only advice
+above, so most installs won&rsquo;t want it.</li>
 </ul>
 </li>
 </ul>
-<p>Two things to know about <code>.env</code>: it is <strong>git-tracked</strong>, so your local
-edits must survive <code>git pull</code> (watch for conflicts when upgrading). And
-it gets <strong>baked into the image</strong> at build time — that is fine when the
-image is built and run on the same box, but never push such an image to
-a registry; for registry-based deploys pass <code>APP_SECRET</code> as a real
-environment variable instead.</p>
+<p>Two things about <code>.env</code>: it is <strong>git-tracked</strong>, so your edits must survive
+<code>git pull</code> (watch for conflicts when upgrading). And it is <strong>baked into
+the image</strong> at build time — fine when image and host are the same box, but
+never push such an image to a registry; for registry deploys pass
+<code>APP_SECRET</code> as a real environment variable instead. Because it&rsquo;s baked at
+build time, edit <code>.env</code> <em>before</em> your first production build — change it
+later and you must rebuild (<code>make prod</code>) for the new value to take effect.</p>
 </li>
 <li>
-<p>Start it:</p>
+<p>Start it with the raw command, or <code>make prod</code> (better for upgrades: it
+also re-pulls the base images, so FrankenPHP/PHP and Postgres security
+patches arrive — a plain <code>up --build</code> reuses the cached base layers):</p>
 </li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose -f compose.yaml -f compose.prod.yaml up -d --build --wait
 </span></span><span style="display:flex;"><span><span style="color:#57606a"># or: make prod</span>
 </span></span></code></pre></div><p>The container waits for the database and applies migrations on every boot —
-first install and upgrades are the same command (<code>git pull &amp;&amp; make prod</code>).
+first install and upgrade are the same command (<code>git pull &amp;&amp; make prod</code>).
 Health checks, restart policy and log rotation are preconfigured.</p>
-<p>Note that there is <strong>no prebuilt image on a registry</strong> — NAS/Portainer
-users build with <code>docker build --target frankenphp_prod</code> and push to their
-own registry (mind the baked-<code>.env</code> warning above).</p>
-<p>When something breaks, the page to open is <code>docker compose logs app</code> —
-access log, PHP errors and the entrypoint&rsquo;s progress all go to container
-output. For external uptime monitoring, probe <code>GET /api/settings</code> (cheap,
-unauthenticated, returns 200 + JSON).</p>
+<p>There is <strong>no prebuilt registry image</strong> — NAS/Portainer users build with
+<code>docker build --target frankenphp_prod</code> and push to their own registry (mind
+the baked-<code>.env</code> warning above).</p>
+<p>When something breaks, check <code>docker compose logs app</code> — access log, PHP
+errors and the entrypoint&rsquo;s progress all go to container output. For uptime
+monitoring, probe <code>GET /api/settings</code> (cheap, unauthenticated, returns 200 +
+JSON).</p>
 <h2 id="choosing-a-database">Choosing a database</h2>
 <p><strong>SQLite</strong>, <strong>MySQL/MariaDB</strong> and <strong>PostgreSQL</strong> are all supported — the
-database is a connection-string choice, not a code choice:</p>
+database is a connection-string choice, not a code change:</p>
 <ul>
-<li><strong>SQLite</strong> — perfect for a single kiosk in a small space; zero
+<li><strong>SQLite</strong> — ideal for a single kiosk in a small space: zero
 administration, one file to back up.</li>
-<li><strong>PostgreSQL / MariaDB</strong> — pick one of these when several devices write at
-once or the instance is long-lived and busy.</li>
+<li><strong>PostgreSQL / MariaDB</strong> — pick one when several devices write at once, or
+the instance is long-lived and busy.</li>
 </ul>
-<p><strong>With Docker</strong> you choose the database in <code>.env</code>. The bundled Postgres is
-the default. To use something else, set <code>DATABASE_URL</code> to your database&rsquo;s
-connection string (an SQLite file, or an external MariaDB/MySQL or
-Postgres) and turn the bundled Postgres off by setting <code>COMPOSE_PROFILES=</code>
-to empty. The image contains all three drivers, and the container prepares
-the database schema on boot.</p>
-<p><strong>On bare metal</strong>, for example with <strong>mysql/mariadb</strong> on the same host:</p>
+<p><strong>With Docker</strong> you choose the database in <code>.env</code>. The bundled Postgres is the
+default. For something else, set <code>DATABASE_URL</code> to your connection string (an
+SQLite file, or an external MariaDB/MySQL or Postgres) and disable the bundled
+Postgres with an empty <code>COMPOSE_PROFILES=</code>. The image carries all three
+drivers and prepares the schema on boot. Single-container SQLite, for example
+(stored in the <code>app_var</code> volume — note the <strong>four</strong> slashes for an absolute
+path):</p>
+<pre tabindex="0"><code class="language-dotenv" data-lang="dotenv">DATABASE_URL=&#34;sqlite:////app/var/data.db&#34;
+COMPOSE_PROFILES=
+</code></pre><p><strong>On bare metal</strong>, for example with <strong>mysql/mariadb</strong> on the same host:</p>
 <pre tabindex="0"><code>DATABASE_URL=&#34;mysql://strichliste:32YourPassWord42@localhost/strichliste?serverVersion=10.11.2-MariaDB&#34;
 </code></pre><p>Create a database and a separate user:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#cf222e">CREATE</span><span style="color:#fff"> </span><span style="color:#cf222e">DATABASE</span><span style="color:#fff"> </span>strichliste<span style="color:#1f2328">;</span><span style="color:#fff">
@@ -169,35 +185,81 @@ ready-built package will follow):</li>
 </span></span><span style="display:flex;"><span>php bin/console importmap:install
 </span></span><span style="display:flex;"><span>php bin/console asset-map:compile
 </span></span></code></pre></div><ol start="3">
-<li><strong>Configure the database</strong> via environment (or <code>.env.local</code>) as shown
-above, then run the migrations.</li>
-<li><strong>Configure the web server</strong>: point the document root at <code>public/</code> and
-route everything through <code>public/index.php</code>. Working nginx (plain + SSL)
-and Apache examples live in the repository&rsquo;s
-<a href="https://github.com/strichliste/strichliste-backend/tree/master/examples"><code>examples/</code></a>
-directory.</li>
-<li>Set <code>APP_ENV=prod</code>, <code>APP_DEBUG=0</code> and a unique <code>APP_SECRET</code> in the
+<li>
+<p><strong>Configure the database</strong> via environment (or <code>.env.local</code>) as shown
+above, then run the migrations.</p>
+</li>
+<li>
+<p><strong>Configure the web server</strong>: point the document root at <code>public/</code> and
+route every request that isn&rsquo;t a real file through <code>public/index.php</code>.
+For Apache, the repository ships a rewrite rule in
+<a href="https://github.com/strichliste/strichliste-backend/blob/master/public/.htaccess.example"><code>public/.htaccess.example</code></a>
+— enable <code>mod_rewrite</code> and rename it to <code>.htaccess</code>. A minimal nginx
+server block:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#cf222e">server</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">listen</span> <span style="color:#0550ae">80</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">server_name</span> <span style="color:#0a3069">strichliste.example.com</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">root</span> <span style="color:#0a3069">/var/www/strichliste/public</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">location</span> <span style="color:#0a3069">/</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">try_files</span> <span style="color:#953800">$uri</span> <span style="color:#0a3069">/index.php</span><span style="color:#953800">$is_args$args</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">location</span> <span style="color:#1f2328">~</span> <span style="color:#0a3069">^/index\.php(/|$)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#57606a"># adjust to your PHP-FPM socket or 127.0.0.1:9000
+</span></span></span><span style="display:flex;"><span>        <span style="color:#cf222e">fastcgi_pass</span> <span style="color:#0a3069">unix:/run/php/php-fpm.sock</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">fastcgi_split_path_info</span> <span style="color:#0a3069">^(.+\.php)(/.*)</span>$<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">include</span> <span style="color:#0a3069">fastcgi_params</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">fastcgi_param</span> <span style="color:#0a3069">SCRIPT_FILENAME</span> <span style="color:#953800">$realpath_root$fastcgi_script_name</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">fastcgi_param</span> <span style="color:#0a3069">DOCUMENT_ROOT</span> <span style="color:#953800">$realpath_root</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">location</span> <span style="color:#1f2328">~</span> <span style="color:#0a3069">\.php$</span> <span style="color:#1f2328">{</span> <span style="color:#cf222e">return</span> <span style="color:#0550ae">404</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>This is the standard Symfony layout; the
+<a href="https://symfony.com/doc/current/setup/web_server_configuration.html">Symfony web-server docs</a>
+cover the TLS variant and the full Apache config.</p>
+</li>
+<li>
+<p>Set <code>APP_ENV=prod</code>, <code>APP_DEBUG=0</code> and a unique <code>APP_SECRET</code> in the
 environment, then warm the cache: <code>php bin/console cache:clear</code>.
-Errors land in your PHP-FPM/web-server error log — the app does not
-write log files of its own.</li>
+Errors land in your PHP-FPM/web-server error log — the app does not write
+log files of its own.</p>
+</li>
 </ol>
 <h2 id="common-pitfalls">Common pitfalls</h2>
 <ul>
-<li>Check your folder owner/group if you&rsquo;re using SQLite as your database!
-Otherwise strichliste can&rsquo;t write to it.</li>
+<li>Using SQLite? Check the folder owner/group — otherwise strichliste can&rsquo;t
+write to it.</li>
 <li>JSON API requests need a <code>Content-Type: application/json</code> header — without
 it the body is silently ignored.</li>
 </ul>
-<h2 id="importing-your-old-data">Importing your old data</h2>
-<p>To import a <strong>strichliste 1</strong> <code>database.sqlite</code>, see the
-<a href="/docs/commands/#import-a-strichliste-1-database"><code>app:import</code> command</a>.
-<strong>It wipes the target database first</strong> — only run it on a fresh install.</p>
+<h2 id="keeping-your-existing-data">Keeping your existing data</h2>
+<p><strong>Already running strichliste 2 or newer?</strong> There is <strong>no import step</strong> —
+point <code>DATABASE_URL</code> at your existing database (SQLite file, MariaDB/MySQL or
+Postgres) and start the app. The migrations detect a populated database and
+bring it up to the current version safely on first boot. With Docker, copy the
+old SQLite file into the <code>app_var</code> volume (or set your external DSN) and boot.
+<strong>Back up first</strong> — on MySQL/MariaDB the backup is your only safety net,
+because DDL there isn&rsquo;t transactional and a half-finished migration can&rsquo;t roll
+itself back.</p>
+<p>Coming from the much older <strong>strichliste 1</strong> (a different schema)? That needs
+a one-time conversion with the
+<a href="/docs/commands/#import-a-strichliste-1-database"><code>app:import</code> command</a>. It
+<strong>replaces</strong> all current data, so it refuses to run against a non-empty
+database unless you pass <code>--force</code> — only convert into a fresh install.
+(strichliste 1 predates the REST API; if your install already serves an
+<code>/api</code>, you are on 2 or newer and need no import.)</p>
 <h2 id="before-you-rely-on-it-for-real-money">Before you rely on it for real money</h2>
-<p>Read the
+<p>Set up a nightly backup <em>before</em> go-live. With the bundled Postgres it is a
+one-liner for cron:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose <span style="color:#6639ba">exec</span> database pg_dump -U strichliste strichliste &gt; strichliste-<span style="color:#cf222e">$(</span>date +%F<span style="color:#cf222e">)</span>.sql
+</span></span></code></pre></div><p>For SQLite, snapshot it consistently even while running:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose <span style="color:#6639ba">exec</span> app php bin/console dbal:run-sql <span style="color:#0a3069">&#34;VACUUM INTO &#39;/app/var/backup.db&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>docker compose cp app:/app/var/backup.db strichliste-<span style="color:#cf222e">$(</span>date +%F<span style="color:#cf222e">)</span>.db
+</span></span></code></pre></div><p>The README&rsquo;s
 <a href="https://github.com/strichliste/strichliste-backend#backup-upgrades-rollback">backup, upgrades &amp; rollback section</a>
-in the README and set up the nightly backup <em>before</em> go-live. That section
-is short, and a tested backup is the difference between &ldquo;restore from last
-night&rdquo; and a shoebox full of receipts.</p>
+covers restore and rollback in full. Test your backup before you need it.</p>
 
     </div>
 </div>

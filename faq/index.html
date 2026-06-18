@@ -63,41 +63,44 @@
         <h1>Frequently Asked Questions</h1>
         
         <h2 id="documentation">Documentation</h2>
-<p>The reference documentation lives on this site now:
+<p>Reference documentation lives on this site:
 <a href="/docs/configuration/">configuration</a>, <a href="/docs/commands/">console commands</a>,
 the <a href="/docs/api/">REST API</a> and a guide for
-<a href="/docs/screen/">the screen by the fridge</a>. The interactive API
-documentation (Swagger UI) is built into your own strichliste server at
-<code>/api/doc</code>.</p>
+<a href="/docs/screen/">the screen by the fridge</a>. The interactive API documentation
+(Swagger UI) is built into your own strichliste server at <code>/api/doc</code>.</p>
 <h2 id="is-there-a-login-or-admin-role">Is there a login or admin role?</h2>
-<p>No — by design. strichliste is a digital tally sheet, not a banking
-product. Anyone standing at the kiosk can book on any account, just like
-anyone could make a pencil mark on paper. So: put it on a trusted network
-only.</p>
+<p>No — by design. strichliste is a digital tally sheet, not a banking product.
+Anyone at the kiosk can book on any account, just like anyone could make a
+pencil mark on paper. So keep it on a trusted network only.</p>
 <h2 id="can-i-make-it-reachable-from-the-internet">Can I make it reachable from the internet?</h2>
-<p>Please don&rsquo;t. Nothing in strichliste has password protection — neither the
-pages nor the API. Keep strichliste inside your own network (LAN/VPN), or
-put a password-protecting proxy in front. See <a href="/install/">Install</a> for
-details.</p>
+<p>Don&rsquo;t. Nothing in strichliste is password-protected — not the pages, not the
+API. Keep it inside your own network (LAN/VPN), or put a password-protecting
+proxy in front. See <a href="/install/">Install</a> for details.</p>
 <h2 id="does-the-paypal-feature-verify-payments">Does the PayPal feature verify payments?</h2>
-<p>No. It is a payment <em>link</em>, not a verified payment integration: the account
-is credited when the member returns from PayPal, but strichliste cannot
-verify the payment really completed. Reconcile your PayPal account against
-the books — the same way you compare the cash box against the metrics page.</p>
+<p>No. It&rsquo;s a payment <em>link</em>, not a verified payment integration: the account is
+credited when the member returns from PayPal, but strichliste cannot confirm
+the payment completed. Reconcile your PayPal account against the books, the
+same way you compare the cash box against the metrics page.</p>
 <h2 id="what-about-my-members-data-gdpr">What about my members&rsquo; data (GDPR)?</h2>
-<p>strichliste stores names, optional e-mail addresses, and a complete log of
-who booked what and when — visible to everyone at the kiosk. That is
-personal data: tell your members, mention it in your privacy notice, and
-decide a retention period. The
-<a href="/docs/commands/#retire-data"><code>app:retire-data</code> command</a> deletes
-transactions older than a chosen interval — but check your bookkeeping
+<p>strichliste stores names, optional e-mail addresses, and a complete log of who
+booked what and when — visible to everyone at the kiosk. That is personal
+data: tell your members, mention it in your privacy notice, and decide a
+retention period. The <a href="/docs/commands/#retire-data"><code>app:retire-data</code> command</a>
+deletes transactions older than a chosen interval — but check your bookkeeping
 retention duties before deleting financial records.</p>
+<h2 id="i-already-run-strichliste--do-i-need-to-import-anything-to-upgrade">I already run strichliste — do I need to import anything to upgrade?</h2>
+<p>No. From strichliste 2 onwards there is no import step: point <code>DATABASE_URL</code>
+at your existing database (SQLite, MariaDB/MySQL or Postgres) and start the
+app — the migrations bring it up to date safely on first boot. Back up first.
+See <a href="/install/#keeping-your-existing-data">Install</a>.</p>
 <h2 id="how-do-i-import-my-old-strichliste-1-data">How do I import my old strichliste 1 data?</h2>
-<p>With the <a href="/docs/commands/#import-a-strichliste-1-database"><code>app:import</code> command</a>.
-Mind that it wipes the target database first.</p>
+<p>The much older strichliste 1 used a different schema, so it needs a one-time
+conversion with the
+<a href="/docs/commands/#import-a-strichliste-1-database"><code>app:import</code> command</a>. It
+replaces all data and refuses to run against a non-empty database without
+<code>--force</code>, so only run it on a fresh install.</p>
 <h2 id="how-to-get-in-touch">How to get in touch?</h2>
-<p>If you have any questions which are not answered by the documentation,
-please open an issue on the
+<p>Question the documentation doesn&rsquo;t answer? Open an issue on the
 <a href="https://github.com/strichliste/strichliste-backend/issues">GitHub issue tracker</a>.</p>
 
     </div>

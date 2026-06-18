@@ -62,37 +62,33 @@
     <div class="row content margin-bottom-20">
         <h1>What is this project about?</h1>
         
-        <p><em>strichliste</em> ([ʃtʀɪçˈlɪstə], the German word for <em>tally sheet</em>) replaces the
-paper tally sheet next to the fridge in a hackerspace, club room or small
-office. Members pick their name on a shared screen, tap what they took (a
-drink, a snack) or how much money they put into the cash box, and strichliste
-keeps everyone&rsquo;s balance.</p>
-<p>It is built around the same trust a paper list has — <strong>there are no logins,
-passwords or user roles</strong>. Anyone standing at the kiosk can book on any
-account, just like anyone could make a pencil mark on paper. What you gain
-over paper is arithmetic that is always correct, an undo button, statistics,
-and an API for barcode scanners and phone apps.</p>
+        <p><em>strichliste</em> ([ʃtʀɪçˈlɪstə], German for <em>tally sheet</em>) replaces the paper
+list next to the fridge in a hackerspace, club room or small office. Members
+pick their name on a shared screen, tap what they took or how much money they
+put in the cash box, and strichliste tracks everyone&rsquo;s balance.</p>
+<p>It runs on the same trust as a paper list: <strong>no logins, passwords or roles</strong>.
+Anyone at the kiosk can book on any account, just like anyone could make a
+pencil mark on paper. Over paper you gain correct arithmetic, an undo button,
+statistics, and an API for barcode scanners and phone apps.</p>
 <p><img src="/img/screenshots/user-list.png" alt="The user list — what the screen by the fridge shows by default" width="1280" height="800" loading="lazy" decoding="async" class="img-fluid border rounded"></p>
 <h2 id="feature-tour">Feature tour</h2>
 <ul>
-<li><strong>User accounts</strong> — anyone can add themselves at the kiosk with just a name
-(optionally an e-mail). Users who haven&rsquo;t booked anything for a while are
-tucked away on an &ldquo;inactive&rdquo; tab and reappear on their next booking.</li>
-<li><strong>Deposit / dispense</strong> — put money in or take money out, via configurable
-one-tap amount buttons or a free amount field. Balances may go negative
-down to a configurable limit, so &ldquo;I&rsquo;ll pay next week&rdquo; works — but only up
-to the boundary you set.</li>
-<li><strong>Articles with barcodes</strong> — maintain a product list (&ldquo;Club-Mate, 1.50 €&rdquo;)
-and buy with one tap. A USB barcode scanner works on a user&rsquo;s page without
-drivers or configuration.</li>
-<li><strong>Undo</strong> — every transaction shows an undo button for a configurable grace
-period, so a slipped finger is not a treasury incident.</li>
+<li><strong>User accounts</strong> — anyone can add themselves with just a name (optionally
+an e-mail). Users inactive for a while move to an &ldquo;inactive&rdquo; tab and
+reappear on their next booking.</li>
+<li><strong>Deposit / dispense</strong> — put money in or take it out, via configurable
+one-tap buttons or a free amount field. Balances may go negative down to a
+limit you set.</li>
+<li><strong>Articles with barcodes</strong> — keep a product list (&ldquo;Club-Mate, 1.50 €&rdquo;) and
+buy with one tap. A USB barcode scanner works on a user&rsquo;s page without
+drivers or setup.</li>
+<li><strong>Undo</strong> — every transaction has an undo button for a configurable grace
+period.</li>
 <li><strong>Transfers and split invoice</strong> — send money to another account with an
-optional comment, or split one group order across any set of members in
-one step.</li>
-<li><strong>Statistics</strong> — a metrics page for the whole system (sum of all balances
-for cash-box reconciliation, transaction volume, top articles) and a
-personal metrics page per user.</li>
+optional comment, or split one order across several members in one step.</li>
+<li><strong>Statistics</strong> — a system metrics page (sum of all balances for cash-box
+reconciliation, transaction volume, top articles) and a personal metrics
+page per user.</li>
 <li><strong>Search</strong> — find users and articles from the header on every page.</li>
 <li><strong>PayPal top-up</strong> <em>(optional)</em> — users can settle their balance via
 paypal.me-style payment links, with a configurable percentage fee passed on
@@ -100,40 +96,35 @@ to the payer.</li>
 <li><strong>Touch-friendly UI</strong> — touch targets sized for fingers, a dark theme that
 follows the device&rsquo;s dark-mode preference, a booking sound, and an idle
 timer that returns the screen to the user list.</li>
-<li><strong>Localization</strong> — the interface ships in English and German and follows
-the configured currency everywhere.</li>
-<li><strong>REST API + OpenAPI docs</strong> — everything above is also scriptable; see the
+<li><strong>Localization</strong> — English and German, with the configured currency used
+everywhere.</li>
+<li><strong>REST API + OpenAPI docs</strong> — everything above is scriptable; see the
 <a href="/docs/api/">API documentation</a>.</li>
 </ul>
 <p><img src="/img/screenshots/user-buy.png" alt="A user&rsquo;s page with the buy tab open" width="1280" height="800" loading="lazy" decoding="async" class="img-fluid border rounded"></p>
 <p><img src="/img/screenshots/metrics.png" alt="The metrics page: sum of all balances, transaction volume and top articles" width="1280" height="800" loading="lazy" decoding="async" class="img-fluid border rounded"></p>
 <h2 id="architecture">Architecture</h2>
-<p>strichliste is <strong>one single application</strong> — one thing to install, one thing
-to update. (For the curious: PHP 8.4+, Symfony 7.4.) That one application
-serves two faces:</p>
+<p>strichliste is <strong>one application</strong> — one thing to install, one thing to
+update (PHP 8.4+, Symfony 8.1). It serves two faces:</p>
 <ul>
-<li><strong>The web UI</strong> — server-rendered pages designed for a wall-mounted
-touchscreen.
+<li><strong>The web UI</strong> — server-rendered pages for a wall-mounted touchscreen.
 It is <strong>fully operable without JavaScript</strong> — every action is a real HTML
-form, so it stays usable on old donated tablets. JavaScript only layers
-comfort on top: snappier navigation, the barcode listener, the idle timer.</li>
+form, so old donated tablets still work. JavaScript only adds comfort:
+snappier navigation, the barcode listener, the idle timer.</li>
 <li><strong>The REST API</strong> at <code>/api/*</code> for third-party clients (Android apps, DIY
-hardware, space-automation scripts). The API is <strong>stable</strong>, so existing
-integrations keep working.</li>
+hardware, automation scripts). It is <strong>stable</strong>, so existing integrations
+keep working.</li>
 </ul>
-<p>strichliste works with several databases, and switching is a one-line
-setting: <strong>SQLite</strong> is a fine default for a single kiosk in a small space,
-<strong>PostgreSQL or MariaDB/MySQL</strong> are the better pick when several devices
-write at once. Everything monetary is an integer number of cents — there is
-no floating-point money anywhere.</p>
+<p>Switching databases is a one-line setting: <strong>SQLite</strong> for a single kiosk in a
+small space, <strong>PostgreSQL or MariaDB/MySQL</strong> when several devices write at
+once. All money is integer cents — no floating-point anywhere.</p>
 <p>Development happens in the
 <a href="https://github.com/strichliste/strichliste-backend">strichliste-backend</a>
 repository.</p>
 <h2 id="demo">Demo</h2>
-<p>That&rsquo;s what you&rsquo;re here for, right? A public demo runs at
-<a href="https://demo.strichliste.org/">demo.strichliste.org</a>.</p>
+<p>A public demo runs at <a href="https://demo.strichliste.org/">demo.strichliste.org</a>.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
-<p>In case of problems, please file an issue on our
+<p>Found a problem? File an issue on the
 <a href="https://github.com/strichliste/strichliste-backend/issues">GitHub issue tracker</a>.</p>
 
     </div>
