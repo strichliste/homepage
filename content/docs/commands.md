@@ -76,7 +76,7 @@ php bin/console app:user:status <userId> <disable>
 
 ## Cleanup accounts
 
-Bulk-disable older unused accounts to clean up your list of stale users:
+Bulk-disable accounts that have been unused for a while:
 
 ```bash
 php bin/console app:user:cleanup --days=3 --months=10 --maxBalance=300 --confirm

@@ -9,10 +9,10 @@ description = "The REST API: endpoints, conventions, examples."
     parent = "Docs"
 +++
 
-The `/api/*` endpoints are **frozen** — the contract keeps the exact shape
-it had before the server-rendered UI shipped, so existing clients keep
-working unchanged. The API is documented as an OpenAPI 3 specification
-served by the application itself:
+The `/api/*` endpoints are **frozen** — they keep the exact shape they had
+before the server-rendered UI shipped, so existing clients keep working. The
+API is documented as an OpenAPI 3 specification served by the application
+itself:
 
 * **`/api/doc`** — interactive Swagger UI on your own instance (browse
   endpoints, try requests — mind that "Try it out" executes *real*
@@ -48,10 +48,9 @@ served by the application itself:
   `GET /api/transaction`.
 * User routes accept a numeric id **or the exact name**
   (`GET /api/user/alice`); the transaction routes take numeric ids only.
-* There is **no authentication** — the API trusts the network like the
-  kiosk trusts the room. CORS is deliberately wide open and there are no
-  rate limits. Both are consistent with the trusted-network model — and more
-  reasons not to expose it publicly.
+* There is **no authentication**. CORS is wide open and there are no rate
+  limits — consistent with the trusted-network model, and more reasons not to
+  expose it publicly.
 
 ## The two calls every integration makes
 

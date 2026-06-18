@@ -45,4 +45,4 @@ disableKinds = ["taxonomy", "term"]
 
 [params]
   logo = "/img/strichliste-logo.png"
-  description = "strichliste is the digital tally sheet for hackerspaces, club rooms and small offices. It makes managing your kiosk a breeze."
+  description = "strichliste is the digital tally sheet for hackerspaces, club rooms and small offices."

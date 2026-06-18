@@ -9,10 +9,9 @@ description = "Every setting in config/strichliste.yaml, with defaults."
     parent = "Docs"
 +++
 
-All application-level behavior is configured in **one file**,
-`config/strichliste.yaml`, under the `parameters.strichliste` key. The same
-values drive the web UI **and** are exposed verbatim to API clients via
-`GET /api/settings`.
+All behavior is configured in **one file**, `config/strichliste.yaml`, under
+the `parameters.strichliste` key. The same values drive the web UI and are
+exposed to API clients via `GET /api/settings`.
 
 Applying changes:
 

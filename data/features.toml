@@ -1,19 +1,19 @@
 [[feature]]
 title = "Statistics"
 img = "/img/features/statistics.png"
-text = "Stay on top of your organization's finances: the metrics page shows the sum of all balances, transaction volume and top articles — and every user gets personal statistics."
+text = "The metrics page shows the sum of all balances, transaction volume and top articles. Every user gets personal statistics too."
 
 [[feature]]
 title = "Database agnostic"
 img = "/img/features/sqlite.png"
-text = "strichliste runs on the database you already have: SQLite for a single kiosk, PostgreSQL or MariaDB for busy installs. Switching is a single setting — use what you like!"
+text = "Runs on the database you already have: SQLite for a single kiosk, PostgreSQL or MariaDB for busy installs. Switching is one setting."
 
 [[feature]]
 title = "REST API"
 img = "/img/features/rest.png"
-text = "Write your own client for our easy-to-use REST API — with interactive documentation built right into your installation at /api/doc."
+text = "Write your own client against the REST API. Interactive documentation is built into your installation at /api/doc."
 
 [[feature]]
 title = "Web-based"
-text = "Being a web application, strichliste can be accessed on any device that runs a web browser — and the UI works even with JavaScript disabled."
+text = "Runs on any device with a web browser, and works even with JavaScript disabled."
 img = "/img/features/web-based.png"
