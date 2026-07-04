@@ -38,6 +38,12 @@ const isAncestor = (href: string) =>
     />
 
     <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
+
+    <script is:inline>
+      // Marker for progressive enhancement: the burger menu only collapses
+      // the nav when scripting is available; without JS the nav stays open.
+      document.documentElement.classList.add('js');
+    </script>
   </head>
   <body>
     <a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a>
@@ -45,8 +51,12 @@ const isAncestor = (href: string) =>
       <a class="logo" href="/">
         <Image src={logo} alt="strichliste — home" loading="eager" />
       </a>
-      <nav aria-label="Main">
-        <ul class="nav" role="list">
+      <nav aria-label="Main" class="site-nav">
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-menu">
+          <span class="nav-toggle-icon" aria-hidden="true"></span>
+          Menu
+        </button>
+        <ul class="nav" id="site-menu" role="list">
           {
             NAV_ITEMS.map((item) => (
               <li class:list={{ active: isCurrent(item.href) || isAncestor(item.href) }}>
@@ -67,5 +77,22 @@ const isAncestor = (href: string) =>
     <main id="main" tabindex="-1">
       <slot />
     </main>
+
+    <script>
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = toggle?.closest('nav');
+      if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!open));
+        });
+        nav.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+            toggle.setAttribute('aria-expanded', 'false');
+            (toggle as HTMLElement).focus();
+          }
+        });
+      }
+    </script>
   </body>
 </html>

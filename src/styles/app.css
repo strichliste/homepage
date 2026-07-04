@@ -7,7 +7,8 @@
 }
 
 /* Visible keyboard focus indicator; :focus-visible leaves mouse clicks alone. */
-a:focus-visible {
+a:focus-visible,
+button:focus-visible {
   outline: 2px solid #d9230f;
   outline-offset: 2px;
 }
@@ -53,9 +54,99 @@ a.logo {
   border-bottom-color: #d9230f;
 }
 
-@media (max-width: 767.98px) {
-  .nav a {
-    padding: 8px 14px;
+/* Burger toggle for the collapsed mobile nav. Hidden by default; the `js`
+   class (set inline in <head>) reveals it below the lg breakpoint, so
+   without JavaScript the nav simply stays fully visible and wraps. */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid #e4e9f0;
+  border-radius: 4px;
+  background: none;
+  color: #687074;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+.nav-toggle-icon {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: currentColor;
+}
+
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background-color: currentColor;
+}
+
+.nav-toggle-icon::before {
+  top: -5px;
+}
+
+.nav-toggle-icon::after {
+  top: 5px;
+}
+
+/* Collapse below lg, not md: between ~750 and 990px the 7 links plus the
+   logo don't fit on one row either. */
+@media (max-width: 991.98px) {
+  .js .header {
+    position: relative;
+    align-items: center;
+  }
+
+  .js .nav-toggle {
+    display: inline-flex;
+    margin-bottom: 10px;
+  }
+
+  .js .site-nav .nav {
+    display: none;
+  }
+
+  /* Open state lives only in aria-expanded, so styling and the screen
+     reader announcement can never disagree. Painted below the header's
+     2px bottom border, hence the +2px. */
+  .js .nav-toggle[aria-expanded='true'] + .nav {
+    display: block;
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    margin: 0;
+    background-color: #fff;
+    border-bottom: 2px solid #eeeeee;
+  }
+
+  .js .nav-toggle[aria-expanded='true'] + .nav a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 20px;
+    border-bottom: 0;
+    border-left: 3px solid transparent;
+  }
+
+  .js .nav-toggle[aria-expanded='true'] + .nav li.active a {
+    border-left-color: #d9230f;
+  }
+
+  /* Without JS the nav stays expanded and wraps; keep the links compact
+     but still comfortably tappable (44px tall). */
+  html:not(.js) .nav a {
+    padding: 10px 14px;
   }
 }
 
