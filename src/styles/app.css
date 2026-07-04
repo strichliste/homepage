@@ -7,19 +7,29 @@
 }
 
 /* Visible keyboard focus indicator; :focus-visible leaves mouse clicks alone. */
-a:focus-visible {
+a:focus-visible,
+button:focus-visible {
   outline: 2px solid #d9230f;
   outline-offset: 2px;
 }
 
 .header {
   border-bottom: 2px solid #eeeeee;
-  padding-top: 40px;
+  padding-top: clamp(1.25rem, 3vw, 2.5rem);
 }
 
 a.logo {
   display: block;
   padding-bottom: 10px;
+}
+
+/* Shrink the 251px wordmark on narrow screens so logo and burger button
+   share one header row instead of wrapping. */
+@media (max-width: 575.98px) {
+  a.logo img {
+    width: 180px;
+    height: auto;
+  }
 }
 
 .nav {
@@ -34,7 +44,7 @@ a.logo {
 .nav a {
   display: block;
   padding: 10px 25px;
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: #687074;
   text-decoration: none;
   /* Transparent placeholder so hover/active only recolor the underline and
@@ -53,9 +63,99 @@ a.logo {
   border-bottom-color: #d9230f;
 }
 
-@media (max-width: 767.98px) {
-  .nav a {
-    padding: 8px 14px;
+/* Burger toggle for the collapsed mobile nav. Hidden by default; the `js`
+   class (set inline in <head>) reveals it below the lg breakpoint, so
+   without JavaScript the nav simply stays fully visible and wraps. */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid #e4e9f0;
+  border-radius: 4px;
+  background: none;
+  color: #687074;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+.nav-toggle-icon {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: currentColor;
+}
+
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background-color: currentColor;
+}
+
+.nav-toggle-icon::before {
+  top: -5px;
+}
+
+.nav-toggle-icon::after {
+  top: 5px;
+}
+
+/* Collapse below lg, not md: between ~750 and 990px the 7 links plus the
+   logo don't fit on one row either. */
+@media (max-width: 991.98px) {
+  .js .header {
+    position: relative;
+    align-items: center;
+  }
+
+  .js .nav-toggle {
+    display: inline-flex;
+    margin-bottom: 10px;
+  }
+
+  .js .site-nav .nav {
+    display: none;
+  }
+
+  /* Open state lives only in aria-expanded, so styling and the screen
+     reader announcement can never disagree. Painted below the header's
+     2px bottom border, hence the +2px. */
+  .js .nav-toggle[aria-expanded='true'] + .nav {
+    display: block;
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    margin: 0;
+    background-color: #fff;
+    border-bottom: 2px solid #eeeeee;
+  }
+
+  .js .nav-toggle[aria-expanded='true'] + .nav a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 20px;
+    border-bottom: 0;
+    border-left: 3px solid transparent;
+  }
+
+  .js .nav-toggle[aria-expanded='true'] + .nav li.active a {
+    border-left-color: #d9230f;
+  }
+
+  /* Without JS the nav stays expanded and wraps; keep the links compact
+     but still comfortably tappable (44px tall). */
+  html:not(.js) .nav a {
+    padding: 10px 14px;
   }
 }
 
@@ -63,37 +163,66 @@ a.logo {
   background-size: cover;
   background-image: url(../assets/teaser/strichliste-blur.jpg);
   background-color: #595959;
-  min-height: 350px;
+  min-height: clamp(16.25rem, 30vw, 21.875rem);
   position: relative;
   border-bottom: 2px solid #eeeeee;
 }
 
 .slider-headline-1 {
   text-transform: uppercase;
-  font-size: 50px;
+  /* ~30px at 360px viewport up to the design's 50px on desktop. */
+  font-size: clamp(1.75rem, 1rem + 4vw, 3.125rem);
   font-weight: normal;
   line-height: inherit;
-  margin-top: 50px;
+  margin-top: clamp(1.875rem, 4vw, 3.125rem);
   margin-bottom: 0;
 }
 
 .slider-headline-1,
 .slider-headline-2 {
-  background-color: rgba(0, 0, 0, 0.6);
+  /* 0.7 alpha keeps white text above 4.5:1 over any region of the teaser
+     photo, not just the dark ones. */
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 5px 10px;
 
-  display: inline-block;
+  /* Shrink-wraps the highlight box like inline-block but forces its own
+     line, so the markup needs no <br /> between the two headlines. */
+  display: table;
   color: #fff;
 }
 
 .slider-headline-2 {
-  font-size: 20px;
+  font-size: clamp(1rem, 0.85rem + 0.7vw, 1.25rem);
   margin-top: 20px;
   margin-bottom: 0;
 }
 
+.slider-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Bootstrap's blue primary button in brand red, via its button variables. */
+.slider-cta .btn {
+  padding: 10px 20px;
+}
+
+.slider-cta .btn-primary {
+  --bs-btn-bg: #d9230f;
+  --bs-btn-border-color: #d9230f;
+  --bs-btn-hover-bg: #91170a;
+  --bs-btn-hover-border-color: #91170a;
+  --bs-btn-active-bg: #91170a;
+  --bs-btn-active-border-color: #91170a;
+}
+
 .content {
   padding: 40px 0;
+  /* Long unbroken tokens (URLs, config keys) in prose must never force a
+     page-wide horizontal scroll on narrow screens. */
+  overflow-wrap: anywhere;
 }
 
 .headline {
@@ -108,6 +237,22 @@ a.logo {
   border-bottom: 2px solid #d9230f;
 }
 
+/* One fluid type scale for all content headings: 40/32/24px on desktop
+   down to 32/24/19px on phones. Bootstrap's own RFS formulas let h2 and
+   h3 converge to nearly the same size on small screens; these keep every
+   level visually distinct at any width. */
+.content h1 {
+  font-size: clamp(2rem, 1.5rem + 1.5vw, 2.5rem);
+}
+
+.content h2 {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+}
+
+.content h3 {
+  font-size: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);
+}
+
 /* Breathing room between sections on long reference pages. Declared before
    the .intro rule so its tighter margins keep winning where both apply. */
 .content h2 {
@@ -118,12 +263,16 @@ a.logo {
   margin-top: 20px;
 }
 
-/* Section sub-headings: semantically h2/h3, visually the size the
-   design always used for these slots. */
-.intro h2,
+/* Section sub-headings: smaller than the 32px section headlines but with
+   h2 (22px) still clearly above h3 (18px), which stays above body (16px). */
+.intro h2 {
+  font-size: 1.375rem;
+  margin: 10px 0;
+}
+
 .lastnews h3,
 .features h3 {
-  font-size: 18px;
+  font-size: 1.125rem;
   margin: 10px 0;
 }
 
@@ -140,8 +289,18 @@ a.logo {
   margin-bottom: 10px;
 }
 
+/* Constrain BOTH axes with auto width/height so the browser scales logos
+   by their intrinsic ratio (max-height alone squashed tall logos against
+   the column width). 85% doubles as breathing room around each logo. */
+.users .img-container img {
+  width: auto;
+  height: auto;
+  max-width: 85%;
+  max-height: 85%;
+}
+
 .users .user {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 /* Markdown content images: what Bootstrap's img-fluid/border/rounded do,
@@ -203,7 +362,7 @@ a.logo {
 }
 
 .page-list a {
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .page-list p {
@@ -212,7 +371,7 @@ a.logo {
 
 .page-meta {
   color: #687074;
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 
 .page-list .page-meta {
@@ -223,4 +382,24 @@ a.logo {
 .content blockquote {
   border-left: 5px solid #d9230f;
   padding-left: 15px;
+}
+
+.footer {
+  border-top: 2px solid #eeeeee;
+  margin-top: 20px;
+  padding: 20px 0 40px;
+  color: #687074;
+  font-size: 0.9375rem;
+}
+
+/* No-JS fallback of ObfuscatedEmail: the DOM holds the address reversed
+   (harvesters find nothing), the bidi override flips it back visually. */
+.email-rev {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  white-space: nowrap;
+}
+
+.footer p {
+  margin: 0;
 }

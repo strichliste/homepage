@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { SITE_DESCRIPTION } from '../consts';
 import { features } from '../data/features';
 import { users } from '../data/users';
 import Layout from '../layouts/Layout.astro';
@@ -7,18 +8,36 @@ import { excerptOf, getNewsPosts, newsPath } from '../lib/news';
 
 const posts = await getNewsPosts();
 const [latest] = posts;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'strichliste',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  url: Astro.site?.toString(),
+  description: SITE_DESCRIPTION,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+  license: 'https://opensource.org/licenses/MIT',
+  softwareHelp: new URL('/docs/', Astro.site).toString(),
+};
 ---
 
 <Layout>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <div class="slider">
     <div class="container slide">
-      <h1 class="slider-headline-1">Self-service tally sheet</h1><br />
-      <p class="slider-headline-2">Manage your kiosk with ease.</p>
+      <h1 class="slider-headline-1">The self-service tally sheet</h1>
+      <p class="slider-headline-2">Replace the paper list by the fridge.</p>
+      <p class="slider-cta">
+        <a class="btn btn-primary" href="/install/">Get started</a>
+        <a class="btn btn-outline-light" href="https://demo.strichliste.org">Try the live demo</a>
+      </p>
     </div>
   </div>
 
   <div class="container">
-    <div class="row content intro margin-bottom-20">
+    <section class="row content intro margin-bottom-20" aria-label="Highlights">
       <div class="col-md-4">
         <h2>Touch-friendly</h2>
         <p>
@@ -37,13 +56,13 @@ const [latest] = posts;
         <h2>Open Source</h2>
         <p>MIT licensed, hosted on GitHub. Issues and pull requests welcome.</p>
       </div>
-    </div>
+    </section>
 
     {
       latest && (
-        <div class="row lastnews margin-bottom-30">
+        <section class="row lastnews margin-bottom-30" aria-labelledby="latest-updates">
           <div class="headline col-12">
-            <h2>Latest Updates</h2>
+            <h2 id="latest-updates">Latest Updates</h2>
           </div>
 
           <div class="col-12 col-lg-8">
@@ -56,7 +75,7 @@ const [latest] = posts;
             </p>
           </div>
 
-          <div class="d-none d-md-block col-lg-4">
+          <div class="col-12 col-lg-4">
             <h3>Latest news</h3>
             <ul>
               {posts.slice(0, 5).map((post) => (
@@ -66,13 +85,13 @@ const [latest] = posts;
               ))}
             </ul>
           </div>
-        </div>
+        </section>
       )
     }
 
-    <div class="row features margin-bottom-20">
+    <section class="row features margin-bottom-20" aria-labelledby="features">
       <div class="headline col-12">
-        <h2>Features</h2>
+        <h2 id="features">Features</h2>
       </div>
       {
         features.map((feature) => (
@@ -83,24 +102,24 @@ const [latest] = posts;
           </div>
         ))
       }
-    </div>
+    </section>
 
-    <div class="row margin-bottom-30 users">
+    <section class="row margin-bottom-30 users" aria-labelledby="users">
       <div class="headline col-12">
-        <h2>Users</h2>
+        <h2 id="users">Users</h2>
       </div>
       {
         users.map((user) => (
           <div class="col-6 col-md-3 col-lg-2 user text-center">
             <a href={user.link} class="text-decoration-none">
               <div class="img-container d-flex align-items-center justify-content-center">
-                <Image src={user.img} alt="" class="img-fluid mh-100" />
+                <Image src={user.img} alt="" />
               </div>
               {user.name}
             </a>
           </div>
         ))
       }
-    </div>
+    </section>
   </div>
 </Layout>

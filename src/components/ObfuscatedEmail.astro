@@ -1,0 +1,35 @@
+---
+/**
+ * E-mail address that never appears in the served HTML: local part and
+ * domain are stored reversed in data attributes (no literal `@` anywhere)
+ * and assembled into a mailto link on the client. Without JavaScript the
+ * reversed text is flipped back purely visually by a CSS bidi override,
+ * so sighted no-JS visitors can still read the address while harvesters
+ * scanning the DOM find nothing shaped like one.
+ */
+interface Props {
+  /** Local part, e.g. "mail". */
+  user: string;
+  /** Domain, e.g. "strichliste.org". */
+  domain: string;
+}
+
+const { user, domain } = Astro.props;
+const reverse = (s: string) => [...s].reverse().join('');
+---
+
+<span class="email-guard" data-u={reverse(user)} data-d={reverse(domain)}>
+  <span class="email-rev" aria-hidden="true">{reverse(`${user} (at) ${domain}`)}</span>
+  <span class="visually-hidden">{user} at {domain.split('.').join(' dot ')}</span>
+</span>
+
+<script>
+  const reverse = (s: string) => [...s].reverse().join('');
+  document.querySelectorAll<HTMLElement>('.email-guard').forEach((el) => {
+    const address = `${reverse(el.dataset.u ?? '')}@${reverse(el.dataset.d ?? '')}`;
+    const link = document.createElement('a');
+    link.href = `mailto:${address}`;
+    link.textContent = address;
+    el.replaceChildren(link);
+  });
+</script>

@@ -38,6 +38,8 @@ const news = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    /** Meta description; posts without one fall back to their excerpt. */
+    description: z.string().optional(),
     /** Drafts are excluded from listings, feeds and the build. */
     draft: z.boolean().default(false),
   }),

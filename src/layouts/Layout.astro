@@ -3,19 +3,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/app.css';
 import { Image } from 'astro:assets';
 import logo from '../assets/strichliste-logo.png';
+import teaser from '../assets/teaser/strichliste-blur.jpg';
 import { NAV_ITEMS, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 interface Props {
   /** Page title; omit on the homepage to use the full site title. */
   title?: string;
   description?: string;
+  /** Social card type: 'article' for news posts, 'website' elsewhere. */
+  ogType?: 'website' | 'article';
+  /** Keep the page out of search indexes (the 404 page). */
+  noindex?: boolean;
 }
 
-const { title, description = SITE_DESCRIPTION } = Astro.props;
+const { title, description = SITE_DESCRIPTION, ogType = 'website', noindex = false } = Astro.props;
 
 const pathname = Astro.url.pathname.endsWith('/')
   ? Astro.url.pathname
   : `${Astro.url.pathname}/`;
+
+const canonical = new URL(pathname, Astro.site);
+const socialTitle = title ?? SITE_TITLE;
+const socialImage = new URL(teaser.src, Astro.site);
 
 const isCurrent = (href: string) => href === pathname;
 const isAncestor = (href: string) =>
@@ -30,6 +39,20 @@ const isAncestor = (href: string) =>
 
     <title>{title ? `${title} · strichliste` : SITE_TITLE}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:site_name" content="strichliste" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={socialTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={socialTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -38,6 +61,14 @@ const isAncestor = (href: string) =>
     />
 
     <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
+    <link rel="apple-touch-icon" href="/img/common/logo-touch-icon.png" />
+    <slot name="head" />
+
+    <script is:inline>
+      // Marker for progressive enhancement: the burger menu only collapses
+      // the nav when scripting is available; without JS the nav stays open.
+      document.documentElement.classList.add('js');
+    </script>
   </head>
   <body>
     <a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a>
@@ -45,8 +76,12 @@ const isAncestor = (href: string) =>
       <a class="logo" href="/">
         <Image src={logo} alt="strichliste — home" loading="eager" />
       </a>
-      <nav aria-label="Main">
-        <ul class="nav" role="list">
+      <nav aria-label="Main" class="site-nav">
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-menu">
+          <span class="nav-toggle-icon" aria-hidden="true"></span>
+          Menu
+        </button>
+        <ul class="nav" id="site-menu" role="list">
           {
             NAV_ITEMS.map((item) => (
               <li class:list={{ active: isCurrent(item.href) || isAncestor(item.href) }}>
@@ -67,5 +102,31 @@ const isAncestor = (href: string) =>
     <main id="main" tabindex="-1">
       <slot />
     </main>
+    <footer class="footer">
+      <div class="container">
+        <p>
+          strichliste is <a href="https://github.com/strichliste">open source on GitHub</a> (MIT
+          license) · <a href="/news/">News</a> · <a href="/index.xml">RSS feed</a> ·{' '}
+          <a href="/impressum/">Impressum</a> · <a href="/datenschutz/">Datenschutz</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = toggle?.closest('nav');
+      if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!open));
+        });
+        nav.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+            toggle.setAttribute('aria-expanded', 'false');
+            (toggle as HTMLElement).focus();
+          }
+        });
+      }
+    </script>
   </body>
 </html>
