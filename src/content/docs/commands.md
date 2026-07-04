@@ -109,7 +109,8 @@ image) don't have it. On a bare-metal install run:
 composer require symfony/ldap
 ```
 
-(It also needs PHP's `ldap` extension.)
+It also needs PHP's `ldap` extension, which the stock Docker image lacks
+too — in practice LDAP import is bare-metal-only.
 
 Bare minimum example:
 

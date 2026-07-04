@@ -23,7 +23,8 @@ itself:
   and the request is rejected.
 * Errors use one envelope, where `class` is the PHP exception class name
   clients switch on. Invalid request bodies come back as
-  `App\Exception\ValidationException` with code 422.
+  `App\Exception\ValidationException` — 422 for failed validation; empty or
+  malformed bodies keep their 400/415 status.
 
 ```json
 {"error": {"class": "App\\Exception\\TransactionBoundaryException",

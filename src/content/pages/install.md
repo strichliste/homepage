@@ -77,9 +77,9 @@ it stays fast even on a Raspberry Pi. It runs on arm64 too (Pi 4/5 with a
    registry while `.env` holds real secrets; for registry deploys pass
    `APP_SECRET` as a real environment variable instead. No rebuild is needed
    after edits, though: `APP_SECRET`, `SERVER_NAME`, `DATABASE_URL` and the
-   ports are handed to the container on every start, so rerunning the compose
-   command applies them. (The app also warns on boot if `APP_SECRET` is still
-   the committed value.)
+   ports are read from `.env` each time you run the `up` command, so
+   rerunning it applies them. (The app also warns on boot if `APP_SECRET` is
+   still the committed value.)
 2. Start it with the raw command, or `make prod` (better for upgrades: it
    also re-pulls the base images, so FrankenPHP/PHP and Postgres security
    patches arrive — a plain `up --build` reuses the cached base layers):
@@ -207,7 +207,7 @@ php bin/console asset-map:compile
 * Using SQLite? Check the folder owner/group — otherwise strichliste can't
   write to it.
 * JSON API requests need a `Content-Type: application/json` header — without
-  it the body is silently ignored.
+  it the request is rejected.
 
 ## Keeping your existing data
 
