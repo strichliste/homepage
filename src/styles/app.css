@@ -61,7 +61,7 @@ a.logo {
 
 .slider {
   background-size: cover;
-  background-image: url(../img/teaser/strichliste-blur.jpg);
+  background-image: url(../assets/teaser/strichliste-blur.jpg);
   background-color: #595959;
   min-height: 350px;
   position: relative;
