@@ -1,8 +1,20 @@
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# editors
 *.swp
-.idea
-public/*
-.hugo_build.lock
-themes/hckspc-bootstrap/static/bower_components
-themes/hckspc-bootstrap/node_modules/
-deploy_id_rsa
+.idea/
+
+# macOS
+.DS_Store
+
+# tooling
 .playwright-mcp/

@@ -1,0 +1,106 @@
+---
+import { Image } from 'astro:assets';
+import { features } from '../data/features';
+import { users } from '../data/users';
+import Layout from '../layouts/Layout.astro';
+import { excerptOf, getNewsPosts, newsPath } from '../lib/news';
+
+const posts = await getNewsPosts();
+const [latest] = posts;
+---
+
+<Layout>
+  <div class="slider">
+    <div class="container slide">
+      <h1 class="slider-headline-1">Self-service tally sheet</h1><br />
+      <p class="slider-headline-2">Manage your kiosk with ease.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row content intro margin-bottom-20">
+      <div class="col-md-4">
+        <h2>Touch-friendly</h2>
+        <p>
+          Big buttons sized for fingers, a dark theme that follows your device, a booking sound,
+          and a screen that returns to the start page when idle.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h2>Works without JavaScript</h2>
+        <p>
+          Stays usable on old donated tablets and ancient browsers. Newer devices get extra comfort
+          on top.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h2>Open Source</h2>
+        <p>MIT licensed, hosted on GitHub. Issues and pull requests welcome.</p>
+      </div>
+    </div>
+
+    {
+      latest && (
+        <div class="row lastnews margin-bottom-30">
+          <div class="headline col-12">
+            <h2>Latest Updates</h2>
+          </div>
+
+          <div class="col-12 col-lg-8">
+            <h3>
+              <a href={newsPath(latest)}>{latest.data.title}</a>
+            </h3>
+            <div set:html={excerptOf(latest)} />
+            <p>
+              <a href="/news/">All news</a>
+            </p>
+          </div>
+
+          <div class="d-none d-md-block col-lg-4">
+            <h3>Latest news</h3>
+            <ul>
+              {posts.slice(0, 5).map((post) => (
+                <li>
+                  <a href={newsPath(post)}>{post.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )
+    }
+
+    <div class="row features margin-bottom-20">
+      <div class="headline col-12">
+        <h2>Features</h2>
+      </div>
+      {
+        features.map((feature) => (
+          <div class="col-md-3">
+            <Image src={feature.img} alt="" class="img-fluid" />
+            <h3>{feature.title}</h3>
+            <p>{feature.text}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="row margin-bottom-30 users">
+      <div class="headline col-12">
+        <h2>Users</h2>
+      </div>
+      {
+        users.map((user) => (
+          <div class="col-6 col-md-3 col-lg-2 user text-center">
+            <a href={user.link} class="text-decoration-none">
+              <div class="img-container d-flex align-items-center justify-content-center">
+                <Image src={user.img} alt="" class="img-fluid mh-100" />
+              </div>
+              {user.name}
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Layout>

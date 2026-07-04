@@ -1,0 +1,21 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { formatDate, getNewsPosts, isoDate, newsPath } from '../../lib/news';
+
+const posts = await getNewsPosts();
+---
+
+<ContentLayout title="News" description="Release announcements and project news from strichliste.">
+  <ul class="page-list" role="list">
+    {
+      posts.map((post) => (
+        <li>
+          <a href={newsPath(post)}>{post.data.title}</a>
+          <span class="page-meta">
+            <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</ContentLayout>
