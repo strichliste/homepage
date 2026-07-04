@@ -11,7 +11,7 @@ export const bootstrapTables = defineHastPlugin({
   element: {
     filter: ['table'],
     visit(node, ctx) {
-      ctx.setProperty(node, 'class', 'table');
+      ctx.setProperty(node, 'className', 'table');
       ctx.wrapNode(node, {
         type: 'element',
         tagName: 'div',

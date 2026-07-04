@@ -20,7 +20,22 @@ export function excerptOf(post: NewsPost): string {
   return firstParagraphEnd === -1 ? html : html.slice(0, firstParagraphEnd + '</p>'.length);
 }
 
-const longDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' });
+/** URL of a post — the one shape shared by pages and the RSS feed. */
+export function newsPath(post: NewsPost): string {
+  return `/news/${post.id}/`;
+}
+
+/* News dates are authored in German local time; rendering them in UTC could
+   shift a late-evening post to the previous calendar day. */
+const TIME_ZONE = 'Europe/Berlin';
+
+const longDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: TIME_ZONE });
+const isoDay = new Intl.DateTimeFormat('en-CA', {
+  timeZone: TIME_ZONE,
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+});
 
 /** "June 12, 2026" — the visible form of a news date. */
 export function formatDate(date: Date): string {
@@ -29,5 +44,5 @@ export function formatDate(date: Date): string {
 
 /** "2026-06-12" — the machine-readable form for `<time datetime>`. */
 export function isoDate(date: Date): string {
-  return date.toISOString().slice(0, 10);
+  return isoDay.format(date);
 }

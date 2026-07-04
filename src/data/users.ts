@@ -17,7 +17,7 @@ import thomann from '../assets/users/thomann.jpg';
 import toolboxBodensee from '../assets/users/toolbox-bodensee.png';
 import wwlabs from '../assets/users/wwlabs-banner.png';
 
-export interface User {
+interface User {
   name: string;
   link: string;
   img: ImageMetadata;

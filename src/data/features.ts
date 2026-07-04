@@ -4,7 +4,7 @@ import sqlite from '../assets/features/sqlite.png';
 import statistics from '../assets/features/statistics.png';
 import webBased from '../assets/features/web-based.png';
 
-export interface Feature {
+interface Feature {
   title: string;
   img: ImageMetadata;
   text: string;

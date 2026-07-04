@@ -3,7 +3,7 @@ export const SITE_TITLE = 'Strichliste ‒ The Tally Sheet Replacement for Your 
 export const SITE_DESCRIPTION =
   'strichliste is the digital tally sheet for hackerspaces, club rooms and small offices.';
 
-export interface NavItem {
+interface NavItem {
   name: string;
   href: string;
 }

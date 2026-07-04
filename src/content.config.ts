@@ -5,10 +5,11 @@ import { z } from 'astro/zod';
 /**
  * IDs are the plain filename without extension. The default loader slugifies
  * (e.g. `v1.6.x` → `v16x`), which would break URLs the Hugo site published.
+ * Collections are flat on purpose: ids map 1:1 onto single-segment routes.
  */
 const markdown = (base: string) =>
   glob({
-    pattern: '**/*.md',
+    pattern: '*.md',
     base,
     generateId: ({ entry }) => entry.replace(/\.md$/, ''),
   });

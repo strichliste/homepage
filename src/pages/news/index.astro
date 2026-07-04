@@ -1,6 +1,6 @@
 ---
 import ContentLayout from '../../layouts/ContentLayout.astro';
-import { formatDate, getNewsPosts, isoDate } from '../../lib/news';
+import { formatDate, getNewsPosts, isoDate, newsPath } from '../../lib/news';
 
 const posts = await getNewsPosts();
 ---
@@ -10,7 +10,7 @@ const posts = await getNewsPosts();
     {
       posts.map((post) => (
         <li>
-          <a href={`/news/${post.id}/`}>{post.data.title}</a>
+          <a href={newsPath(post)}>{post.data.title}</a>
           <span class="page-meta">
             <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
           </span>

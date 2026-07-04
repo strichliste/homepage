@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { features } from '../data/features';
 import { users } from '../data/users';
 import Layout from '../layouts/Layout.astro';
-import { excerptOf, getNewsPosts } from '../lib/news';
+import { excerptOf, getNewsPosts, newsPath } from '../lib/news';
 
 const posts = await getNewsPosts();
 const [latest] = posts;
@@ -48,7 +48,7 @@ const [latest] = posts;
 
           <div class="col-12 col-lg-8">
             <h3>
-              <a href={`/news/${latest.id}/`}>{latest.data.title}</a>
+              <a href={newsPath(latest)}>{latest.data.title}</a>
             </h3>
             <div set:html={excerptOf(latest)} />
             <p>
@@ -61,7 +61,7 @@ const [latest] = posts;
             <ul>
               {posts.slice(0, 5).map((post) => (
                 <li>
-                  <a href={`/news/${post.id}/`}>{post.data.title}</a>
+                  <a href={newsPath(post)}>{post.data.title}</a>
                 </li>
               ))}
             </ul>

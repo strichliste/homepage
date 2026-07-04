@@ -1,6 +1,6 @@
 import rss from '@astrojs/rss';
 import { SITE_TITLE } from '../consts';
-import { excerptOf, getNewsPosts } from './news';
+import { excerptOf, getNewsPosts, newsPath } from './news';
 
 function plainText(html: string): string {
   return html
@@ -23,7 +23,7 @@ export async function newsFeed(site: URL | undefined): Promise<Response> {
     site,
     items: posts.map((post) => ({
       title: post.data.title,
-      link: `/news/${post.id}/`,
+      link: newsPath(post),
       pubDate: post.data.date,
       description: plainText(excerptOf(post)),
     })),
