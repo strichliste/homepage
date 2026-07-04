@@ -1,8 +1,0 @@
-    <ul class="nav" role="list">
-        {{ $currentNode := . }}
-        {{ range .Site.Menus.main }}
-        {{ $isPage := $currentNode.IsMenuCurrent "main" . }}
-        {{ $isAncestor := $currentNode.HasMenuCurrent "main" . }}
-        <li{{ if or $isPage $isAncestor }} class="active"{{ end }}><a href="{{ .URL }}"{{ if $isPage }} aria-current="page"{{ else if $isAncestor }} aria-current="true"{{ end }}>{{ .Name }}</a></li>
-        {{ end }}
-    </ul>
