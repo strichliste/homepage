@@ -23,6 +23,15 @@ a.logo {
   padding-bottom: 10px;
 }
 
+/* Shrink the 251px wordmark on narrow screens so logo and burger button
+   share one header row instead of wrapping. */
+@media (max-width: 575.98px) {
+  a.logo img {
+    width: 180px;
+    height: auto;
+  }
+}
+
 .nav {
   color: #687074;
   text-transform: uppercase;
