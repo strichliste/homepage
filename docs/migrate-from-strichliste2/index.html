@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Migrate from strichliste 2 · strichliste</title><meta name="description" content="Point strichliste 3 at your existing database — no export, no import."><link rel="alternate" type="application/rss+xml" href="https://www.strichliste.org/index.xml" title="Strichliste ‒ The Tally Sheet Replacement for Your Organization"><link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png"><link rel="stylesheet" href="/_astro/Layout.D9ZuYYk7.css"></head><body><a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a><header class="header container d-flex justify-content-between align-items-end flex-wrap"><a class="logo" href="/"><img src="/_astro/strichliste-logo.Dv_sgQBX_179dzA.webp" alt="strichliste — home" loading="eager" decoding="async" width="251" height="35"></a><nav aria-label="Main"><ul class="nav" role="list"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/install/">Install</a></li><li class="active"><a href="/docs/" aria-current="true">Docs</a></li><li><a href="https://demo.strichliste.org">Demo</a></li><li><a href="https://github.com/strichliste">Source</a></li><li><a href="/faq/">FAQ</a></li></ul></nav></header><main id="main" tabindex="-1"><div class="container"><div class="row content margin-bottom-20"><h1>Migrate from strichliste 2</h1><p>strichliste 3 starts directly on a strichliste 2 database. On first boot it
+upgrades the schema and keeps all users, balances, articles and history.
+The API keeps its exact shape, so barcode scanners and apps keep working
+(undo via the API now follows the
+<a href="/docs/configuration/#paymentundo">payment.undo</a> window). The separate web
+frontend is gone — strichliste 3 serves the UI itself.</p>
+<h2 id="1-stop-strichliste-2-and-back-up">1. Stop strichliste 2 and back up</h2>
+<p>Stop the old instance first. Bookings made from now on would be lost, and
+nothing may write to the database while the schema is upgraded.</p>
+<p>Then back up. The database credentials are in the old install’s <code>.env</code>:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">mysqldump</span><span style="color:#005CC5"> -u</span><span style="color:#032F62"> strichliste</span><span style="color:#005CC5"> -p</span><span style="color:#032F62"> strichliste</span><span style="color:#D73A49"> ></span><span style="color:#032F62"> strichliste2-backup.sql</span><span style="color:#6A737D">   # MariaDB/MySQL</span></span>
+<span class="line"><span style="color:#6F42C1">pg_dump</span><span style="color:#005CC5"> -U</span><span style="color:#032F62"> strichliste</span><span style="color:#032F62"> strichliste</span><span style="color:#D73A49"> ></span><span style="color:#032F62"> strichliste2-backup.sql</span><span style="color:#6A737D">        # Postgres</span></span>
+<span class="line"><span style="color:#6A737D"># SQLite: copy the database file</span></span></code></pre>
+<p>Don’t skip this. On MySQL/MariaDB a failed migration cannot roll itself
+back — restoring this dump and restarting strichliste 2 is your only way
+back.</p>
+<h2 id="2-point-strichliste-3-at-your-database">2. Point strichliste 3 at your database</h2>
+<p>On the machine that will run strichliste 3 — a new one is fine, it only
+needs to reach the database — follow
+<a href="/install/#production-with-docker-recommended">Production with Docker</a>
+including the <code>COMPOSE_FILE</code> line, but <strong>don’t start it yet</strong>. First set
+your database in <code>.env</code>:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="dotenv"><code><span class="line"><span style="color:#E36209">DATABASE_URL</span><span style="color:#D73A49">=</span><span style="color:#032F62">"mysql://strichliste:secret@192.168.1.10:3306/strichliste?serverVersion=10.11.2-MariaDB&#x26;charset=utf8mb4"</span></span>
+<span class="line"><span style="color:#E36209">COMPOSE_PROFILES</span><span style="color:#D73A49">=</span></span></code></pre>
+<ul>
+<li>User, password and database name come from the old install’s <code>.env</code>.
+Replace <code>10.11.2-MariaDB</code> with your server’s version (<code>SELECT VERSION();</code>).</li>
+<li>Use the database host’s LAN IP, not <code>localhost</code> — inside the container,
+localhost is the container. The database must accept connections from
+that address (MariaDB: <code>bind-address</code> and the user’s host grant).</li>
+<li><code>COMPOSE_PROFILES=</code> (empty) switches the bundled Postgres off.</li>
+</ul>
+<p>For an SQLite file:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="dotenv"><code><span class="line"><span style="color:#E36209">DATABASE_URL</span><span style="color:#D73A49">=</span><span style="color:#032F62">"sqlite:////app/var/data.db"</span></span>
+<span class="line"><span style="color:#E36209">COMPOSE_PROFILES</span><span style="color:#D73A49">=</span></span></code></pre>
+<p>Only a Postgres dump and no running server? Keep
+<code>COMPOSE_PROFILES=database</code> and restore into the bundled Postgres — see
+<a href="https://github.com/strichliste/strichliste-backend#reusing-an-existing-database">“Reusing an existing database” in the README</a>.</p>
+<h2 id="3-start-it">3. Start it</h2>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">make</span><span style="color:#032F62"> prod</span></span></code></pre>
+<p>The first boot takes a few minutes — watch the migrations finish with
+<code>docker compose logs -f app</code>. If they fail, the app doesn’t come up:
+restore your backup and restart strichliste 2.</p>
+<p><strong>SQLite only:</strong> the first start created a fresh database — now replace it
+with your file and restart:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">docker</span><span style="color:#032F62"> compose</span><span style="color:#032F62"> cp</span><span style="color:#032F62"> ./your-old-data.db</span><span style="color:#032F62"> app:/app/var/data.db</span></span>
+<span class="line"><span style="color:#6F42C1">docker</span><span style="color:#032F62"> compose</span><span style="color:#032F62"> exec</span><span style="color:#005CC5"> -u</span><span style="color:#032F62"> root</span><span style="color:#032F62"> app</span><span style="color:#032F62"> chown</span><span style="color:#032F62"> www-data</span><span style="color:#032F62"> /app/var/data.db</span></span>
+<span class="line"><span style="color:#6F42C1">docker</span><span style="color:#032F62"> compose</span><span style="color:#032F62"> restart</span><span style="color:#032F62"> app</span></span></code></pre>
+<p>(The <code>chown</code> is needed because <code>docker compose cp</code> leaves the file
+root-owned and the app runs as <code>www-data</code>.)</p>
+<p>Open the site — your users and balances are there.</p>
+<h2 id="4-carry-over-your-settings">4. Carry over your settings</h2>
+<p>strichliste 3 keeps the <code>strichliste.yaml</code> format. Copy your customized
+values from the old install’s <code>config/strichliste.yaml</code> into the same file
+in the new checkout, then run <code>make prod</code> again — the file is baked into
+the image. <a href="/docs/configuration/">Configuration</a> documents every key and a
+bind-mount alternative.</p>
+<h2 id="afterwards">Afterwards</h2>
+<p>The old strichliste 2 app and its web frontend can be removed. The
+database stays where it is — strichliste 3 keeps using it.</p>
+<p>Coming from strichliste 1? That’s a different schema and needs a one-time
+conversion: <a href="/docs/commands/#import-a-strichliste-1-database"><code>app:import</code></a>.</p>
+</div></div></main></body></html>

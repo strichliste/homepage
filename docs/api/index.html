@@ -1,74 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>REST API · strichliste</title>
-    <meta name="description" content="The REST API: endpoints, conventions, examples." />
-    
-
-    <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
-
-    <link href="/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/css/app.css" rel="stylesheet" />
-    
-  </head>
-  <body>
-    <a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a>
-    <header class="header container d-flex justify-content-between align-items-end flex-wrap">
-      <a class="logo" href="/">
-        <img src="/img/strichliste-logo.png" alt="strichliste — home" width="251" height="35" />
-      </a>
-      <nav aria-label="Main">
-            <ul class="nav" role="list">
-        
-        
-        
-        
-        <li><a href="/">Home</a></li>
-        
-        
-        
-        <li><a href="/about/">About</a></li>
-        
-        
-        
-        <li><a href="/install/">Install</a></li>
-        
-        
-        
-        <li class="active"><a href="/docs/" aria-current="true">Docs</a></li>
-        
-        
-        
-        <li><a href="https://demo.strichliste.org">Demo</a></li>
-        
-        
-        
-        <li><a href="https://github.com/strichliste">Source</a></li>
-        
-        
-        
-        <li><a href="/faq/">FAQ</a></li>
-        
-    </ul>
-
-      </nav>
-    </header>
-    <main id="main" tabindex="-1">
-
-<div class="container">
-    <div class="row content margin-bottom-20">
-        <h1>REST API</h1>
-        
-        <p>The <code>/api/*</code> endpoints are <strong>frozen</strong> — they keep the exact shape they had
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>REST API · strichliste</title><meta name="description" content="The REST API: endpoints, conventions, examples."><link rel="alternate" type="application/rss+xml" href="https://www.strichliste.org/index.xml" title="Strichliste ‒ The Tally Sheet Replacement for Your Organization"><link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png"><link rel="stylesheet" href="/_astro/Layout.D9ZuYYk7.css"></head><body><a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a><header class="header container d-flex justify-content-between align-items-end flex-wrap"><a class="logo" href="/"><img src="/_astro/strichliste-logo.Dv_sgQBX_179dzA.webp" alt="strichliste — home" loading="eager" decoding="async" width="251" height="35"></a><nav aria-label="Main"><ul class="nav" role="list"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/install/">Install</a></li><li class="active"><a href="/docs/" aria-current="true">Docs</a></li><li><a href="https://demo.strichliste.org">Demo</a></li><li><a href="https://github.com/strichliste">Source</a></li><li><a href="/faq/">FAQ</a></li></ul></nav></header><main id="main" tabindex="-1"><div class="container"><div class="row content margin-bottom-20"><h1>REST API</h1><p>The <code>/api/*</code> endpoints are <strong>frozen</strong> — they keep the exact shape they had
 before the server-rendered UI shipped, so existing clients keep working. The
 API is documented as an OpenAPI 3 specification served by the application
 itself:</p>
 <ul>
 <li><strong><code>/api/doc</code></strong> — interactive Swagger UI on your own instance (browse
-endpoints, try requests — mind that &ldquo;Try it out&rdquo; executes <em>real</em>
+endpoints, try requests — mind that “Try it out” executes <em>real</em>
 bookings).</li>
 <li><strong><code>/api/doc.json</code></strong> — the raw OpenAPI document, ready for code generators
 or Postman/Insomnia import.</li>
@@ -77,14 +13,16 @@ or Postman/Insomnia import.</li>
 <ul>
 <li>Amounts are <strong>integer cents</strong>; timestamps are <code>YYYY-MM-DD HH:MM:SS</code>.</li>
 <li>Request bodies may be JSON or form-encoded. <strong>JSON bodies require
-<code>Content-Type: application/json</code></strong> — without it the body is silently
-ignored and you get a confusing &ldquo;parameter missing&rdquo; error.</li>
+<code>Content-Type: application/json</code></strong> — without it the body can’t be parsed
+and the request is rejected.</li>
 <li>Errors use one envelope, where <code>class</code> is the PHP exception class name
-clients switch on:</li>
+clients switch on. Invalid request bodies come back as
+<code>App\Exception\ValidationException</code> — 422 for failed validation; empty or
+malformed bodies keep their 400/415 status.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span><span style="color:#0550ae">&#34;error&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span><span style="color:#0550ae">&#34;class&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;App\\Exception\\TransactionBoundaryException&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#0550ae">&#34;code&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">400</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;message&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Transaction boundary reached&#34;</span><span style="color:#1f2328">}}</span>
-</span></span></code></pre></div><ul>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#24292E">{</span><span style="color:#005CC5">"error"</span><span style="color:#24292E">: {</span><span style="color:#005CC5">"class"</span><span style="color:#24292E">: </span><span style="color:#032F62">"App</span><span style="color:#005CC5">\\</span><span style="color:#032F62">Exception</span><span style="color:#005CC5">\\</span><span style="color:#032F62">TransactionBoundaryException"</span><span style="color:#24292E">,</span></span>
+<span class="line"><span style="color:#005CC5">           "code"</span><span style="color:#24292E">: </span><span style="color:#005CC5">400</span><span style="color:#24292E">, </span><span style="color:#005CC5">"message"</span><span style="color:#24292E">: </span><span style="color:#032F62">"Transaction boundary reached"</span><span style="color:#24292E">}}</span></span></code></pre>
+<ul>
 <li><strong>Pagination is uneven (kept for compatibility):</strong> <code>/api/transaction</code>,
 <code>/api/user/{id}/transaction</code> and <code>/api/article</code> accept
 <code>?limit=…&amp;offset=…</code> with a <strong>default limit of 25</strong> — forget <code>limit</code> and
@@ -104,64 +42,54 @@ limits — consistent with the trusted-network model, and more reasons not to
 expose it publicly.</li>
 </ul>
 <h2 id="the-two-calls-every-integration-makes">The two calls every integration makes</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># deposit 1.00 € with a comment</span>
-</span></span><span style="display:flex;"><span>curl -X POST http://server/api/user/4/transaction <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span>  -H <span style="color:#0a3069">&#39;Content-Type: application/json&#39;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span>  -d <span style="color:#0a3069">&#39;{&#34;amount&#34;: 100, &#34;comment&#34;: &#34;cash box&#34;}&#39;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a"># buy an article (server computes the price; amount must be omitted</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a"># or negative — sending a positive amount with articleId is rejected)</span>
-</span></span><span style="display:flex;"><span>curl -X POST http://server/api/user/4/transaction <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span>  -H <span style="color:#0a3069">&#39;Content-Type: application/json&#39;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span>  -d <span style="color:#0a3069">&#39;{&#34;articleId&#34;: 3, &#34;quantity&#34;: 1}&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a"># → {&#34;transaction&#34;: {&#34;id&#34;: …, &#34;amount&#34;: -150, &#34;article&#34;: {…}, …}}</span>
-</span></span></code></pre></div><p>The scanner-script recipe (e.g. for a serial scanner or vending machine):
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># deposit 1.00 € with a comment</span></span>
+<span class="line"><span style="color:#6F42C1">curl</span><span style="color:#005CC5"> -X</span><span style="color:#032F62"> POST</span><span style="color:#032F62"> http://server/api/user/4/transaction</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">  -H</span><span style="color:#032F62"> 'Content-Type: application/json'</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">  -d</span><span style="color:#032F62"> '{"amount": 100, "comment": "cash box"}'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># buy an article (server computes the price; amount must be omitted</span></span>
+<span class="line"><span style="color:#6A737D"># or negative — sending a positive amount with articleId is rejected)</span></span>
+<span class="line"><span style="color:#6F42C1">curl</span><span style="color:#005CC5"> -X</span><span style="color:#032F62"> POST</span><span style="color:#032F62"> http://server/api/user/4/transaction</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">  -H</span><span style="color:#032F62"> 'Content-Type: application/json'</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">  -d</span><span style="color:#032F62"> '{"articleId": 3, "quantity": 1}'</span></span>
+<span class="line"><span style="color:#6A737D"># → {"transaction": {"id": …, "amount": -150, "article": {…}, …}}</span></span></code></pre>
+<p>The scanner-script recipe (e.g. for a serial scanner or vending machine):
 <code>GET /api/article?barcode=&lt;scan&gt;</code> → take <code>articles[0].id</code> →
-<code>POST /api/user/{id}/transaction</code> with <code>{&quot;articleId&quot;: …}</code>.</p>
+<code>POST /api/user/{id}/transaction</code> with <code>{"articleId": …}</code>.</p>
 <h2 id="resource-overview">Resource overview</h2>
-<p>Full, browsable detail at <code>/api/doc</code> on your instance; prose examples in
-the repository&rsquo;s
-<a href="https://github.com/strichliste/strichliste-backend/blob/master/docs/API.md">docs/API.md</a>.</p>
-<div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Resource</th>
-        <th scope="col">Endpoints</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Users</td>
-        <td><code>GET /api/user</code> (all enabled; <code>?active=true|false</code> filters by activity), <code>POST /api/user</code>, <code>GET/POST /api/user/{id}</code> (id or exact name), <code>GET /api/user/search</code></td>
-      </tr>
-      <tr>
-        <td>Transactions</td>
-        <td><code>GET /api/transaction</code> (global list), <code>GET/POST /api/user/{id}/transaction</code>, <code>GET/DELETE /api/user/{id}/transaction/{tid}</code> (DELETE = undo/revert)</td>
-      </tr>
-      <tr>
-        <td>Articles</td>
-        <td><code>GET/POST /api/article</code> (filters: <code>barcode</code>, <code>active</code>, …), <code>GET/POST /api/article/{id}</code>, <code>DELETE /api/article/{id}</code> (soft delete: deactivates), <code>GET /api/article/search</code></td>
-      </tr>
-      <tr>
-        <td>Barcodes / tags</td>
-        <td><code>GET /api/barcode</code>, <code>GET /api/tag</code>, and per article <code>GET/POST …/barcode</code>, <code>GET/DELETE …/barcode/{bid}</code> (same shape for <code>…/tag</code>)</td>
-      </tr>
-      <tr>
-        <td>Metrics</td>
-        <td><code>GET /api/metrics</code> (system-wide: sum of balances, counts, top articles), <code>GET /api/user/{id}/metrics</code></td>
-      </tr>
-      <tr>
-        <td>Settings</td>
-        <td><code>GET /api/settings</code> — serves the <a href="/docs/configuration/">strichliste.yaml</a> values</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-    </div>
-</div>
-    </main>
-  </body>
-</html>
-
+<p>Full, browsable detail at <code>/api/doc</code> on your instance.</p>
+<div class="table-responsive"><table class="table">
+<thead>
+<tr>
+<th>Resource</th>
+<th>Endpoints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Users</td>
+<td><code>GET /api/user</code> (all enabled; <code>?active=true|false</code> filters by activity), <code>POST /api/user</code>, <code>GET/POST /api/user/{id}</code> (id or exact name), <code>GET /api/user/search</code></td>
+</tr>
+<tr>
+<td>Transactions</td>
+<td><code>GET /api/transaction</code> (global list), <code>GET/POST /api/user/{id}/transaction</code>, <code>GET/DELETE /api/user/{id}/transaction/{tid}</code> (DELETE = undo; follows the <a href="/docs/configuration/#paymentundo">payment.undo</a> policy)</td>
+</tr>
+<tr>
+<td>Articles</td>
+<td><code>GET/POST /api/article</code> (filters: <code>barcode</code>, <code>active</code>, …), <code>GET/POST /api/article/{id}</code>, <code>DELETE /api/article/{id}</code> (soft delete: deactivates), <code>GET /api/article/search</code></td>
+</tr>
+<tr>
+<td>Barcodes / tags</td>
+<td><code>GET /api/barcode</code>, <code>GET /api/tag</code>, and per article <code>GET/POST …/barcode</code>, <code>GET/DELETE …/barcode/{bid}</code> (same shape for <code>…/tag</code>)</td>
+</tr>
+<tr>
+<td>Metrics</td>
+<td><code>GET /api/metrics</code> (system-wide: sum of balances, counts, top articles), <code>GET /api/user/{id}/metrics</code></td>
+</tr>
+<tr>
+<td>Settings</td>
+<td><code>GET /api/settings</code> — serves the <a href="/docs/configuration/">strichliste.yaml</a> values</td>
+</tr>
+</tbody>
+</table></div>
+</div></div></main></body></html>

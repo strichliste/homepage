@@ -1,68 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Install strichliste · strichliste</title>
-    <meta name="description" content="How to install strichliste 3: with Docker (recommended) or directly on your own server." />
-    
-
-    <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
-
-    <link href="/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/css/app.css" rel="stylesheet" />
-    
-  </head>
-  <body>
-    <a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a>
-    <header class="header container d-flex justify-content-between align-items-end flex-wrap">
-      <a class="logo" href="/">
-        <img src="/img/strichliste-logo.png" alt="strichliste — home" width="251" height="35" />
-      </a>
-      <nav aria-label="Main">
-            <ul class="nav" role="list">
-        
-        
-        
-        
-        <li><a href="/">Home</a></li>
-        
-        
-        
-        <li><a href="/about/">About</a></li>
-        
-        
-        
-        <li class="active"><a href="/install/" aria-current="page">Install</a></li>
-        
-        
-        
-        <li><a href="/docs/">Docs</a></li>
-        
-        
-        
-        <li><a href="https://demo.strichliste.org">Demo</a></li>
-        
-        
-        
-        <li><a href="https://github.com/strichliste">Source</a></li>
-        
-        
-        
-        <li><a href="/faq/">FAQ</a></li>
-        
-    </ul>
-
-      </nav>
-    </header>
-    <main id="main" tabindex="-1">
-
-<div class="container">
-    <div class="row content margin-bottom-20">
-        <h1>Install strichliste</h1>
-        
-        <p>Installing <strong>strichliste 3</strong>, short version: use Docker, set two values in
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Install strichliste · strichliste</title><meta name="description" content="How to install strichliste 3: with Docker (recommended) or directly on your own server."><link rel="alternate" type="application/rss+xml" href="https://www.strichliste.org/index.xml" title="Strichliste ‒ The Tally Sheet Replacement for Your Organization"><link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png"><link rel="stylesheet" href="/_astro/Layout.D9ZuYYk7.css"></head><body><a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a><header class="header container d-flex justify-content-between align-items-end flex-wrap"><a class="logo" href="/"><img src="/_astro/strichliste-logo.Dv_sgQBX_179dzA.webp" alt="strichliste — home" loading="eager" decoding="async" width="251" height="35"></a><nav aria-label="Main"><ul class="nav" role="list"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li class="active"><a href="/install/" aria-current="page">Install</a></li><li><a href="/docs/">Docs</a></li><li><a href="https://demo.strichliste.org">Demo</a></li><li><a href="https://github.com/strichliste">Source</a></li><li><a href="/faq/">FAQ</a></li></ul></nav></header><main id="main" tabindex="-1"><div class="container"><div class="row content margin-bottom-20"><h1>Install strichliste</h1><p>Installing <strong>strichliste 3</strong>, short version: use Docker, set two values in
 <code>.env</code>, run one command. The
 <a href="https://github.com/strichliste/strichliste-backend#readme">README</a> is the
 full operations manual (TLS, every setting, backup &amp; restore, upgrades,
@@ -74,22 +10,24 @@ password-protecting proxy (HTTP basic auth) in front.
 <strong>Do not port-forward strichliste to the internet.</strong></p>
 </blockquote>
 <h2 id="try-it-in-five-minutes">Try it in five minutes</h2>
+<p>First time? <a href="/docs/getting-started/">Getting started</a> walks through this and
+your first booking.</p>
 <p>You need <strong>git</strong> and a <strong>running Docker</strong> (Engine 25+, Compose v2.30+ — any
 recent Docker Desktop qualifies):</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/strichliste/strichliste-backend.git
-</span></span><span style="display:flex;"><span><span style="color:#6639ba">cd</span> strichliste-backend
-</span></span><span style="display:flex;"><span>make up
-</span></span></code></pre></div><p><code>make up</code> is <code>docker compose up -d --build --wait</code> with a longer first-boot
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">git</span><span style="color:#032F62"> clone</span><span style="color:#032F62"> https://github.com/strichliste/strichliste-backend.git</span></span>
+<span class="line"><span style="color:#005CC5">cd</span><span style="color:#032F62"> strichliste-backend</span></span>
+<span class="line"><span style="color:#6F42C1">make</span><span style="color:#032F62"> up</span></span></code></pre>
+<p><code>make up</code> is <code>docker compose up -d --build --wait</code> with a longer first-boot
 timeout — the initial build downloads all dependencies and can outlast
-Docker&rsquo;s default wait. No <code>make</code>? Run it directly:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up -d --build --wait --wait-timeout <span style="color:#0550ae">300</span>
-</span></span></code></pre></div><p>The first run takes a few minutes; later starts are quick. Then open
-<strong>https://localhost</strong>. The browser shows a one-time certificate warning (in
+Docker’s default wait. No <code>make</code>? Run it directly:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">docker</span><span style="color:#032F62"> compose</span><span style="color:#032F62"> up</span><span style="color:#005CC5"> -d</span><span style="color:#005CC5"> --build</span><span style="color:#005CC5"> --wait</span><span style="color:#005CC5"> --wait-timeout</span><span style="color:#005CC5"> 300</span></span></code></pre>
+<p>The first run takes a few minutes; later starts are quick. Then open
+<strong><a href="https://localhost">https://localhost</a></strong>. The browser shows a one-time certificate warning (in
 Chrome: <em>Your connection is not private</em> → <strong>Advanced</strong> → <strong>Proceed to
-localhost</strong>) — that&rsquo;s the self-signed local certificate, expected on
+localhost</strong>) — that’s the self-signed local certificate, expected on
 localhost. To silence it, run <code>make tls</code> once to trust the local CA (it asks
 for your password and only affects this machine). The database comes ready:
-add a user, add an article under <em>Article List</em>, buy it — that&rsquo;s the whole
+add a user, add an article under <em>Article List</em>, buy it — that’s the whole
 loop.</p>
 <p>If ports 80/443 are already taken, set <code>HTTP_PORT</code> / <code>HTTPS_PORT</code> /
 <code>HTTP3_PORT</code> in <code>.env</code> and open the HTTPS port directly (e.g.
@@ -107,25 +45,27 @@ it stays fast even on a Raspberry Pi. It runs on arm64 too (Pi 4/5 with a
 <ul>
 <li>set a unique <code>APP_SECRET</code> (<code>openssl rand -hex 32</code>),</li>
 <li>uncomment <code>COMPOSE_FILE=compose.yaml:compose.prod.yaml</code>, so a plain
-<code>docker compose up</code> later doesn&rsquo;t start the development version,</li>
+<code>docker compose up</code> later doesn’t start the development version,</li>
 <li>optionally set <code>SERVER_NAME</code>. Three choices:
 <ul>
 <li><code>localhost</code> (the default) — a self-signed certificate; browsers show
 a one-time warning.</li>
-<li><code>&quot;:80&quot;</code> — plain HTTP, for when your own proxy handles HTTPS.</li>
-<li>a real hostname — automatic Let&rsquo;s Encrypt certificates. Needs the box
+<li><code>":80"</code> — plain HTTP, for when your own proxy handles HTTPS.</li>
+<li>a real hostname — automatic Let’s Encrypt certificates. Needs the box
 reachable from the internet, which goes against the LAN-only advice
-above, so most installs won&rsquo;t want it.</li>
+above, so most installs won’t want it.</li>
 </ul>
 </li>
 </ul>
 <p>Two things about <code>.env</code>: it is <strong>git-tracked</strong>, so your edits must survive
-<code>git pull</code> (watch for conflicts when upgrading). And it is <strong>baked into
-the image</strong> at build time — fine when image and host are the same box, but
-never push such an image to a registry; for registry deploys pass
-<code>APP_SECRET</code> as a real environment variable instead. Because it&rsquo;s baked at
-build time, edit <code>.env</code> <em>before</em> your first production build — change it
-later and you must rebuild (<code>make prod</code>) for the new value to take effect.</p>
+<code>git pull</code> (watch for conflicts when upgrading). And a copy is <strong>baked
+into the image</strong> at build time — so never push a self-built image to a
+registry while <code>.env</code> holds real secrets; for registry deploys pass
+<code>APP_SECRET</code> as a real environment variable instead. No rebuild is needed
+after edits, though: <code>APP_SECRET</code>, <code>SERVER_NAME</code>, <code>DATABASE_URL</code> and the
+ports are read from <code>.env</code> each time you run the <code>up</code> command, so
+rerunning it applies them. (The app also warns on boot if <code>APP_SECRET</code> is
+still the committed value.)</p>
 </li>
 <li>
 <p>Start it with the raw command, or <code>make prod</code> (better for upgrades: it
@@ -133,16 +73,16 @@ also re-pulls the base images, so FrankenPHP/PHP and Postgres security
 patches arrive — a plain <code>up --build</code> reuses the cached base layers):</p>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose -f compose.yaml -f compose.prod.yaml up -d --build --wait
-</span></span><span style="display:flex;"><span><span style="color:#57606a"># or: make prod</span>
-</span></span></code></pre></div><p>The container waits for the database and applies migrations on every boot —
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">docker</span><span style="color:#032F62"> compose</span><span style="color:#005CC5"> -f</span><span style="color:#032F62"> compose.yaml</span><span style="color:#005CC5"> -f</span><span style="color:#032F62"> compose.prod.yaml</span><span style="color:#032F62"> up</span><span style="color:#005CC5"> -d</span><span style="color:#005CC5"> --build</span><span style="color:#005CC5"> --wait</span></span>
+<span class="line"><span style="color:#6A737D"># or: make prod</span></span></code></pre>
+<p>The container waits for the database and applies migrations on every boot —
 first install and upgrade are the same command (<code>git pull &amp;&amp; make prod</code>).
 Health checks, restart policy and log rotation are preconfigured.</p>
 <p>There is <strong>no prebuilt registry image</strong> — NAS/Portainer users build with
 <code>docker build --target frankenphp_prod</code> and push to their own registry (mind
 the baked-<code>.env</code> warning above).</p>
 <p>When something breaks, check <code>docker compose logs app</code> — access log, PHP
-errors and the entrypoint&rsquo;s progress all go to container output. For uptime
+errors and the entrypoint’s progress all go to container output. For uptime
 monitoring, probe <code>GET /api/settings</code> (cheap, unauthenticated, returns 200 +
 JSON).</p>
 <h2 id="choosing-a-database">Choosing a database</h2>
@@ -161,18 +101,18 @@ Postgres with an empty <code>COMPOSE_PROFILES=</code>. The image carries all thr
 drivers and prepares the schema on boot. Single-container SQLite, for example
 (stored in the <code>app_var</code> volume — note the <strong>four</strong> slashes for an absolute
 path):</p>
-<pre tabindex="0"><code class="language-dotenv" data-lang="dotenv">DATABASE_URL=&#34;sqlite:////app/var/data.db&#34;
-COMPOSE_PROFILES=
-</code></pre><p><strong>On bare metal</strong>, for example with <strong>mysql/mariadb</strong> on the same host:</p>
-<pre tabindex="0"><code>DATABASE_URL=&#34;mysql://strichliste:32YourPassWord42@localhost/strichliste?serverVersion=10.11.2-MariaDB&#34;
-</code></pre><p>Create a database and a separate user:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#cf222e">CREATE</span><span style="color:#fff"> </span><span style="color:#cf222e">DATABASE</span><span style="color:#fff"> </span>strichliste<span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">CREATE</span><span style="color:#fff"> </span><span style="color:#cf222e">USER</span><span style="color:#fff"> </span><span style="color:#0a3069">&#39;strichliste&#39;</span><span style="color:#0550ae">@</span><span style="color:#0a3069">&#39;localhost&#39;</span><span style="color:#fff"> </span>IDENTIFIED<span style="color:#fff"> </span><span style="color:#cf222e">BY</span><span style="color:#fff"> </span><span style="color:#0a3069">&#39;32YourPassWord42&#39;</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span><span style="color:#cf222e">GRANT</span><span style="color:#fff"> </span><span style="color:#cf222e">ALL</span><span style="color:#fff"> </span><span style="color:#cf222e">PRIVILEGES</span><span style="color:#fff"> </span><span style="color:#cf222e">ON</span><span style="color:#fff"> </span>strichliste<span style="color:#1f2328">.</span><span style="color:#0550ae">*</span><span style="color:#fff"> </span><span style="color:#cf222e">TO</span><span style="color:#fff"> </span><span style="color:#0a3069">&#39;strichliste&#39;</span><span style="color:#0550ae">@</span><span style="color:#0a3069">&#39;localhost&#39;</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span><span style="display:flex;"><span>FLUSH<span style="color:#fff"> </span><span style="color:#cf222e">PRIVILEGES</span><span style="color:#1f2328">;</span><span style="color:#fff">
-</span></span></span></code></pre></div><p>Then apply the schema:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php bin/console doctrine:migrations:migrate
-</span></span></code></pre></div><h2 id="bare-metal-without-docker">Bare metal (without Docker)</h2>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="dotenv"><code><span class="line"><span style="color:#E36209">DATABASE_URL</span><span style="color:#D73A49">=</span><span style="color:#032F62">"sqlite:////app/var/data.db"</span></span>
+<span class="line"><span style="color:#E36209">COMPOSE_PROFILES</span><span style="color:#D73A49">=</span></span></code></pre>
+<p><strong>On bare metal</strong>, for example with <strong>mysql/mariadb</strong> on the same host:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>DATABASE_URL="mysql://strichliste:32YourPassWord42@localhost/strichliste?serverVersion=10.11.2-MariaDB"</span></span></code></pre>
+<p>Create a database and a separate user:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#D73A49">CREATE</span><span style="color:#D73A49"> DATABASE</span><span style="color:#6F42C1"> strichliste</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">CREATE</span><span style="color:#D73A49"> USER</span><span style="color:#24292E"> '</span><span style="color:#6F42C1">strichliste</span><span style="color:#24292E">'@</span><span style="color:#032F62">'localhost'</span><span style="color:#24292E"> IDENTIFIED </span><span style="color:#D73A49">BY</span><span style="color:#032F62"> '32YourPassWord42'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">GRANT</span><span style="color:#24292E"> ALL PRIVILEGES </span><span style="color:#D73A49">ON</span><span style="color:#24292E"> strichliste.</span><span style="color:#D73A49">*</span><span style="color:#D73A49"> TO</span><span style="color:#032F62"> 'strichliste'</span><span style="color:#24292E">@</span><span style="color:#032F62">'localhost'</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#24292E">FLUSH PRIVILEGES;</span></span></code></pre>
+<p>Then apply the schema:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">php</span><span style="color:#032F62"> bin/console</span><span style="color:#032F62"> doctrine:migrations:migrate</span></span></code></pre>
+<h2 id="bare-metal-without-docker">Bare metal (without Docker)</h2>
 <p>The classic setup still works, modernized:</p>
 <ol>
 <li><strong>Requirements</strong>: PHP ≥ 8.4 with <code>intl</code>, <code>ctype</code>, <code>iconv</code>, <code>json</code> and the
@@ -181,42 +121,42 @@ a web server with PHP-FPM.</li>
 <li><strong>Get the code</strong>: build from a git checkout (tagged releases with a
 ready-built package will follow):</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>composer install --no-dev --optimize-autoloader
-</span></span><span style="display:flex;"><span>php bin/console importmap:install
-</span></span><span style="display:flex;"><span>php bin/console asset-map:compile
-</span></span></code></pre></div><ol start="3">
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">composer</span><span style="color:#032F62"> install</span><span style="color:#005CC5"> --no-dev</span><span style="color:#005CC5"> --optimize-autoloader</span></span>
+<span class="line"><span style="color:#6F42C1">php</span><span style="color:#032F62"> bin/console</span><span style="color:#032F62"> importmap:install</span></span>
+<span class="line"><span style="color:#6F42C1">php</span><span style="color:#032F62"> bin/console</span><span style="color:#032F62"> asset-map:compile</span></span></code></pre>
+<ol start="3">
 <li>
 <p><strong>Configure the database</strong> via environment (or <code>.env.local</code>) as shown
 above, then run the migrations.</p>
 </li>
 <li>
 <p><strong>Configure the web server</strong>: point the document root at <code>public/</code> and
-route every request that isn&rsquo;t a real file through <code>public/index.php</code>.
+route every request that isn’t a real file through <code>public/index.php</code>.
 For Apache, the repository ships a rewrite rule in
 <a href="https://github.com/strichliste/strichliste-backend/blob/master/public/.htaccess.example"><code>public/.htaccess.example</code></a>
 — enable <code>mod_rewrite</code> and rename it to <code>.htaccess</code>. A minimal nginx
 server block:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#cf222e">server</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">listen</span> <span style="color:#0550ae">80</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">server_name</span> <span style="color:#0a3069">strichliste.example.com</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">root</span> <span style="color:#0a3069">/var/www/strichliste/public</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">location</span> <span style="color:#0a3069">/</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">try_files</span> <span style="color:#953800">$uri</span> <span style="color:#0a3069">/index.php</span><span style="color:#953800">$is_args$args</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">location</span> <span style="color:#1f2328">~</span> <span style="color:#0a3069">^/index\.php(/|$)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#57606a"># adjust to your PHP-FPM socket or 127.0.0.1:9000
-</span></span></span><span style="display:flex;"><span>        <span style="color:#cf222e">fastcgi_pass</span> <span style="color:#0a3069">unix:/run/php/php-fpm.sock</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">fastcgi_split_path_info</span> <span style="color:#0a3069">^(.+\.php)(/.*)</span>$<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">include</span> <span style="color:#0a3069">fastcgi_params</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">fastcgi_param</span> <span style="color:#0a3069">SCRIPT_FILENAME</span> <span style="color:#953800">$realpath_root$fastcgi_script_name</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">fastcgi_param</span> <span style="color:#0a3069">DOCUMENT_ROOT</span> <span style="color:#953800">$realpath_root</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">location</span> <span style="color:#1f2328">~</span> <span style="color:#0a3069">\.php$</span> <span style="color:#1f2328">{</span> <span style="color:#cf222e">return</span> <span style="color:#0550ae">404</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><p>This is the standard Symfony layout; the
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="nginx"><code><span class="line"><span style="color:#D73A49">server</span><span style="color:#24292E"> {</span></span>
+<span class="line"><span style="color:#D73A49">    listen </span><span style="color:#005CC5">80</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">    server_name </span><span style="color:#24292E">strichliste.example.com;</span></span>
+<span class="line"><span style="color:#D73A49">    root </span><span style="color:#24292E">/var/www/strichliste/public;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">    location</span><span style="color:#6F42C1"> / </span><span style="color:#24292E">{</span></span>
+<span class="line"><span style="color:#D73A49">        try_files </span><span style="color:#24292E">$uri /index.php$is_args$args;</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">    location</span><span style="color:#D73A49"> ~</span><span style="color:#032F62"> ^/index\.php(/|$) </span><span style="color:#24292E">{</span></span>
+<span class="line"><span style="color:#6A737D">        # adjust to your PHP-FPM socket or 127.0.0.1:9000</span></span>
+<span class="line"><span style="color:#D73A49">        fastcgi_pass </span><span style="color:#24292E">unix:/run/php/php-fpm.sock;</span></span>
+<span class="line"><span style="color:#D73A49">        fastcgi_split_path_info </span><span style="color:#032F62">^(.+\.php)(/.*)$</span><span style="color:#24292E">;</span></span>
+<span class="line"><span style="color:#D73A49">        include </span><span style="color:#24292E">fastcgi_params;</span></span>
+<span class="line"><span style="color:#D73A49">        fastcgi_param </span><span style="color:#24292E">SCRIPT_FILENAME $realpath_root$fastcgi_script_name;</span></span>
+<span class="line"><span style="color:#D73A49">        fastcgi_param </span><span style="color:#24292E">DOCUMENT_ROOT $realpath_root;</span></span>
+<span class="line"><span style="color:#24292E">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D73A49">    location</span><span style="color:#D73A49"> ~</span><span style="color:#032F62"> \.php$ </span><span style="color:#24292E">{ </span><span style="color:#D73A49">return</span><span style="color:#005CC5"> 404</span><span style="color:#24292E">; }</span></span>
+<span class="line"><span style="color:#24292E">}</span></span></code></pre>
+<p>This is the standard Symfony layout; the
 <a href="https://symfony.com/doc/current/setup/web_server_configuration.html">Symfony web-server docs</a>
 cover the TLS variant and the full Apache config.</p>
 </li>
@@ -229,20 +169,15 @@ log files of its own.</p>
 </ol>
 <h2 id="common-pitfalls">Common pitfalls</h2>
 <ul>
-<li>Using SQLite? Check the folder owner/group — otherwise strichliste can&rsquo;t
+<li>Using SQLite? Check the folder owner/group — otherwise strichliste can’t
 write to it.</li>
 <li>JSON API requests need a <code>Content-Type: application/json</code> header — without
-it the body is silently ignored.</li>
+it the request is rejected.</li>
 </ul>
 <h2 id="keeping-your-existing-data">Keeping your existing data</h2>
 <p><strong>Already running strichliste 2 or newer?</strong> There is <strong>no import step</strong> —
-point <code>DATABASE_URL</code> at your existing database (SQLite file, MariaDB/MySQL or
-Postgres) and start the app. The migrations detect a populated database and
-bring it up to the current version safely on first boot. With Docker, copy the
-old SQLite file into the <code>app_var</code> volume (or set your external DSN) and boot.
-<strong>Back up first</strong> — on MySQL/MariaDB the backup is your only safety net,
-because DDL there isn&rsquo;t transactional and a half-finished migration can&rsquo;t roll
-itself back.</p>
+strichliste 3 starts on your existing database and upgrades it on first boot.
+Step by step: <a href="/docs/migrate-from-strichliste2/">Migrate from strichliste 2</a>.</p>
 <p>Coming from the much older <strong>strichliste 1</strong> (a different schema)? That needs
 a one-time conversion with the
 <a href="/docs/commands/#import-a-strichliste-1-database"><code>app:import</code> command</a>. It
@@ -253,17 +188,11 @@ database unless you pass <code>--force</code> — only convert into a fresh inst
 <h2 id="before-you-rely-on-it-for-real-money">Before you rely on it for real money</h2>
 <p>Set up a nightly backup <em>before</em> go-live. With the bundled Postgres it is a
 one-liner for cron:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose <span style="color:#6639ba">exec</span> database pg_dump -U strichliste strichliste &gt; strichliste-<span style="color:#cf222e">$(</span>date +%F<span style="color:#cf222e">)</span>.sql
-</span></span></code></pre></div><p>For SQLite, snapshot it consistently even while running:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose <span style="color:#6639ba">exec</span> app php bin/console dbal:run-sql <span style="color:#0a3069">&#34;VACUUM INTO &#39;/app/var/backup.db&#39;&#34;</span>
-</span></span><span style="display:flex;"><span>docker compose cp app:/app/var/backup.db strichliste-<span style="color:#cf222e">$(</span>date +%F<span style="color:#cf222e">)</span>.db
-</span></span></code></pre></div><p>The README&rsquo;s
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">docker</span><span style="color:#032F62"> compose</span><span style="color:#032F62"> exec</span><span style="color:#032F62"> database</span><span style="color:#032F62"> pg_dump</span><span style="color:#005CC5"> -U</span><span style="color:#032F62"> strichliste</span><span style="color:#032F62"> strichliste</span><span style="color:#D73A49"> ></span><span style="color:#032F62"> strichliste-</span><span style="color:#24292E">$(</span><span style="color:#6F42C1">date</span><span style="color:#032F62"> +%F</span><span style="color:#24292E">)</span><span style="color:#032F62">.sql</span></span></code></pre>
+<p>For SQLite, snapshot it consistently even while running:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">docker</span><span style="color:#032F62"> compose</span><span style="color:#032F62"> exec</span><span style="color:#032F62"> app</span><span style="color:#032F62"> php</span><span style="color:#032F62"> bin/console</span><span style="color:#032F62"> dbal:run-sql</span><span style="color:#032F62"> "VACUUM INTO '/app/var/backup.db'"</span></span>
+<span class="line"><span style="color:#6F42C1">docker</span><span style="color:#032F62"> compose</span><span style="color:#032F62"> cp</span><span style="color:#032F62"> app:/app/var/backup.db</span><span style="color:#032F62"> strichliste-</span><span style="color:#24292E">$(</span><span style="color:#6F42C1">date</span><span style="color:#032F62"> +%F</span><span style="color:#24292E">)</span><span style="color:#032F62">.db</span></span></code></pre>
+<p>The README’s
 <a href="https://github.com/strichliste/strichliste-backend#backup-upgrades-rollback">backup, upgrades &amp; rollback section</a>
 covers restore and rollback in full. Test your backup before you need it.</p>
-
-    </div>
-</div>
-    </main>
-  </body>
-</html>
-
+</div></div></main></body></html>

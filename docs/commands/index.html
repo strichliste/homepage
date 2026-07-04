@@ -1,109 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Console commands · strichliste</title>
-    <meta name="description" content="Command-line tools: import, user cleanup, deleting old data, LDAP import." />
-    
-
-    <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
-
-    <link href="/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/css/app.css" rel="stylesheet" />
-    
-  </head>
-  <body>
-    <a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a>
-    <header class="header container d-flex justify-content-between align-items-end flex-wrap">
-      <a class="logo" href="/">
-        <img src="/img/strichliste-logo.png" alt="strichliste — home" width="251" height="35" />
-      </a>
-      <nav aria-label="Main">
-            <ul class="nav" role="list">
-        
-        
-        
-        
-        <li><a href="/">Home</a></li>
-        
-        
-        
-        <li><a href="/about/">About</a></li>
-        
-        
-        
-        <li><a href="/install/">Install</a></li>
-        
-        
-        
-        <li class="active"><a href="/docs/" aria-current="true">Docs</a></li>
-        
-        
-        
-        <li><a href="https://demo.strichliste.org">Demo</a></li>
-        
-        
-        
-        <li><a href="https://github.com/strichliste">Source</a></li>
-        
-        
-        
-        <li><a href="/faq/">FAQ</a></li>
-        
-    </ul>
-
-      </nav>
-    </header>
-    <main id="main" tabindex="-1">
-
-<div class="container">
-    <div class="row content margin-bottom-20">
-        <h1>Console commands</h1>
-        
-        <p>Run with <code>php bin/console …</code> — inside Docker:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose <span style="color:#6639ba">exec</span> app php bin/console …
-</span></span></code></pre></div><div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Command</th>
-        <th scope="col">Purpose</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>app:import &lt;file&gt;</code></td>
-        <td>Import a strichliste 1 <code>database.sqlite</code>. <strong>Replaces all data</strong> — refuses a non-empty database without <code>--force</code>.</td>
-      </tr>
-      <tr>
-        <td><code>app:user:status &lt;user&gt; &lt;true|false&gt;</code></td>
-        <td>Deactivate (<code>true</code>) or reactivate (<code>false</code>) an account, by name or id.</td>
-      </tr>
-      <tr>
-        <td><code>app:user:cleanup</code></td>
-        <td>Bulk-disable accounts inactive for longer than an interval.</td>
-      </tr>
-      <tr>
-        <td><code>app:retire-data</code></td>
-        <td><strong>Delete</strong> transactions older than an interval — the data-privacy tool.</td>
-      </tr>
-      <tr>
-        <td><code>app:ldapimport</code></td>
-        <td>Create/update users from an LDAP directory (cron-able).</td>
-      </tr>
-      <tr>
-        <td><code>cache:clear</code></td>
-        <td>Apply <code>strichliste.yaml</code> changes (bare metal; the Docker entrypoint does this on boot).</td>
-      </tr>
-      <tr>
-        <td><code>doctrine:migrations:migrate</code></td>
-        <td>Apply schema migrations (automatic in Docker).</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Console commands · strichliste</title><meta name="description" content="Command-line tools: import, user cleanup, deleting old data, LDAP import."><link rel="alternate" type="application/rss+xml" href="https://www.strichliste.org/index.xml" title="Strichliste ‒ The Tally Sheet Replacement for Your Organization"><link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png"><link rel="stylesheet" href="/_astro/Layout.D9ZuYYk7.css"></head><body><a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a><header class="header container d-flex justify-content-between align-items-end flex-wrap"><a class="logo" href="/"><img src="/_astro/strichliste-logo.Dv_sgQBX_179dzA.webp" alt="strichliste — home" loading="eager" decoding="async" width="251" height="35"></a><nav aria-label="Main"><ul class="nav" role="list"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/install/">Install</a></li><li class="active"><a href="/docs/" aria-current="true">Docs</a></li><li><a href="https://demo.strichliste.org">Demo</a></li><li><a href="https://github.com/strichliste">Source</a></li><li><a href="/faq/">FAQ</a></li></ul></nav></header><main id="main" tabindex="-1"><div class="container"><div class="row content margin-bottom-20"><h1>Console commands</h1><p>Run with <code>php bin/console …</code> — inside Docker:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">docker</span><span style="color:#032F62"> compose</span><span style="color:#032F62"> exec</span><span style="color:#032F62"> app</span><span style="color:#032F62"> php</span><span style="color:#032F62"> bin/console</span><span style="color:#032F62"> …</span></span></code></pre>
+<div class="table-responsive"><table class="table">
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app:import &lt;file&gt;</code></td>
+<td>Import a strichliste 1 <code>database.sqlite</code>. <strong>Replaces all data</strong> — refuses a non-empty database without <code>--force</code>.</td>
+</tr>
+<tr>
+<td><code>app:user:status &lt;user&gt; &lt;true|false&gt;</code></td>
+<td>Deactivate (<code>true</code>) or reactivate (<code>false</code>) an account, by name or id.</td>
+</tr>
+<tr>
+<td><code>app:user:cleanup</code></td>
+<td>Bulk-disable accounts inactive for longer than an interval.</td>
+</tr>
+<tr>
+<td><code>app:retire-data</code></td>
+<td><strong>Delete</strong> transactions older than an interval — the data-privacy tool.</td>
+</tr>
+<tr>
+<td><code>app:ldapimport</code></td>
+<td>Create/update users from an LDAP directory (cron-able).</td>
+</tr>
+<tr>
+<td><code>cache:clear</code></td>
+<td>Apply <code>strichliste.yaml</code> changes (bare metal; the Docker entrypoint does this on boot).</td>
+</tr>
+<tr>
+<td><code>doctrine:migrations:migrate</code></td>
+<td>Apply schema migrations (automatic in Docker).</td>
+</tr>
+</tbody>
+</table></div>
 <h2 id="import-a-strichliste-1-database">Import a strichliste 1 database</h2>
 <blockquote>
 <p><strong>For migrating from strichliste 1 only.</strong> If you are already on
@@ -111,177 +45,173 @@ strichliste 2 or newer, do <strong>not</strong> use this — point <code>DATABAS
 your existing database and start the app; the migrations run safely on it
 (see <a href="/install/#keeping-your-existing-data">Install</a>).</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php bin/console app:import database.sqlite
-</span></span></code></pre></div><p><strong>This replaces all data</strong> — every existing user, transaction <em>and</em> article
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">php</span><span style="color:#032F62"> bin/console</span><span style="color:#032F62"> app:import</span><span style="color:#032F62"> database.sqlite</span></span></code></pre>
+<p><strong>This replaces all data</strong> — every existing user, transaction <em>and</em> article
 is deleted before the import. To guard against accidents it <strong>refuses to run
 against a non-empty database unless you pass <code>--force</code></strong>, so only convert
 into a fresh install. It imports users and transactions; the product list is
 entered by hand afterwards. After a successful import the terminal outputs
-&ldquo;Import done!&rdquo;.</p>
-<div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">argument / option</th>
-        <th scope="col">description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>&lt;file&gt;</code></td>
-        <td>strichliste 1 SQLite database to import</td>
-      </tr>
-      <tr>
-        <td><code>--force</code></td>
-        <td>Required when the target database already holds data (wipes it)</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+“Import done!”.</p>
+<div class="table-responsive"><table class="table">
+<thead>
+<tr>
+<th>argument / option</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;file&gt;</code></td>
+<td>strichliste 1 SQLite database to import</td>
+</tr>
+<tr>
+<td><code>--force</code></td>
+<td>Required when the target database already holds data (wipes it)</td>
+</tr>
+</tbody>
+</table></div>
 <p>Importing into Docker — the file must be inside the container:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose cp database.sqlite app:/tmp/old.sqlite
-</span></span><span style="display:flex;"><span>docker compose <span style="color:#6639ba">exec</span> app php bin/console app:import /tmp/old.sqlite
-</span></span></code></pre></div><p>There is <strong>no CSV / paper-list importer</strong>. The practical route is a small
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">docker</span><span style="color:#032F62"> compose</span><span style="color:#032F62"> cp</span><span style="color:#032F62"> database.sqlite</span><span style="color:#032F62"> app:/tmp/old.sqlite</span></span>
+<span class="line"><span style="color:#6F42C1">docker</span><span style="color:#032F62"> compose</span><span style="color:#032F62"> exec</span><span style="color:#032F62"> app</span><span style="color:#032F62"> php</span><span style="color:#032F62"> bin/console</span><span style="color:#032F62"> app:import</span><span style="color:#032F62"> /tmp/old.sqlite</span></span></code></pre>
+<p>There is <strong>no CSV / paper-list importer</strong>. The practical route is a small
 shell loop over the <a href="/docs/api/">API</a>: <code>POST /api/user</code> per member, then
 <code>POST /api/user/{id}/transaction</code> with the opening balance.</p>
 <h2 id="user-status">User status</h2>
 <p>Deactivates or reactivates a user account by id or name. Note the second
 argument is <code>disable</code>, so the sense is inverted: <strong><code>true</code> deactivates</strong> the
 account, <code>false</code> brings it back.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php bin/console app:user:status &lt;userId&gt; &lt;disable&gt;
-</span></span></code></pre></div><div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">argument</th>
-        <th scope="col">description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>userId</td>
-        <td>username or id</td>
-      </tr>
-      <tr>
-        <td>disable</td>
-        <td><code>true</code> deactivates the account, <code>false</code> reactivates it</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">php</span><span style="color:#032F62"> bin/console</span><span style="color:#032F62"> app:user:status</span><span style="color:#D73A49"> &#x3C;</span><span style="color:#032F62">userI</span><span style="color:#24292E">d</span><span style="color:#D73A49">></span><span style="color:#D73A49"> &#x3C;</span><span style="color:#032F62">disabl</span><span style="color:#24292E">e</span><span style="color:#D73A49">></span></span></code></pre>
+<div class="table-responsive"><table class="table">
+<thead>
+<tr>
+<th>argument</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>userId</td>
+<td>username or id</td>
+</tr>
+<tr>
+<td>disable</td>
+<td><code>true</code> deactivates the account, <code>false</code> reactivates it</td>
+</tr>
+</tbody>
+</table></div>
 <h2 id="cleanup-accounts">Cleanup accounts</h2>
 <p>Bulk-disable accounts that have been unused for a while:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php bin/console app:user:cleanup --days<span style="color:#0550ae">=</span><span style="color:#0550ae">3</span> --months<span style="color:#0550ae">=</span><span style="color:#0550ae">10</span> --maxBalance<span style="color:#0550ae">=</span><span style="color:#0550ae">300</span> --confirm
-</span></span></code></pre></div><div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">option</th>
-        <th scope="col">description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>days / months / years</td>
-        <td>Inactivity interval</td>
-      </tr>
-      <tr>
-        <td>minBalance / maxBalance</td>
-        <td>Only touch accounts within this balance range (cents)</td>
-      </tr>
-      <tr>
-        <td>confirm</td>
-        <td>Skip the confirmation question</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">php</span><span style="color:#032F62"> bin/console</span><span style="color:#032F62"> app:user:cleanup</span><span style="color:#005CC5"> --days=3</span><span style="color:#005CC5"> --months=10</span><span style="color:#005CC5"> --maxBalance=300</span><span style="color:#005CC5"> --confirm</span></span></code></pre>
+<div class="table-responsive"><table class="table">
+<thead>
+<tr>
+<th>option</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>days / months / years</td>
+<td>Inactivity interval</td>
+</tr>
+<tr>
+<td>minBalance / maxBalance</td>
+<td>Only touch accounts within this balance range (cents)</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>Delete the accounts instead of deactivating them</td>
+</tr>
+<tr>
+<td>confirm</td>
+<td>Skip the confirmation question</td>
+</tr>
+</tbody>
+</table></div>
 <h2 id="retire-data">Retire data</h2>
 <p>Deletes transactions older than the given interval — useful for data
 privacy (GDPR retention). Check your bookkeeping retention duties before
 deleting financial records.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php bin/console app:retire-data --days<span style="color:#0550ae">=</span><span style="color:#0550ae">3</span> --months<span style="color:#0550ae">=</span><span style="color:#0550ae">10</span> --confirm
-</span></span></code></pre></div><div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">option</th>
-        <th scope="col">description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>days / months / years</td>
-        <td>Age threshold</td>
-      </tr>
-      <tr>
-        <td>confirm</td>
-        <td>Skip the confirmation question</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">php</span><span style="color:#032F62"> bin/console</span><span style="color:#032F62"> app:retire-data</span><span style="color:#005CC5"> --days=3</span><span style="color:#005CC5"> --months=10</span><span style="color:#005CC5"> --confirm</span></span></code></pre>
+<div class="table-responsive"><table class="table">
+<thead>
+<tr>
+<th>option</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>days / months / years</td>
+<td>Age threshold</td>
+</tr>
+<tr>
+<td>confirm</td>
+<td>Skip the confirmation question</td>
+</tr>
+</tbody>
+</table></div>
 <h2 id="import-from-ldap">Import from LDAP</h2>
-<p><strong>Attention:</strong> this command needs the <code>symfony/ldap</code> package, which is not
-included by default (and not available in the stock Docker image). Inside
-your installation run:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>composer require symfony/ldap
-</span></span></code></pre></div><p>Bare minimum example:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php bin/console app:ldapimport --host<span style="color:#0550ae">=</span>ldap.company.tld <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span>  --bindDn<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;cn=reader,ou=ldapuser,dc=company&#34;</span> <span style="color:#0a3069">\
-</span></span></span><span style="display:flex;"><span>  --password<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;yourpass&#34;</span> --baseDn<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;ou=employee,dc=company&#34;</span>
-</span></span></code></pre></div><div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">option</th>
-        <th scope="col">description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>host</td>
-        <td>hostname or IP</td>
-      </tr>
-      <tr>
-        <td>port</td>
-        <td>port of your LDAP server (default: 636)</td>
-      </tr>
-      <tr>
-        <td>ssl</td>
-        <td>none, ssl or tls (default: ssl)</td>
-      </tr>
-      <tr>
-        <td>bindDn</td>
-        <td>LDAP user</td>
-      </tr>
-      <tr>
-        <td>password</td>
-        <td>Password</td>
-      </tr>
-      <tr>
-        <td>baseDn</td>
-        <td>LDAP base DN</td>
-      </tr>
-      <tr>
-        <td>query</td>
-        <td>LDAP filter query (default: <code>($userField=*)</code>)</td>
-      </tr>
-      <tr>
-        <td>userField</td>
-        <td>Username field (default: <code>uid</code>)</td>
-      </tr>
-      <tr>
-        <td>emailField</td>
-        <td>Mail address field (default: off)</td>
-      </tr>
-      <tr>
-        <td>update</td>
-        <td>Update the mail address if the user exists (default: off)</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<p><strong>Attention:</strong> this command needs the <code>symfony/ldap</code> package, which ships
+only as a dev dependency — production installs (including the stock Docker
+image) don’t have it. On a bare-metal install run:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">composer</span><span style="color:#032F62"> require</span><span style="color:#032F62"> symfony/ldap</span></span></code></pre>
+<p>It also needs PHP’s <code>ldap</code> extension, which the stock Docker image lacks
+too — in practice LDAP import is bare-metal-only.</p>
+<p>Bare minimum example:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">php</span><span style="color:#032F62"> bin/console</span><span style="color:#032F62"> app:ldapimport</span><span style="color:#005CC5"> --host=ldap.company.tld</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">  --bindDn=</span><span style="color:#032F62">"cn=reader,ou=ldapuser,dc=company"</span><span style="color:#005CC5"> \</span></span>
+<span class="line"><span style="color:#005CC5">  --password=</span><span style="color:#032F62">"yourpass"</span><span style="color:#005CC5"> --baseDn=</span><span style="color:#032F62">"ou=employee,dc=company"</span></span></code></pre>
+<div class="table-responsive"><table class="table">
+<thead>
+<tr>
+<th>option</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host</td>
+<td>hostname or IP</td>
+</tr>
+<tr>
+<td>port</td>
+<td>port of your LDAP server (default: 636)</td>
+</tr>
+<tr>
+<td>ssl</td>
+<td>none, ssl or tls (default: ssl)</td>
+</tr>
+<tr>
+<td>bindDn</td>
+<td>LDAP user</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Password</td>
+</tr>
+<tr>
+<td>baseDn</td>
+<td>LDAP base DN</td>
+</tr>
+<tr>
+<td>query</td>
+<td>LDAP filter query (default: <code>($userField=*)</code>)</td>
+</tr>
+<tr>
+<td>userField</td>
+<td>Username field (default: <code>uid</code>)</td>
+</tr>
+<tr>
+<td>emailField</td>
+<td>Mail address field (default: off)</td>
+</tr>
+<tr>
+<td>update</td>
+<td>Update the mail address if the user exists (default: off)</td>
+</tr>
+</tbody>
+</table></div>
 <p>You can run this command as a cronjob to pick up changes in your LDAP
 directory, e.g. new members or changed mail addresses.</p>
 <h2 id="getting-data-out">Getting data out</h2>
@@ -289,10 +219,4 @@ directory, e.g. new members or changed mail addresses.</p>
 <a href="https://github.com/strichliste/strichliste-backend#readme">README</a> (SQL
 dump / SQLite file) — or read everything as JSON via the
 <a href="/docs/api/">API</a>. There is no dedicated export command.</p>
-
-    </div>
-</div>
-    </main>
-  </body>
-</html>
-
+</div></div></main></body></html>

@@ -1,69 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Frequently Asked Questions · strichliste</title>
-    <meta name="description" content="Common questions about strichliste, answered." />
-    
-
-    <link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png" />
-
-    <link href="/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/css/app.css" rel="stylesheet" />
-    
-  </head>
-  <body>
-    <a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a>
-    <header class="header container d-flex justify-content-between align-items-end flex-wrap">
-      <a class="logo" href="/">
-        <img src="/img/strichliste-logo.png" alt="strichliste — home" width="251" height="35" />
-      </a>
-      <nav aria-label="Main">
-            <ul class="nav" role="list">
-        
-        
-        
-        
-        <li><a href="/">Home</a></li>
-        
-        
-        
-        <li><a href="/about/">About</a></li>
-        
-        
-        
-        <li><a href="/install/">Install</a></li>
-        
-        
-        
-        <li><a href="/docs/">Docs</a></li>
-        
-        
-        
-        <li><a href="https://demo.strichliste.org">Demo</a></li>
-        
-        
-        
-        <li><a href="https://github.com/strichliste">Source</a></li>
-        
-        
-        
-        <li class="active"><a href="/faq/" aria-current="page">FAQ</a></li>
-        
-    </ul>
-
-      </nav>
-    </header>
-    <main id="main" tabindex="-1">
-
-<div class="container">
-    <div class="row content margin-bottom-20">
-        <h1>Frequently Asked Questions</h1>
-        
-        <h2 id="documentation">Documentation</h2>
-<p>Reference documentation lives on this site:
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Frequently Asked Questions · strichliste</title><meta name="description" content="Common questions about strichliste, answered."><link rel="alternate" type="application/rss+xml" href="https://www.strichliste.org/index.xml" title="Strichliste ‒ The Tally Sheet Replacement for Your Organization"><link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png"><link rel="stylesheet" href="/_astro/Layout.D9ZuYYk7.css"></head><body><a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a><header class="header container d-flex justify-content-between align-items-end flex-wrap"><a class="logo" href="/"><img src="/_astro/strichliste-logo.Dv_sgQBX_179dzA.webp" alt="strichliste — home" loading="eager" decoding="async" width="251" height="35"></a><nav aria-label="Main"><ul class="nav" role="list"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/install/">Install</a></li><li><a href="/docs/">Docs</a></li><li><a href="https://demo.strichliste.org">Demo</a></li><li><a href="https://github.com/strichliste">Source</a></li><li class="active"><a href="/faq/" aria-current="page">FAQ</a></li></ul></nav></header><main id="main" tabindex="-1"><div class="container"><div class="row content margin-bottom-20"><h1>Frequently Asked Questions</h1><h2 id="documentation">Documentation</h2>
+<p>New here? Start with the <a href="/docs/getting-started/">getting started tutorial</a>.
+Reference documentation lives on this site:
 <a href="/docs/configuration/">configuration</a>, <a href="/docs/commands/">console commands</a>,
 the <a href="/docs/api/">REST API</a> and a guide for
 <a href="/docs/screen/">the screen by the fridge</a>. The interactive API documentation
@@ -73,15 +10,15 @@ the <a href="/docs/api/">REST API</a> and a guide for
 Anyone at the kiosk can book on any account, just like anyone could make a
 pencil mark on paper. So keep it on a trusted network only.</p>
 <h2 id="can-i-make-it-reachable-from-the-internet">Can I make it reachable from the internet?</h2>
-<p>Don&rsquo;t. Nothing in strichliste is password-protected — not the pages, not the
+<p>Don’t. Nothing in strichliste is password-protected — not the pages, not the
 API. Keep it inside your own network (LAN/VPN), or put a password-protecting
 proxy in front. See <a href="/install/">Install</a> for details.</p>
 <h2 id="does-the-paypal-feature-verify-payments">Does the PayPal feature verify payments?</h2>
-<p>No. It&rsquo;s a payment <em>link</em>, not a verified payment integration: the account is
+<p>No. It’s a payment <em>link</em>, not a verified payment integration: the account is
 credited when the member returns from PayPal, but strichliste cannot confirm
 the payment completed. Reconcile your PayPal account against the books, the
 same way you compare the cash box against the metrics page.</p>
-<h2 id="what-about-my-members-data-gdpr">What about my members&rsquo; data (GDPR)?</h2>
+<h2 id="what-about-my-members-data-gdpr">What about my members’ data (GDPR)?</h2>
 <p>strichliste stores names, optional e-mail addresses, and a complete log of who
 booked what and when — visible to everyone at the kiosk. That is personal
 data: tell your members, mention it in your privacy notice, and decide a
@@ -92,7 +29,7 @@ retention duties before deleting financial records.</p>
 <p>No. From strichliste 2 onwards there is no import step: point <code>DATABASE_URL</code>
 at your existing database (SQLite, MariaDB/MySQL or Postgres) and start the
 app — the migrations bring it up to date safely on first boot. Back up first.
-See <a href="/install/#keeping-your-existing-data">Install</a>.</p>
+Step by step: <a href="/docs/migrate-from-strichliste2/">Migrate from strichliste 2</a>.</p>
 <h2 id="how-do-i-import-my-old-strichliste-1-data">How do I import my old strichliste 1 data?</h2>
 <p>The much older strichliste 1 used a different schema, so it needs a one-time
 conversion with the
@@ -100,12 +37,6 @@ conversion with the
 replaces all data and refuses to run against a non-empty database without
 <code>--force</code>, so only run it on a fresh install.</p>
 <h2 id="how-to-get-in-touch">How to get in touch?</h2>
-<p>Question the documentation doesn&rsquo;t answer? Open an issue on the
+<p>Question the documentation doesn’t answer? Open an issue on the
 <a href="https://github.com/strichliste/strichliste-backend/issues">GitHub issue tracker</a>.</p>
-
-    </div>
-</div>
-    </main>
-  </body>
-</html>
-
+</div></div></main></body></html>

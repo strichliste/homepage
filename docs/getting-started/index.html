@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Getting started · strichliste</title><meta name="description" content="Set up a test instance and make your first booking."><link rel="alternate" type="application/rss+xml" href="https://www.strichliste.org/index.xml" title="Strichliste ‒ The Tally Sheet Replacement for Your Organization"><link rel="icon" sizes="128x128" href="/img/common/logo-touch-icon.png"><link rel="stylesheet" href="/_astro/Layout.D9ZuYYk7.css"></head><body><a class="visually-hidden-focusable p-2" href="#main">Skip to main content</a><header class="header container d-flex justify-content-between align-items-end flex-wrap"><a class="logo" href="/"><img src="/_astro/strichliste-logo.Dv_sgQBX_179dzA.webp" alt="strichliste — home" loading="eager" decoding="async" width="251" height="35"></a><nav aria-label="Main"><ul class="nav" role="list"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/install/">Install</a></li><li class="active"><a href="/docs/" aria-current="true">Docs</a></li><li><a href="https://demo.strichliste.org">Demo</a></li><li><a href="https://github.com/strichliste">Source</a></li><li><a href="/faq/">FAQ</a></li></ul></nav></header><main id="main" tabindex="-1"><div class="container"><div class="row content margin-bottom-20"><h1>Getting started</h1><p>In about fifteen minutes you’ll have strichliste running on your own
+computer and your first drink booked. You need
+<a href="https://git-scm.com/downloads">git</a> and
+<a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> —
+install both, then start Docker Desktop.</p>
+<h2 id="1-start-strichliste">1. Start strichliste</h2>
+<p>Open a terminal (Terminal on macOS, PowerShell on Windows) and run:</p>
+<pre class="astro-code github-light" style="background-color:#fff;color:#24292e; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1">git</span><span style="color:#032F62"> clone</span><span style="color:#032F62"> https://github.com/strichliste/strichliste-backend.git</span></span>
+<span class="line"><span style="color:#005CC5">cd</span><span style="color:#032F62"> strichliste-backend</span></span>
+<span class="line"><span style="color:#6F42C1">make</span><span style="color:#032F62"> up</span></span></code></pre>
+<p>The first start builds everything and takes a few minutes. Two common
+errors: <code>make: command not found</code> — run
+<code>docker compose up -d --build --wait --wait-timeout 300</code> instead;
+“Cannot connect to the Docker daemon” — Docker Desktop isn’t running.
+Ports 80/443 already taken? Set <code>HTTP_PORT</code>/<code>HTTPS_PORT</code> in <code>.env</code>
+(<a href="/install/">Install</a> has details).</p>
+<p>When the command finishes, open <strong><a href="https://localhost">https://localhost</a></strong>. The browser warns
+about the certificate once — that’s the self-signed localhost certificate,
+expected here. In Chrome: <em>Advanced</em> → <em>Proceed to localhost</em>; other
+browsers word it similarly.</p>
+<h2 id="2-create-a-user">2. Create a user</h2>
+<p>Click <strong>Add user</strong> and enter a name — that’s the whole account. No
+password, no e-mail. This is how members will add themselves at the kiosk.</p>
+<h2 id="3-add-an-article">3. Add an article</h2>
+<p>Articles are the things people buy — the price list. Open <strong>Article List</strong>
+in the header, click <strong>Add article</strong>, and create one: name “Club-Mate”,
+price 1.50.</p>
+<h2 id="4-book-something">4. Book something</h2>
+<p>Back on the start page, tap your user. On the <strong>Buy article</strong> tab, tap
+Club-Mate — your balance drops to -€1.50.</p>
+<p>Now put money in: under <strong>Deposit</strong>, tap <strong>+€5.00</strong> (or use the custom
+amount field). Balance: €3.50. That’s the everyday loop at the kiosk: tap
+your name, tap what you took, drop coins in the cash box now and then.</p>
+<h2 id="5-undo-a-mistake">5. Undo a mistake</h2>
+<p>Tap the undo arrow next to a recent transaction. Bookings stay undoable
+for 5 minutes (configurable) — after that they are final.</p>
+<h2 id="where-next">Where next?</h2>
+<ul>
+<li><a href="/install/">Install</a> — run it for real: production setup, choosing a
+database, backups.</li>
+<li><a href="/docs/configuration/">Configuration</a> — currency, balance limits,
+one-tap amounts, PayPal top-up.</li>
+<li><a href="/docs/screen/">The screen by the fridge</a> — turn a tablet or Raspberry
+Pi into the kiosk, with a barcode scanner.</li>
+</ul>
+<p>Everything runs in the <code>strichliste-backend</code> folder: <code>docker compose down</code>
+stops it, <code>make up</code> brings it back. Done playing?
+<code>docker compose down -v</code> removes it with <strong>all data</strong>.</p>
+</div></div></main></body></html>
