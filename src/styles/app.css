@@ -35,7 +35,7 @@ a.logo {
 .nav a {
   display: block;
   padding: 10px 25px;
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: #687074;
   text-decoration: none;
   /* Transparent placeholder so hover/active only recolor the underline and
@@ -161,10 +161,11 @@ a.logo {
 
 .slider-headline-1 {
   text-transform: uppercase;
-  font-size: 50px;
+  /* ~30px at 360px viewport up to the design's 50px on desktop. */
+  font-size: clamp(1.75rem, 1rem + 4vw, 3.125rem);
   font-weight: normal;
   line-height: inherit;
-  margin-top: 50px;
+  margin-top: clamp(1.875rem, 4vw, 3.125rem);
   margin-bottom: 0;
 }
 
@@ -178,7 +179,7 @@ a.logo {
 }
 
 .slider-headline-2 {
-  font-size: 20px;
+  font-size: clamp(1rem, 0.85rem + 0.7vw, 1.25rem);
   margin-top: 20px;
   margin-bottom: 0;
 }
@@ -199,6 +200,22 @@ a.logo {
   border-bottom: 2px solid #d9230f;
 }
 
+/* One fluid type scale for all content headings: 40/32/24px on desktop
+   down to 32/24/19px on phones. Bootstrap's own RFS formulas let h2 and
+   h3 converge to nearly the same size on small screens; these keep every
+   level visually distinct at any width. */
+.content h1 {
+  font-size: clamp(2rem, 1.5rem + 1.5vw, 2.5rem);
+}
+
+.content h2 {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+}
+
+.content h3 {
+  font-size: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);
+}
+
 /* Breathing room between sections on long reference pages. Declared before
    the .intro rule so its tighter margins keep winning where both apply. */
 .content h2 {
@@ -209,12 +226,16 @@ a.logo {
   margin-top: 20px;
 }
 
-/* Section sub-headings: semantically h2/h3, visually the size the
-   design always used for these slots. */
-.intro h2,
+/* Section sub-headings: smaller than the 32px section headlines but with
+   h2 (22px) still clearly above h3 (18px), which stays above body (16px). */
+.intro h2 {
+  font-size: 1.375rem;
+  margin: 10px 0;
+}
+
 .lastnews h3,
 .features h3 {
-  font-size: 18px;
+  font-size: 1.125rem;
   margin: 10px 0;
 }
 
@@ -294,7 +315,7 @@ a.logo {
 }
 
 .page-list a {
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .page-list p {
@@ -303,7 +324,7 @@ a.logo {
 
 .page-meta {
   color: #687074;
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 
 .page-list .page-meta {
