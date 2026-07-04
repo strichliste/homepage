@@ -1,7 +1,7 @@
 ---
 title: Configuration
 description: Every setting in config/strichliste.yaml, with defaults.
-order: 1
+order: 2
 ---
 
 All behavior is configured in **one file**, `config/strichliste.yaml`, under

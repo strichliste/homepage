@@ -1,7 +1,7 @@
 ---
 title: The screen by the fridge
 description: Hardware, fullscreen browser and barcode scanners for the screen at your kiosk.
-order: 4
+order: 5
 ---
 
 The server is half the job; the screen by the fridge is the other half.

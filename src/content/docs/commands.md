@@ -1,7 +1,7 @@
 ---
 title: Console commands
 description: "Command-line tools: import, user cleanup, deleting old data, LDAP import."
-order: 2
+order: 3
 ---
 
 Run with `php bin/console …` — inside Docker:

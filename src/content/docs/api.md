@@ -1,7 +1,7 @@
 ---
 title: REST API
 description: "The REST API: endpoints, conventions, examples."
-order: 3
+order: 4
 ---
 
 The `/api/*` endpoints are **frozen** — they keep the exact shape they had
