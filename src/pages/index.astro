@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { SITE_DESCRIPTION } from '../consts';
 import { features } from '../data/features';
 import { users } from '../data/users';
 import Layout from '../layouts/Layout.astro';
@@ -7,9 +8,23 @@ import { excerptOf, getNewsPosts, newsPath } from '../lib/news';
 
 const posts = await getNewsPosts();
 const [latest] = posts;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'strichliste',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  url: Astro.site?.toString(),
+  description: SITE_DESCRIPTION,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+  license: 'https://opensource.org/licenses/MIT',
+  softwareHelp: new URL('/docs/', Astro.site).toString(),
+};
 ---
 
 <Layout>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <div class="slider">
     <div class="container slide">
       <h1 class="slider-headline-1">Self-service tally sheet</h1>

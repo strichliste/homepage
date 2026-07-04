@@ -2,7 +2,7 @@
 import type { InferGetStaticPropsType } from 'astro';
 import { render } from 'astro:content';
 import ContentLayout from '../../layouts/ContentLayout.astro';
-import { formatDate, getNewsPosts, isoDate } from '../../lib/news';
+import { formatDate, getNewsPosts, isoDate, newsPath, plainExcerptOf } from '../../lib/news';
 
 export async function getStaticPaths() {
   const posts = await getNewsPosts();
@@ -13,9 +13,22 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const description = post.data.description ?? plainExcerptOf(post);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  datePublished: isoDate(post.data.date),
+  description,
+  url: new URL(newsPath(post), Astro.site).toString(),
+  author: { '@type': 'Organization', name: 'strichliste' },
+};
 ---
 
-<ContentLayout title={post.data.title}>
+<ContentLayout title={post.data.title} description={description} ogType="article">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <p class="page-meta">
     <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
   </p>

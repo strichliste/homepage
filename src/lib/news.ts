@@ -25,6 +25,15 @@ export function newsPath(post: NewsPost): string {
   return `/news/${post.id}/`;
 }
 
+/** Plain-text excerpt capped for meta descriptions. */
+export function plainExcerptOf(post: NewsPost, maxLength = 160): string {
+  const text = excerptOf(post)
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return text.length > maxLength ? `${text.slice(0, maxLength - 1).trimEnd()}…` : text;
+}
+
 /* News dates are authored in German local time; rendering them in UTC could
    shift a late-evening post to the previous calendar day. */
 const TIME_ZONE = 'Europe/Berlin';
