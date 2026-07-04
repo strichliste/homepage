@@ -19,10 +19,11 @@ itself:
 
 * Amounts are **integer cents**; timestamps are `YYYY-MM-DD HH:MM:SS`.
 * Request bodies may be JSON or form-encoded. **JSON bodies require
-  `Content-Type: application/json`** — without it the body is silently
-  ignored and you get a confusing "parameter missing" error.
+  `Content-Type: application/json`** — without it the body can't be parsed
+  and the request is rejected.
 * Errors use one envelope, where `class` is the PHP exception class name
-  clients switch on:
+  clients switch on. Invalid request bodies come back as
+  `App\Exception\ValidationException` with code 422.
 
 ```json
 {"error": {"class": "App\\Exception\\TransactionBoundaryException",
@@ -69,14 +70,12 @@ The scanner-script recipe (e.g. for a serial scanner or vending machine):
 
 ## Resource overview
 
-Full, browsable detail at `/api/doc` on your instance; prose examples in
-the repository's
-[docs/API.md](https://github.com/strichliste/strichliste-backend/blob/master/docs/API.md).
+Full, browsable detail at `/api/doc` on your instance.
 
 | Resource | Endpoints |
 | --- | --- |
 | Users | `GET /api/user` (all enabled; `?active=true\|false` filters by activity), `POST /api/user`, `GET/POST /api/user/{id}` (id or exact name), `GET /api/user/search` |
-| Transactions | `GET /api/transaction` (global list), `GET/POST /api/user/{id}/transaction`, `GET/DELETE /api/user/{id}/transaction/{tid}` (DELETE = undo/revert) |
+| Transactions | `GET /api/transaction` (global list), `GET/POST /api/user/{id}/transaction`, `GET/DELETE /api/user/{id}/transaction/{tid}` (DELETE = undo; follows the [payment.undo](/docs/configuration/#paymentundo) policy) |
 | Articles | `GET/POST /api/article` (filters: `barcode`, `active`, …), `GET/POST /api/article/{id}`, `DELETE /api/article/{id}` (soft delete: deactivates), `GET /api/article/search` |
 | Barcodes / tags | `GET /api/barcode`, `GET /api/tag`, and per article `GET/POST …/barcode`, `GET/DELETE …/barcode/{bid}` (same shape for `…/tag`) |
 | Metrics | `GET /api/metrics` (system-wide: sum of balances, counts, top articles), `GET /api/user/{id}/metrics` |

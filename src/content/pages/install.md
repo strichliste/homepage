@@ -16,6 +16,9 @@ rollback); this page covers the essentials.
 
 ## Try it in five minutes
 
+First time? [Getting started](/docs/getting-started/) walks through this and
+your first booking.
+
 You need **git** and a **running Docker** (Engine 25+, Compose v2.30+ — any
 recent Docker Desktop qualifies):
 
@@ -69,12 +72,14 @@ it stays fast even on a Raspberry Pi. It runs on arm64 too (Pi 4/5 with a
        above, so most installs won't want it.
 
    Two things about `.env`: it is **git-tracked**, so your edits must survive
-   `git pull` (watch for conflicts when upgrading). And it is **baked into
-   the image** at build time — fine when image and host are the same box, but
-   never push such an image to a registry; for registry deploys pass
-   `APP_SECRET` as a real environment variable instead. Because it's baked at
-   build time, edit `.env` *before* your first production build — change it
-   later and you must rebuild (`make prod`) for the new value to take effect.
+   `git pull` (watch for conflicts when upgrading). And a copy is **baked
+   into the image** at build time — so never push a self-built image to a
+   registry while `.env` holds real secrets; for registry deploys pass
+   `APP_SECRET` as a real environment variable instead. No rebuild is needed
+   after edits, though: `APP_SECRET`, `SERVER_NAME`, `DATABASE_URL` and the
+   ports are handed to the container on every start, so rerunning the compose
+   command applies them. (The app also warns on boot if `APP_SECRET` is still
+   the committed value.)
 2. Start it with the raw command, or `make prod` (better for upgrades: it
    also re-pulls the base images, so FrankenPHP/PHP and Postgres security
    patches arrive — a plain `up --build` reuses the cached base layers):
@@ -207,13 +212,8 @@ php bin/console asset-map:compile
 ## Keeping your existing data
 
 **Already running strichliste 2 or newer?** There is **no import step** —
-point `DATABASE_URL` at your existing database (SQLite file, MariaDB/MySQL or
-Postgres) and start the app. The migrations detect a populated database and
-bring it up to the current version safely on first boot. With Docker, copy the
-old SQLite file into the `app_var` volume (or set your external DSN) and boot.
-**Back up first** — on MySQL/MariaDB the backup is your only safety net,
-because DDL there isn't transactional and a half-finished migration can't roll
-itself back.
+strichliste 3 starts on your existing database and upgrades it on first boot.
+Step by step: [Migrate from strichliste 2](/docs/migrate-from-strichliste2/).
 
 Coming from the much older **strichliste 1** (a different schema)? That needs
 a one-time conversion with the

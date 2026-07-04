@@ -5,6 +5,7 @@ description: Common questions about strichliste, answered.
 
 ## Documentation
 
+New here? Start with the [getting started tutorial](/docs/getting-started/).
 Reference documentation lives on this site:
 [configuration](/docs/configuration/), [console commands](/docs/commands/),
 the [REST API](/docs/api/) and a guide for
@@ -44,7 +45,7 @@ retention duties before deleting financial records.
 No. From strichliste 2 onwards there is no import step: point `DATABASE_URL`
 at your existing database (SQLite, MariaDB/MySQL or Postgres) and start the
 app — the migrations bring it up to date safely on first boot. Back up first.
-See [Install](/install/#keeping-your-existing-data).
+Step by step: [Migrate from strichliste 2](/docs/migrate-from-strichliste2/).
 
 ## How do I import my old strichliste 1 data?
 

@@ -81,6 +81,7 @@ php bin/console app:user:cleanup --days=3 --months=10 --maxBalance=300 --confirm
 | --- | --- |
 | days / months / years | Inactivity interval |
 | minBalance / maxBalance | Only touch accounts within this balance range (cents) |
+| delete | Delete the accounts instead of deactivating them |
 | confirm | Skip the confirmation question |
 
 ## Retire data
@@ -100,13 +101,15 @@ php bin/console app:retire-data --days=3 --months=10 --confirm
 
 ## Import from LDAP
 
-**Attention:** this command needs the `symfony/ldap` package, which is not
-included by default (and not available in the stock Docker image). Inside
-your installation run:
+**Attention:** this command needs the `symfony/ldap` package, which ships
+only as a dev dependency — production installs (including the stock Docker
+image) don't have it. On a bare-metal install run:
 
 ```bash
 composer require symfony/ldap
 ```
+
+(It also needs PHP's `ldap` extension.)
 
 Bare minimum example:
 
