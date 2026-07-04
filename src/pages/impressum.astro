@@ -1,0 +1,32 @@
+---
+import ObfuscatedEmail from '../components/ObfuscatedEmail.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Impressum" description="Anbieterkennzeichnung und Kontakt für strichliste.org.">
+  <div class="container" lang="de">
+    <div class="row content margin-bottom-20">
+      <h1>Impressum</h1>
+
+      <h2>Angaben gemäß § 5 DDG</h2>
+      <p>
+        Christopher Schirner<br />
+        Spiegelgraben 41<br />
+        96052 Bamberg<br />
+        Deutschland
+      </p>
+
+      <h2>Kontakt</h2>
+      <p>E-Mail: <ObfuscatedEmail user="mail" domain="strichliste.org" /></p>
+
+      <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+      <p>Christopher Schirner (Anschrift wie oben)</p>
+
+      <h2>Hinweis</h2>
+      <p>
+        strichliste ist ein nicht-kommerzielles Open-Source-Projekt (MIT-Lizenz). Der Quellcode ist
+        auf <a href="https://github.com/strichliste">GitHub</a> verfügbar.
+      </p>
+    </div>
+  </div>
+</Layout>
