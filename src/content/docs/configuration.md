@@ -1,13 +1,8 @@
-+++
-date = "2026-06-12T09:00:00+02:00"
-draft = false
-weight = 10
-title = "Configuration"
-description = "Every setting in config/strichliste.yaml, with defaults."
-[menu]
-  [menu.main]
-    parent = "Docs"
-+++
+---
+title: Configuration
+description: Every setting in config/strichliste.yaml, with defaults.
+order: 1
+---
 
 All behavior is configured in **one file**, `config/strichliste.yaml`, under
 the `parameters.strichliste` key. The same values drive the web UI and are

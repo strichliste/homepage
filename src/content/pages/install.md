@@ -1,12 +1,7 @@
-+++
-date = "2026-06-12T09:00:00+02:00"
-draft = false
-title = "Install strichliste"
-description = "How to install strichliste 3: with Docker (recommended) or directly on your own server."
-[menu]
-  [menu.main]
-    parent = "Install"
-+++
+---
+title: Install strichliste
+description: "How to install strichliste 3: with Docker (recommended) or directly on your own server."
+---
 
 Installing **strichliste 3**, short version: use Docker, set two values in
 `.env`, run one command. The

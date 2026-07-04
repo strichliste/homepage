@@ -1,12 +1,7 @@
-+++
-date = "2026-06-12T09:00:00+02:00"
-draft = false
-title = "Frequently Asked Questions"
-description = "Common questions about strichliste, answered."
-[menu]
-  [menu.main]
-    parent = "FAQ"
-+++
+---
+title: Frequently Asked Questions
+description: Common questions about strichliste, answered.
+---
 
 ## Documentation
 

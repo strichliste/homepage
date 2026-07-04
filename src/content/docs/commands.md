@@ -1,13 +1,8 @@
-+++
-date = "2026-06-12T09:00:00+02:00"
-draft = false
-weight = 20
-title = "Console commands"
-description = "Command-line tools: import, user cleanup, deleting old data, LDAP import."
-[menu]
-  [menu.main]
-    parent = "Docs"
-+++
+---
+title: Console commands
+description: "Command-line tools: import, user cleanup, deleting old data, LDAP import."
+order: 2
+---
 
 Run with `php bin/console …` — inside Docker:
 

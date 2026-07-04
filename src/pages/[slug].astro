@@ -1,0 +1,19 @@
+---
+import type { InferGetStaticPropsType } from 'astro';
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../layouts/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => ({ params: { slug: page.id }, props: { page } }));
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<ContentLayout title={page.data.title} description={page.data.description}>
+  <Content />
+</ContentLayout>

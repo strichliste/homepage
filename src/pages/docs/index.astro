@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<ContentLayout
+  title="Documentation"
+  description="Reference documentation for strichliste 3: configuration, console commands, REST API, and the screen by the fridge."
+>
+  <p>
+    Reference documentation for <strong>strichliste 3</strong>. The interactive API documentation
+    (Swagger UI) is built into your own strichliste server at <code>/api/doc</code>.
+  </p>
+  <ul class="page-list" role="list">
+    {
+      docs.map((doc) => (
+        <li>
+          <a href={`/docs/${doc.id}/`}>{doc.data.title}</a>
+          <p>{doc.data.description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</ContentLayout>

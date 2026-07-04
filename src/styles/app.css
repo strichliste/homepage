@@ -144,6 +144,15 @@ a.logo {
   margin-bottom: 20px;
 }
 
+/* Markdown content images: what Bootstrap's img-fluid/border/rounded do,
+   as CSS — the Markdown pipeline can't hand classes to the image service. */
+.content img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+}
+
 /* Uniform look for fenced code blocks: highlighted blocks come with an
    inline background but no padding, plain ones with neither. */
 .content pre {

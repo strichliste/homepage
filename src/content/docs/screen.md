@@ -1,13 +1,8 @@
-+++
-date = "2026-06-12T09:00:00+02:00"
-draft = false
-weight = 40
-title = "The screen by the fridge"
-description = "Hardware, fullscreen browser and barcode scanners for the screen at your kiosk."
-[menu]
-  [menu.main]
-    parent = "Docs"
-+++
+---
+title: The screen by the fridge
+description: Hardware, fullscreen browser and barcode scanners for the screen at your kiosk.
+order: 4
+---
 
 The server is half the job; the screen by the fridge is the other half.
 strichliste's part is ready: big touch buttons, works without JavaScript on

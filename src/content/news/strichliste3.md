@@ -1,7 +1,6 @@
 ---
-title: "strichliste 3 is here"
+title: strichliste 3 is here
 date: 2026-06-12T09:00:00+02:00
-draft: false
 ---
 
 strichliste 3 is **one single application** with the look and feel long-time

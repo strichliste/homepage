@@ -1,7 +1,6 @@
 ---
-title: "LDAP Importer"
+title: LDAP Importer
 date: 2019-02-04T16:00:32+01:00
-draft: false
 ---
 
 Strichliste just got a new, experimental command! You can now import users from a LDAP source. 

@@ -1,12 +1,7 @@
-+++
-date = "2026-06-12T09:00:00+02:00"
-draft = false
-title = "What is this project about?"
-description = "strichliste is the digital tally sheet for hackerspaces, club rooms and small offices."
-[menu]
-  [menu.main]
-    parent = "About"
-+++
+---
+title: What is this project about?
+description: strichliste is the digital tally sheet for hackerspaces, club rooms and small offices.
+---
 
 _strichliste_ ([ʃtʀɪçˈlɪstə], German for *tally sheet*) replaces the paper
 list next to the fridge in a hackerspace, club room or small office. Members
@@ -18,7 +13,7 @@ Anyone at the kiosk can book on any account, just like anyone could make a
 pencil mark on paper. Over paper you gain correct arithmetic, an undo button,
 statistics, and an API for barcode scanners and phone apps.
 
-![The user list — what the screen by the fridge shows by default](/img/screenshots/user-list.png)
+![The user list — what the screen by the fridge shows by default](../../assets/screenshots/user-list.png)
 
 ## Feature tour
 
@@ -50,9 +45,9 @@ statistics, and an API for barcode scanners and phone apps.
 * **REST API + OpenAPI docs** — everything above is scriptable; see the
   [API documentation](/docs/api/).
 
-![A user's page with the buy tab open](/img/screenshots/user-buy.png)
+![A user's page with the buy tab open](../../assets/screenshots/user-buy.png)
 
-![The metrics page: sum of all balances, transaction volume and top articles](/img/screenshots/metrics.png)
+![The metrics page: sum of all balances, transaction volume and top articles](../../assets/screenshots/metrics.png)
 
 ## Architecture
 

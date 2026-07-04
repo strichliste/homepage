@@ -1,7 +1,6 @@
 ---
-title: "Builds"
+title: Builds
 date: 2019-02-10T16:52:25+01:00
-draft: false
 ---
 
 Our build infrastructure and repo names have changed!

@@ -1,0 +1,23 @@
+---
+import type { InferGetStaticPropsType } from 'astro';
+import { render } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { formatDate, getNewsPosts, isoDate } from '../../lib/news';
+
+export async function getStaticPaths() {
+  const posts = await getNewsPosts();
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<ContentLayout title={post.data.title}>
+  <p class="page-meta">
+    <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
+  </p>
+  <Content />
+</ContentLayout>

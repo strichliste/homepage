@@ -1,7 +1,6 @@
 ---
-title: "Strichliste 2 released!"
+title: Strichliste 2 released!
 date: 2018-12-21T08:59:19+01:00
-draft: false
 ---
 
 After a lot of concept work, strichliste 2 has now a stable API and also a well designed front-end. We've also changed our

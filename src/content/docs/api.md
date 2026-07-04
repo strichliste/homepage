@@ -1,13 +1,8 @@
-+++
-date = "2026-06-12T09:00:00+02:00"
-draft = false
-weight = 30
-title = "REST API"
-description = "The REST API: endpoints, conventions, examples."
-[menu]
-  [menu.main]
-    parent = "Docs"
-+++
+---
+title: REST API
+description: "The REST API: endpoints, conventions, examples."
+order: 3
+---
 
 The `/api/*` endpoints are **frozen** — they keep the exact shape they had
 before the server-rendered UI shipped, so existing clients keep working. The
