@@ -15,7 +15,7 @@ button:focus-visible {
 
 .header {
   border-bottom: 2px solid #eeeeee;
-  padding-top: 40px;
+  padding-top: clamp(1.25rem, 3vw, 2.5rem);
 }
 
 a.logo {
@@ -154,7 +154,7 @@ a.logo {
   background-size: cover;
   background-image: url(../assets/teaser/strichliste-blur.jpg);
   background-color: #595959;
-  min-height: 350px;
+  min-height: clamp(16.25rem, 30vw, 21.875rem);
   position: relative;
   border-bottom: 2px solid #eeeeee;
 }
@@ -186,6 +186,9 @@ a.logo {
 
 .content {
   padding: 40px 0;
+  /* Long unbroken tokens (URLs, config keys) in prose must never force a
+     page-wide horizontal scroll on narrow screens. */
+  overflow-wrap: anywhere;
 }
 
 .headline {
