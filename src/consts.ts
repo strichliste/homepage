@@ -1,7 +1,7 @@
-export const SITE_TITLE = 'Strichliste ‒ The Tally Sheet Replacement for Your Organization';
+export const SITE_TITLE = 'strichliste — the digital tally sheet for hackerspaces & clubs';
 
 export const SITE_DESCRIPTION =
-  'strichliste is the digital tally sheet for hackerspaces, club rooms and small offices.';
+  'strichliste is the free, open-source digital tally sheet for hackerspaces, clubs and offices — track drinks and snacks by the fridge, no logins required.';
 
 interface NavItem {
   name: string;

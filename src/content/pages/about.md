@@ -1,6 +1,6 @@
 ---
-title: What is this project about?
-description: strichliste is the digital tally sheet for hackerspaces, club rooms and small offices.
+title: What is strichliste?
+description: How strichliste works — a shared, login-free tally sheet by the fridge for tracking drinks, snacks and balances in hackerspaces, clubs and small offices.
 ---
 
 _strichliste_ ([ʃtʀɪçˈlɪstə], German for *tally sheet*) replaces the paper

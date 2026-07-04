@@ -197,6 +197,24 @@ a.logo {
   margin-bottom: 0;
 }
 
+.slider-cta {
+  margin-top: 20px;
+}
+
+/* Bootstrap's blue primary button in brand red, via its button variables. */
+.slider-cta .btn {
+  padding: 10px 20px;
+}
+
+.slider-cta .btn-primary {
+  --bs-btn-bg: #d9230f;
+  --bs-btn-border-color: #d9230f;
+  --bs-btn-hover-bg: #91170a;
+  --bs-btn-hover-border-color: #91170a;
+  --bs-btn-active-bg: #91170a;
+  --bs-btn-active-border-color: #91170a;
+}
+
 .content {
   padding: 40px 0;
   /* Long unbroken tokens (URLs, config keys) in prose must never force a
