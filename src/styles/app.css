@@ -289,8 +289,18 @@ a.logo {
   margin-bottom: 10px;
 }
 
+/* Constrain BOTH axes with auto width/height so the browser scales logos
+   by their intrinsic ratio (max-height alone squashed tall logos against
+   the column width). 85% doubles as breathing room around each logo. */
+.users .img-container img {
+  width: auto;
+  height: auto;
+  max-width: 85%;
+  max-height: 85%;
+}
+
 .users .user {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 /* Markdown content images: what Bootstrap's img-fluid/border/rounded do,
