@@ -12,13 +12,13 @@ const [latest] = posts;
 <Layout>
   <div class="slider">
     <div class="container slide">
-      <h1 class="slider-headline-1">Self-service tally sheet</h1><br />
+      <h1 class="slider-headline-1">Self-service tally sheet</h1>
       <p class="slider-headline-2">Manage your kiosk with ease.</p>
     </div>
   </div>
 
   <div class="container">
-    <div class="row content intro margin-bottom-20">
+    <section class="row content intro margin-bottom-20" aria-label="Highlights">
       <div class="col-md-4">
         <h2>Touch-friendly</h2>
         <p>
@@ -37,13 +37,13 @@ const [latest] = posts;
         <h2>Open Source</h2>
         <p>MIT licensed, hosted on GitHub. Issues and pull requests welcome.</p>
       </div>
-    </div>
+    </section>
 
     {
       latest && (
-        <div class="row lastnews margin-bottom-30">
+        <section class="row lastnews margin-bottom-30" aria-labelledby="latest-updates">
           <div class="headline col-12">
-            <h2>Latest Updates</h2>
+            <h2 id="latest-updates">Latest Updates</h2>
           </div>
 
           <div class="col-12 col-lg-8">
@@ -66,13 +66,13 @@ const [latest] = posts;
               ))}
             </ul>
           </div>
-        </div>
+        </section>
       )
     }
 
-    <div class="row features margin-bottom-20">
+    <section class="row features margin-bottom-20" aria-labelledby="features">
       <div class="headline col-12">
-        <h2>Features</h2>
+        <h2 id="features">Features</h2>
       </div>
       {
         features.map((feature) => (
@@ -83,11 +83,11 @@ const [latest] = posts;
           </div>
         ))
       }
-    </div>
+    </section>
 
-    <div class="row margin-bottom-30 users">
+    <section class="row margin-bottom-30 users" aria-labelledby="users">
       <div class="headline col-12">
-        <h2>Users</h2>
+        <h2 id="users">Users</h2>
       </div>
       {
         users.map((user) => (
@@ -101,6 +101,6 @@ const [latest] = posts;
           </div>
         ))
       }
-    </div>
+    </section>
   </div>
 </Layout>

@@ -171,10 +171,14 @@ a.logo {
 
 .slider-headline-1,
 .slider-headline-2 {
-  background-color: rgba(0, 0, 0, 0.6);
+  /* 0.7 alpha keeps white text above 4.5:1 over any region of the teaser
+     photo, not just the dark ones. */
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 5px 10px;
 
-  display: inline-block;
+  /* Shrink-wraps the highlight box like inline-block but forces its own
+     line, so the markup needs no <br /> between the two headlines. */
+  display: table;
   color: #fff;
 }
 
@@ -338,4 +342,16 @@ a.logo {
 .content blockquote {
   border-left: 5px solid #d9230f;
   padding-left: 15px;
+}
+
+.footer {
+  border-top: 2px solid #eeeeee;
+  margin-top: 20px;
+  padding: 20px 0 40px;
+  color: #687074;
+  font-size: 0.9375rem;
+}
+
+.footer p {
+  margin: 0;
 }
